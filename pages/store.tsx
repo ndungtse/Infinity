@@ -1,25 +1,21 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Axios from 'axios'
-import HomeComp from '../components/Home/HomeComp'
-import Navbar from '../components/Navbar'
-import SideBar from '../components/SideBar'
 import { GetStaticProps } from "next";
 
-const Home: NextPage = ({gameData}: any) => {
+const Store: NextPage = ({gameData}: any) => {
   console.log(gameData);
   
   return (
     <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
-      <Head>
-        <title>Infinity</title>
+      {/* <Head>
+        <title>Create Next App</title>
         <link rel="icon" href="/logo2.png" />
       </Head>
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar />
-        <HomeComp />
-      </div>
+        <StoreComp />
+      </div> */}
     </div>
   )
 }
@@ -34,6 +30,7 @@ export const getStaticProps: GetStaticProps = async()=>{
       }
     };
   const res = await Axios.request(options)
+  console.log(res);
   return {
     props: {
       gameData: res.data
@@ -41,4 +38,4 @@ export const getStaticProps: GetStaticProps = async()=>{
   };
 };
 
-export default Home
+export default Store

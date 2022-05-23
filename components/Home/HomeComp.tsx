@@ -1,8 +1,11 @@
-import React from 'react'
+// import React from 'react'
 import Feed from './Feed'
 import GameCard from './GameCard'
+import Axios from 'axios'
 
-const HomeComp = () => {
+const HomeComp = ({gameData}: any) => {
+  console.log(gameData);
+  
   return (
     <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
         <div className="flex flex-col w-full h-[84vh] overflow-auto">
@@ -16,12 +19,12 @@ const HomeComp = () => {
                     <button className='px-3 py-2 mt-5 bg-pink-500 rounded-lg'>Start Now</button>
                  </div>
             </div>
-            <h2 className="text-xl font-bold mt-3">Newest</h2>
-            <div className="grid auto-cols-[23%] mt-4">
+            <h2 className="ml-2 text-xl font-bold mt-3">Newest</h2>
+            <div className="grid px-2 auto-cols-[23%] mt-4">
               <GameCard />
             </div>
-            <h2 className="text-xl font-bold mt-3">Featured</h2>
-            <div className="grid auto-cols-[23%] mt-4">
+            <h2 className="ml-2 text-xl font-bold mt-3">Featured</h2>
+            <div className="grid px-2 auto-cols-[23%] mt-4">
               <GameCard />
             </div>
         </div>
@@ -30,4 +33,7 @@ const HomeComp = () => {
   )
 }
 
+
+
 export default HomeComp
+
