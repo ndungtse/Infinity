@@ -1,4 +1,5 @@
 import React from 'react'
+import { BiSearch } from 'react-icons/bi'
 import GameCard from '../Home/GameCard'
 
 interface Props {
@@ -9,15 +10,16 @@ const StoreComp = ({gameData}: Props)=> {
   return (
     <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
         <div className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
-            <div className="flex relative w-full h-[30vh] rounded-xl">
-                <img
-                 className='object-cover rounded-xl min-h-full min-w-full '
-                 src="/images/battlefield.jpg" alt="" />
-                 <div className="absolute top-9 left-5">
-                    <p>NEW GAME HERE</p>
-                    <h1 className="text-2xl mt-3">Games are games, Games are infinity. Just Play</h1>
-                    <button className='px-3 py-2 mt-5 bg-pink-500 rounded-lg'>Start Now</button>
-                 </div>
+            
+                <div className="flex mt-4 tr sm:ml-0 w-1/2 mx-auto bg-stone-800 text-sm tablet:text-lg text-white rounded-3xl items-center px-3 py-3">
+                    <BiSearch className='text-sm mt-1 tablet:text-2xl' />
+                    <input
+                    maxLength={70}
+                    className='sm:w-full tablet:text-xl text-[0.9em] w-full px-2 outline-none bg-transparent'
+                     type="text" placeholder='Search Store ' />
+                </div>
+            <div className="flex w-full">
+
             </div>
             <h2 className="ml-2 text-xl font-bold mt-3">All Games</h2>
             <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3

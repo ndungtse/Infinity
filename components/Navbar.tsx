@@ -15,7 +15,7 @@ const Navbar = () => {
                 <BiSearch className='text-sm mt-1 tablet:text-xl' />
                 <input
                 className='sm:w-full text-[0.9em] w-[100px] tablet:w-[300px] px-2 outline-none bg-transparent'
-                 type="text" placeholder='Search Game ' />
+                 type="text" placeholder='Search ' />
             </div>
         </div>
         <div className="flex items-center">
