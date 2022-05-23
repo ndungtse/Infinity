@@ -3,7 +3,7 @@ import { BiBell, BiCog, BiMenu, BiSearch } from 'react-icons/bi'
 
 const Navbar = () => {
   return (
-    <div className='w-full h-[80px] flex items-center justify-between p-3 sm:px-11'>
+    <div className='w-full h-[60px] flex items-center justify-between p-3 sm:px-11'>
         <div className="flex ">
             <div className="xtab:ml-7 xtab:flex hidden xtab:w-[180px] ">
               <img className="w-[100px] cursor-pointer" src="/images/inlogo.png" alt="logo" />
