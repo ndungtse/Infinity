@@ -7,8 +7,7 @@ import SideBar from '../components/SideBar'
 import { GetStaticProps } from "next";
 
 const Home: NextPage = ({gameData}: any) => {
-  console.log(gameData);
-  
+
   return (
     <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
       <Head>
@@ -18,7 +17,7 @@ const Home: NextPage = ({gameData}: any) => {
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar />
-        <HomeComp />
+        <HomeComp gameData={gameData} />
       </div>
     </div>
   )

@@ -1,14 +1,20 @@
-// import React from 'react'
+import React from 'react'
 import Feed from './Feed'
 import GameCard from './GameCard'
-import Axios from 'axios'
 
-const HomeComp = ({gameData}: any) => {
-  console.log(gameData);
-  
+interface Props {
+  item: object,
+  gameData: Array<object>
+}
+
+const HomeComp: React.FC <Props> = ({gameData, item}) => {
+  const newest: object[] = gameData.slice(0, 8)
+  const featured: object[]= gameData.slice(100, 108)
+  console.log(newest);
+
   return (
     <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
-        <div className="flex flex-col w-full h-[84vh] overflow-auto">
+        <div className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
             <div className="flex relative w-full h-[30vh] rounded-xl">
                 <img
                  className='object-cover rounded-xl min-h-full min-w-full '
@@ -20,12 +26,18 @@ const HomeComp = ({gameData}: any) => {
                  </div>
             </div>
             <h2 className="ml-2 text-xl font-bold mt-3">Newest</h2>
-            <div className="grid px-2 auto-cols-[23%] mt-4">
-              <GameCard />
+            <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
+              five:grid-cols-2 grid-cols-[50%]  desktop:grid-cols-4 mt-4">
+              {newest.map((game, index)=>(
+              <GameCard item={game} key={index} />
+              ))}
             </div>
             <h2 className="ml-2 text-xl font-bold mt-3">Featured</h2>
-            <div className="grid px-2 auto-cols-[23%] mt-4">
-              <GameCard />
+            <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
+              five:grid-cols-2 grid-cols-[50%]  desktop:grid-cols-4 mt-4">
+              {featured.map((feature, index) => (
+              <GameCard item={ feature } key={index} />
+              ))}
             </div>
         </div>
         <Feed />
