@@ -22,9 +22,14 @@ const GameCard = ({ item }: Props) => {
                     <BiStar className='text-orange-500'/>
                 </div>
             </div>
-            <BiDownload 
+            <div className="">
+            {/* <BiDownload 
             title='Download'
-            className='bg-pink-500 text-4xl p-2 cursor-pointer rounded-full'/>
+            className='bg-stone-800 text-4xl p-2 cursor-pointer rounded-full'/> */}
+            <button
+            title='Download'
+            className='bg-stone-800 mt-3 p-1 cursor-pointer rounded-md'>Details</button>
+            </div>
         </div>
     </div>
   )
