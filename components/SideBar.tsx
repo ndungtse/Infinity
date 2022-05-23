@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiHome } from 'react-icons/bi'
+import { BiGroup, BiHome, BiJoystick, BiLibrary,  } from 'react-icons/bi'
 
 function SideBar() {
     
@@ -17,17 +17,17 @@ function SideBar() {
           </div>
           <div className="flex items-center px-3 py-2 mt-2
                 cursor-pointer bg-stone-900 text-md rounded-xl">
-            <BiHome className='text-lg' />
+            <BiLibrary className='text-lg' />
             <p className='ml-4'>Library</p>
           </div>
           <div className="flex items-center px-3 py-2 mt-2
                 cursor-pointer bg-stone-900 text-md rounded-xl">
-            <BiHome className='text-lg' />
+            <BiJoystick className='text-lg' />
             <p className='ml-4'>My Games</p>
           </div>
           <div className="flex items-center px-3 py-2 mt-2
                 cursor-pointer bg-stone-900 text-md rounded-xl">
-            <BiHome className='text-lg' />
+            <BiGroup className='text-lg' />
             <p className='ml-4'>Community</p>
           </div>
         </div>
