@@ -1,13 +1,13 @@
+import Link from 'next/link'
 import React from 'react'
 import Feed from './Feed'
 import GameCard from './GameCard'
 
 interface Props {
-  item: object,
   gameData: Array<object>
 }
 
-const HomeComp: React.FC <Props> = ({gameData, item}) => {
+const HomeComp: React.FC <Props> = ({gameData}) => {
   const newest: object[] = gameData.slice(0, 8)
   const featured: object[]= gameData.slice(100, 108)
   console.log(newest);
@@ -38,6 +38,11 @@ const HomeComp: React.FC <Props> = ({gameData, item}) => {
               {featured.map((feature, index) => (
               <GameCard item={ feature } key={index} />
               ))}
+            </div>
+            <div className="flex mt-5 w-full">
+            <Link href="/store">
+              <button className='bg-pink-500 px-3 py-2 rounded-md'>See More</button>
+              </Link>
             </div>
         </div>
         <Feed />

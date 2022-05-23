@@ -17,7 +17,7 @@ const Home: NextPage = ({gameData}: any) => {
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar />
-        <HomeComp gameData={gameData} />
+        <HomeComp gameData={ gameData } />
       </div>
     </div>
   )
