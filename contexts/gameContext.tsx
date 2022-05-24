@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useEffect } from "react";
+import React, { createContext, ReactNode, useContext} from "react";
 import Axios from 'axios'
 import { GetStaticProps } from "next";
 
@@ -40,10 +40,6 @@ export function GameProvider({children}: Props, { gameData }: any){
           },
         };
       };
-
-    useEffect(()=>{
-        getGames()
-    },[])
 
     return(
         <GameContext.Provider value={gameData}>
