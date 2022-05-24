@@ -30,7 +30,7 @@ const Search = () => {
     <div className="flex h-screen w-full flex-col bg-stone-800 py-2">
       <Navbar />
       <div className="flex h-full w-full">
-        <SideBar />
+        <SideBar active='store' />
         <div className="flex h-full w-full bg-stone-900 text-white xtab:p-6">
           <div className="flex h-[84vh] w-full flex-col overflow-auto overflow-x-hidden">
             <SearchForm />

@@ -24,7 +24,7 @@ const Store: NextPage = ({gameData}: any) => {
     <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
       <Navbar />
       <div className="flex h-full w-full">
-        <SideBar />
+        <SideBar active='store' />
         <StoreComp gameData ={ gameData } loading={isLoading} />
       </div>
     </div>

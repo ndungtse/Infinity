@@ -17,7 +17,7 @@ console.log(gameData);
       </Head>
       <Navbar />
       <div className="flex h-full w-full">
-        <SideBar />
+        <SideBar active='home' />
         <HomeComp gameData={ gameData } />
       </div>
     </div>
