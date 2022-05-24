@@ -7,10 +7,11 @@ type Props = {
 
 const GameCard = ({ item }: Props) => {
   return (
-    <div className='rounded-xl mx-auto h-[200px] min-w-[200px] overflow-hidden relative flex flex-col'>
+    <div className='rounded-xl mx-auto h-[250px] min-w-[200px] overflow-hidden relative flex flex-col'>
         <img src={item.background_image} className="min-w-full
         object-cover min-h-full" alt="gameimage" />
-        <div className="flex absolute bottom-0 w-full justify-between p-2 backdrop-blur-md items-center">
+        <div className="flex absolute bottom-0 w-full justify-between
+            bg-black bg-opacity-40 p-2 backdrop-blur-sm items-center">
             <div className="flex flex-col">
                 <p className='text-bold text-lg'>{item.name}</p>
                 <p className="">30.1k Users</p>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Axios from 'axios'
 import { GetStaticProps } from 'next'
@@ -9,17 +9,43 @@ import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 
 const Page = ({ gameData }: any) => {
-  const router = useRouter()
-  const [pageGames, setPageGames] = useState([])
-  const { page } = router.query
+  const router: any = useRouter()
+  const [pageGames, setPageGames] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [filteredGames, setFilteredGames] = useState(pageGames)
+  const { page }: any = router.query
   const nextPage = parseInt(page)+1
+  const panelRef: React.MutableRefObject<null> = useRef(null)
+
+  const panel: any = panelRef.current
+
+  const filterGames = (genre:string) =>{
+      let arr = [];
+      for (let i = 0; i < pageGames.length; i++) {
+          for (let j = 0; j < pageGames[i].genres.length; j++) {
+            if (pageGames[i].genres[j].name === genre) {
+                arr.push(pageGames[i])
+            }              
+          }
+          
+      }
+      console.log(arr);
+      setFilteredGames(arr)
+  }
 
   const getNextPageGames = async () => {
+      setLoading(true)
     const res = await Axios.get(
       `https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&page=${page}`
     )
     console.log(res)
+    setLoading(false)
     setPageGames(res.data.results)
+    setFilteredGames(res.data.results)
+  }
+
+  const scrollToTop = ()=>{
+    panel.scrollTop = 0;
   }
 
   useEffect(() => {
@@ -31,8 +57,11 @@ const Page = ({ gameData }: any) => {
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar />
+        
         <div className="flex h-full w-full bg-stone-900 text-white xtab:p-6">
-          <div className="flex h-[84vh] w-full flex-col overflow-auto overflow-x-hidden">
+          <div 
+          ref={panelRef}
+          className="flex h-[84vh] w-full flex-col overflow-auto overflow-x-hidden">
             <div
               className="tr sm:ml-0 mx-auto mt-4 flex w-1/2 items-center rounded-3xl bg-stone-800 px-3 py-2
              text-sm text-white tablet:text-lg"
@@ -53,24 +82,28 @@ const Page = ({ gameData }: any) => {
                 All
               </button>
               <button
+              onClick={()=> filterGames('Action')}
                 className="ml-4 flex items-center justify-center rounded-xl
             border-2 border-stone-800 px-3 py-2 duration-200 hover:bg-stone-800"
               >
                 Shooter
               </button>
               <button
+                onClick={()=> filterGames('Racing')}
                 className="ml-4 flex items-center justify-center rounded-xl
             border-2 border-stone-800 px-3 py-2 duration-200 hover:bg-stone-800"
               >
                 Racing
               </button>
               <button
+              onClick={()=> filterGames('Sports')}
                 className="ml-4 flex items-center justify-center rounded-xl
             border-2 border-stone-800 px-3 py-2 duration-200 hover:bg-stone-800"
               >
                 Sports
               </button>
               <button
+                onClick={()=> filterGames('Strategy')}
                 className="ml-4 flex items-center justify-center rounded-xl
             border-2 border-stone-800 px-3 py-2 duration-200 hover:bg-stone-800"
               >
@@ -78,18 +111,22 @@ const Page = ({ gameData }: any) => {
               </button>
             </div>
             <h2 className="ml-2 mt-3 text-xl font-bold">All Games</h2>
+            {loading?<div>Loading...</div>:(
             <div
               className="mx-auto mt-4  grid w-[230px] grid-cols-[50%] gap-4 px-2 
             five:grid-cols-2 five:w-full tablet:w-full  tablet:grid-cols-3 desktop:grid-cols-4"
             >
-              {pageGames.map(
+              {filteredGames.map(
                 (game: any, index: React.Key | null | undefined) => (
                   <GameCard item={game} key={index} />
                 )
               )}
             </div>
+             )}
             <Link href={`/store/${nextPage}`}>
-              <button className="rounded-md hover:bg-stone-700
+              <button 
+              onClick={scrollToTop}
+              className="rounded-md hover:bg-stone-700 w-[100px] mx-auto
               bg-stone-800 mt-5 duration-200 px-3 py-2">Next</button>
             </Link>
           </div>
