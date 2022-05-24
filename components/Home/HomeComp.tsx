@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
+import CardLoader from '../Loaders/CardLoader'
 import Feed from './Feed'
 import GameCard from './GameCard'
 
 interface Props {
-  gameData: any
+  gameData: any,
+  loading: boolean
 }
 
-const HomeComp: React.FC <Props> = ({gameData}) => {
+const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   const newest: object[] = gameData.results.slice(0, 8)
   const featured: object[]= gameData.results.slice(100, 108)
   console.log(newest);
@@ -26,6 +28,8 @@ const HomeComp: React.FC <Props> = ({gameData}) => {
                  </div>
             </div>
             <h2 className="ml-2 text-xl font-bold mt-3">Newest</h2>
+            {loading? <CardLoader />:(
+              <>
             <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
               five:grid-cols-2 grid-cols-[50%]  desktop:grid-cols-4 mt-4">
               {newest.map((game, index)=>(
@@ -44,6 +48,8 @@ const HomeComp: React.FC <Props> = ({gameData}) => {
               <button className='bg-pink-500 px-3 py-2 rounded-md'>See More</button>
               </Link>
             </div>
+            </>
+            )}
         </div>
         <Feed />
     </div>
