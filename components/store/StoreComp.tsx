@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import GameCard from '../Home/GameCard'
@@ -11,12 +12,6 @@ const StoreComp = ({gameData}: Props)=> {
     const firstPageGames = gameData.results.slice(0,28)
     const [page, setPage] = useState(1)
     const [pageGames, setPageGames] = useState(firstPageGames)
-
-    const getNextPageGames = async(page:number)=>{
-      const res = await Axios.get(`https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&page=${page}`)
-      console.log(res);
-      setPageGames(res.data.results)
-    }
 
   return (
     <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
@@ -49,9 +44,11 @@ const StoreComp = ({gameData}: Props)=> {
               <GameCard item={game} key={index} />
               ))}
             </div>
-            <button
-              onClick={()=>getNextPageGames(2)}
-             className='bg-pink-500 px-3 py-2 rounded-md'>Next</button>
+            <Link href="/store/2">
+              <button
+               className='bg-stone-800 mt-4 hover:bg-stone-700
+               duration-200 px-3 py-2 rounded-md'>Next</button>
+             </Link>
         </div>
     </div>
   )

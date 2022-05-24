@@ -12,7 +12,7 @@ const Page = ({ gameData }: any) => {
   const router = useRouter()
   const [pageGames, setPageGames] = useState([])
   const { page } = router.query
-  console.log(page)
+  const nextPage = parseInt(page)+1
 
   const getNextPageGames = async () => {
     const res = await Axios.get(
@@ -79,8 +79,8 @@ const Page = ({ gameData }: any) => {
             </div>
             <h2 className="ml-2 mt-3 text-xl font-bold">All Games</h2>
             <div
-              className="mx-auto mt-4 grid w-[230px] grid-cols-[50%] gap-4 px-2 tablet:grid-cols-3
-            five:w-full  five:grid-cols-2 desktop:grid-cols-4"
+              className="mx-auto mt-4  grid w-[230px] grid-cols-[50%] gap-4 px-2 
+            five:grid-cols-2 five:w-full tablet:w-full  tablet:grid-cols-3 desktop:grid-cols-4"
             >
               {pageGames.map(
                 (game: any, index: React.Key | null | undefined) => (
@@ -88,8 +88,9 @@ const Page = ({ gameData }: any) => {
                 )
               )}
             </div>
-            <Link href="/store/2">
-              <button className="rounded-md bg-stone-700 px-3 py-2">Next</button>
+            <Link href={`/store/${nextPage}`}>
+              <button className="rounded-md hover:bg-stone-700
+              bg-stone-800 mt-5 duration-200 px-3 py-2">Next</button>
             </Link>
           </div>
         </div>
