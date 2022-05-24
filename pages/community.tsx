@@ -1,7 +1,10 @@
+import { NextPage } from 'next'
 import React from 'react'
 
-export const Community = () => {
+const Community:NextPage = () => {
   return (
     <div>Community</div>
   )
 }
+
+export default Community
