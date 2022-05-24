@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 import Filter from '../../components/store/Filter'
+import CardLoader from '../../components/Loaders/CardLoader'
 
 const Page = ({ gameData }: any) => {
   const router: any = useRouter()
@@ -80,7 +81,7 @@ const Page = ({ gameData }: any) => {
             </div>
             <Filter filterGames={filterGames} />
             <h2 className="ml-2 mt-3 text-xl font-bold">All Games</h2>
-            {loading?<div>Loading...</div>:(
+            {loading?<CardLoader />:(
             <div
               className="mx-auto mt-4  grid w-[230px] grid-cols-[50%] gap-4 px-2 
             five:grid-cols-2 five:w-full tablet:w-full  tablet:grid-cols-3 desktop:grid-cols-4"

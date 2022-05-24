@@ -6,7 +6,7 @@ const Feed = () => {
         <div className="flex flex-col h-[84vh] p-2 w-full rounded-xl bg-stone-800">
             <p className="text-md font-semibold w-full text-sky-400">Weekly Chart</p>
             <div className="flex flex-col w-full overflow-auto">
-            <div className="flex w-full items-center justify-between">
+            <div className="flex bg-st w-full items-center justify-between">
                 <p className='mt-2'>Game</p>
                 <p>rating/10</p>
             </div>

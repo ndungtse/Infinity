@@ -24,9 +24,6 @@ const GameCard = ({ item }: Props) => {
                 </div>
             </div>
             <div className="">
-            {/* <BiDownload 
-            title='Download'
-            className='bg-stone-800 text-4xl p-2 cursor-pointer rounded-full'/> */}
             <button
             title='Download'
             className='bg-stone-800 mt-3 p-1 cursor-pointer rounded-md'>Details</button>

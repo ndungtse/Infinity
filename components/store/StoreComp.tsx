@@ -3,14 +3,16 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import GameCard from '../Home/GameCard'
+import CardLoader from '../Loaders/CardLoader'
 import Filter from './Filter'
 import SearchForm from './Search'
 
 interface Props {
-    gameData: any
+    gameData: any,
+    loading: boolean
   }
 
-const StoreComp = ({gameData}: Props)=> {
+const StoreComp = ({gameData, loading}: Props)=> {
     const firstPageGames = gameData.results.slice(0,28)
     const [page, setPage] = useState(1)
     const [pageGames, setPageGames] = useState(firstPageGames)
@@ -37,12 +39,16 @@ const StoreComp = ({gameData}: Props)=> {
             <SearchForm />
             <Filter filterGames={ filterGames } />
             <h2 className="ml-2 text-xl font-bold mt-3">All Games</h2>
+            {loading?(
+              <CardLoader />
+            ):(
             <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
               five:grid-cols-2 grid-cols-[50%]  desktop:grid-cols-4 mt-4">
               {filteredGames.map((game: any, index: React.Key | null | undefined)=>(
               <GameCard item={game} key={index} />
               ))}
             </div>
+            )}
             <Link href="/store/2">
               <button
                className='bg-stone-800 w-[150px] mx-auto mt-4 hover:bg-stone-700
