@@ -4,12 +4,12 @@ import Feed from './Feed'
 import GameCard from './GameCard'
 
 interface Props {
-  gameData: Array<object>
+  gameData: any
 }
 
 const HomeComp: React.FC <Props> = ({gameData}) => {
-  const newest: object[] = gameData.slice(0, 8)
-  const featured: object[]= gameData.slice(100, 108)
+  const newest: object[] = gameData.results.slice(0, 8)
+  const featured: object[]= gameData.results.slice(100, 108)
   console.log(newest);
 
   return (

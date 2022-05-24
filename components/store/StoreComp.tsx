@@ -1,17 +1,22 @@
+import Axios from 'axios'
 import React, { useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import GameCard from '../Home/GameCard'
 
 interface Props {
-    gameData: Array<object>
+    gameData: any
   }
 
 const StoreComp = ({gameData}: Props)=> {
-    const firstPageGames = gameData.slice(0,28)
-
+    const firstPageGames = gameData.results.slice(0,28)
     const [page, setPage] = useState(1)
     const [pageGames, setPageGames] = useState(firstPageGames)
-    
+
+    const getNextPageGames = async(page:number)=>{
+      const res = await Axios.get(`https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&page=${page}`)
+      console.log(res);
+      setPageGames(res.data.results)
+    }
 
   return (
     <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
@@ -40,10 +45,13 @@ const StoreComp = ({gameData}: Props)=> {
             <h2 className="ml-2 text-xl font-bold mt-3">All Games</h2>
             <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
               five:grid-cols-2 grid-cols-[50%]  desktop:grid-cols-4 mt-4">
-              {pageGames.map((game, index)=>(
+              {pageGames.map((game: any, index: React.Key | null | undefined)=>(
               <GameCard item={game} key={index} />
               ))}
             </div>
+            <button
+              onClick={()=>getNextPageGames(2)}
+             className='bg-pink-500 px-3 py-2 rounded-md'>Next</button>
         </div>
     </div>
   )

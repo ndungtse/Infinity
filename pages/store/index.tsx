@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Axios from 'axios'
 import { GetStaticProps } from "next";
-import Navbar from '../components/Navbar';
-import SideBar from '../components/SideBar';
-import StoreComp from '../components/store/StoreComp';
+import Navbar from '../../components/Navbar';
+import SideBar from '../../components/SideBar';
+import StoreComp from '../../components/store/StoreComp';
 
 const Store: NextPage = ({gameData}: any) => {
   console.log(gameData);
@@ -20,21 +20,14 @@ const Store: NextPage = ({gameData}: any) => {
 }
 
 export const getStaticProps: GetStaticProps = async()=>{
-  const options = {
-      method: 'GET',
-      url: 'https://free-to-play-games-database.p.rapidapi.com/api/games',
-      headers: {
-        'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
-        'X-RapidAPI-Key': 'bbce629d3cmsh48cb41094daa35cp1157cejsn05466969482c'
-      }
-    };
-  const res = await Axios.request(options)
-  console.log(res);
+  
+  const res = await Axios.get('https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d')
   return {
     props: {
       gameData: res.data
     },
   };
 };
+
 
 export default Store
