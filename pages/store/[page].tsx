@@ -18,6 +18,9 @@ const Page = ({ gameData }: any) => {
   const nextPage = parseInt(page)+1
   const panelRef: React.MutableRefObject<null> = useRef(null)
 
+  console.log(page);
+  
+
   const panel: any = panelRef.current
 
   const filterGames = (genre:string) =>{
