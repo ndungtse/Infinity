@@ -5,6 +5,7 @@ import { ParsedUrlQuery } from 'querystring'
 import React, { useEffect, useState } from 'react'
 import { BiArrowBack, BiSearch } from 'react-icons/bi'
 import GameCard from '../../../components/Home/GameCard'
+import CardLoader from '../../../components/Loaders/CardLoader'
 import Navbar from '../../../components/Navbar'
 import SideBar from '../../../components/SideBar'
 import Filter from '../../../components/store/Filter'
@@ -13,6 +14,7 @@ import SearchForm from '../../../components/store/Search'
 const Search = () => {
     const router: NextRouter = useRouter()
     const [searchRes, setSearchRes] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const { search }: ParsedUrlQuery = router.query
     console.log(search);
@@ -20,6 +22,7 @@ const Search = () => {
     const getSearchedItem = async()=>{
       const res = await Axios.get(`https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&search=${search}`)
       setSearchRes(res.data.results)
+      setLoading(false)
     }
 
     useEffect(()=>{
@@ -44,6 +47,7 @@ const Search = () => {
               <p>Results for { search }</p>
               <p>{searchRes.length} results</p>
             </div>
+            {loading?<CardLoader />:(
             <div
               className="mx-auto mt-4  grid w-[230px] grid-cols-[50%] gap-4 px-2 
             five:grid-cols-2 five:w-full tablet:w-full  tablet:grid-cols-3 desktop:grid-cols-4"
@@ -52,6 +56,7 @@ const Search = () => {
                 <GameCard item={game} key={index}/>
                 ))}
             </div>
+            )}
           </div>
           
         </div>

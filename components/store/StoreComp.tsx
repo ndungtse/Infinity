@@ -38,7 +38,7 @@ const StoreComp = ({gameData, loading}: Props)=> {
         <div className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
             <SearchForm />
             <Filter filterGames={ filterGames } />
-            <h2 className="ml-2 text-xl font-bold mt-3">All Games</h2>
+            <h2 className="ml-2 text-xl font-bold mt-3">Games</h2>
             {loading?(
               <CardLoader />
             ):(

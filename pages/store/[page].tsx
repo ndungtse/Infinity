@@ -80,7 +80,7 @@ const Page = ({ gameData }: any) => {
               />
             </div>
             <Filter filterGames={filterGames} />
-            <h2 className="ml-2 mt-3 text-xl font-bold">All Games</h2>
+            <h2 className="ml-2 mt-3 text-xl font-bold">Games</h2>
             {loading?<CardLoader />:(
             <div
               className="mx-auto mt-4  grid w-[230px] grid-cols-[50%] gap-4 px-2 

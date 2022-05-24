@@ -13,7 +13,6 @@ const CardLoader = () => {
         <Card />
         <Card />
         <Card />
-        <Card />
     </div>
   )
 }
