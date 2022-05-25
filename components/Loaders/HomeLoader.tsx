@@ -67,6 +67,8 @@ const HomeLoader = () => {
                   <Card />
                   <Card />
                   <Card />
+                  <Card />
+                  <Card />
                 </div>
             </div>
             <div className='xtab:w-[300px] px-2 xtab:flex hidden xtab:flex-col xtab:h-full'>
