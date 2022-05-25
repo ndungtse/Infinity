@@ -8,6 +8,7 @@ type Props = {
     video: string
 }
 
+
 const Video = ({video}: Props) => {
   const [playerState, setPlayerState] = useState({
     isPlaying: false,
@@ -15,7 +16,7 @@ const Video = ({video}: Props) => {
     speed: 1,
     isMuted: false,
   });
-  const videoElement: React.MutableRefObject<null> = useRef(null);
+  const videoElement = useRef<HTMLVideoElement>(null);
 
     const togglePlay = () => {
       setPlayerState({
@@ -25,20 +26,26 @@ const Video = ({video}: Props) => {
     };
   
     useEffect(() => {
+        if (videoElement.current!==null) {
+            
       playerState.isPlaying
         ? videoElement.current.play()
         : videoElement.current.pause();
+    }
     }, [playerState.isPlaying, videoElement]);
   
     const handleOnTimeUpdate = () => {
+        if (videoElement.current!==null) {
         const progress = (videoElement.current.currentTime / videoElement.current.duration) * 100;
         setPlayerState({
           ...playerState,
            progress,
         });
-      };
+      }
+    };
     
-      const handleVideoProgress = (event) => {
+      const handleVideoProgress = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (videoElement.current!==null) {
         const manualChange = Number(event.target.value);
         videoElement.current.currentTime = (videoElement.current.duration / 100) * manualChange;
         console.log(videoElement.current.currentTime, videoElement.current.duration, manualChange);
@@ -47,15 +54,18 @@ const Video = ({video}: Props) => {
           ...playerState,
           progress: manualChange,
         });
+        }
       };
     
-      const handleVideoSpeed = (event) => {
+      const handleVideoSpeed = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        if (videoElement.current!==null) {
         const speed = Number(event.target.value);
         videoElement.current.playbackRate = speed;
         setPlayerState({
           ...playerState,
           speed,
         });
+        }
       };
     
       const toggleMute = () => {
@@ -66,9 +76,11 @@ const Video = ({video}: Props) => {
       };
   
       useEffect(() => {
+        if (videoElement.current!==null) {
         playerState.isMuted
           ? (videoElement.current.muted = true)
           : (videoElement.current.muted = false);
+        }
       }, [playerState.isMuted, videoElement]);
   
 
