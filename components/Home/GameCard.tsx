@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import { BiDownload, BiStar } from 'react-icons/bi'
 
@@ -7,7 +8,8 @@ type Props = {
 
 const GameCard = ({ item }: Props) => {
   return (
-    <div className='rounded-xl mx-auto h-[250px] min-w-[200px] overflow-hidden relative flex flex-col'>
+    <Link href={`/game/${item.id}`}>
+    <div className='rounded-xl cursor-pointer mx-auto h-[250px] min-w-[200px] overflow-hidden relative flex flex-col'>
         <img src={item.background_image} className="min-w-full
         object-cover min-h-full" alt="" />
         <div className="flex absolute bottom-0 w-full justify-between
@@ -30,6 +32,7 @@ const GameCard = ({ item }: Props) => {
             </div>
         </div>
     </div>
+    </Link>
   )
 }
 
