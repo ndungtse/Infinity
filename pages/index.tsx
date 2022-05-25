@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
 import { GetStaticProps } from "next";
 import { useEffect, useState } from 'react'
+import HomeLoader from '../components/Loaders/HomeLoader'
 
 const Home: NextPage = ({gameData}: any) => {
   const [isLoading, SetIsLoading] = useState(true)
@@ -22,17 +23,21 @@ useEffect(()=>{
 },[])
 
   return (
-    <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
+    <>
       <Head>
         <title>Infinity</title>
         <link rel="icon" href="/logo2.png" />
       </Head>
+    {isLoading?<HomeLoader />:( 
+    <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar active='home' />
         <HomeComp gameData={ gameData } loading={isLoading} />
       </div>
     </div>
+    )} 
+    </>
   )
 }
 
