@@ -9,6 +9,7 @@ import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 import Filter from '../../components/store/Filter'
 import CardLoader from '../../components/Loaders/CardLoader'
+import SearchForm from '../../components/store/Search'
 
 const Page = ({ gameData }: any) => {
   const router: any = useRouter()
@@ -67,18 +68,7 @@ const Page = ({ gameData }: any) => {
           <div 
           ref={panelRef}
           className="flex h-[84vh] w-full flex-col overflow-auto overflow-x-hidden">
-            <div
-              className="tr sm:ml-0 mx-auto mt-4 flex w-1/2 items-center rounded-3xl bg-stone-800 px-3 py-2
-             text-sm text-white tablet:text-lg"
-            >
-              <BiSearch className="mt-1 text-sm tablet:text-2xl" />
-              <input
-                maxLength={70}
-                className="sm:w-full w-full bg-transparent px-2 text-[0.9em] outline-none tablet:text-lg"
-                type="text"
-                placeholder="Search Store "
-              />
-            </div>
+            <SearchForm setLoading={setLoading} />
             <Filter filterGames={filterGames} />
             <h2 className="ml-2 mt-3 text-xl font-bold">Games</h2>
             {loading?<CardLoader />:(

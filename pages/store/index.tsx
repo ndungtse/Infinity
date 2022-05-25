@@ -13,7 +13,7 @@ const Store: NextPage = ({gameData}: any) => {
   const delay = ()=>{
     setTimeout(()=>{
       SetIsLoading(false)
-    }, 3000)
+    }, 1000)
   }
 
   useEffect(()=>{

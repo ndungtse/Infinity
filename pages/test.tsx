@@ -5,7 +5,6 @@ import HomeLoader from '../components/Loaders/HomeLoader'
 const Test = () => {
   return (
     <div className='w-full h-screen bg-slate-800'>
-        <HomeLoader />
     </div>
   )
 }

@@ -8,20 +8,14 @@ import { GetStaticProps } from "next";
 import { useEffect, useState } from 'react'
 import HomeLoader from '../components/Loaders/HomeLoader'
 
-const Home: NextPage = ({gameData}: any) => {
-  const [isLoading, SetIsLoading] = useState(true)
-console.log(gameData);
-
-const delay = ()=>{
-  setTimeout(()=>{
-    SetIsLoading(false)
-  }, 3000)
+type Props = {
+  isLoading: boolean,
+  setIsLoading: any
 }
 
-useEffect(()=>{
-  delay()
-},[])
-
+const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
+  console.log(isLoading);
+  
   return (
     <>
       <Head>
