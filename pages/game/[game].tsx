@@ -33,7 +33,9 @@ const Game: NextPage = () => {
   }
   let downName
   if (gameDetails !== undefined) {
-    downName = gameDetails.name.split(' ').join('+')
+    const new0 = gameDetails.name.replace('(','')
+    const new1 = new0.replace(')','')
+    downName = new1.split(' ').join('+')
     console.log(downName);
     
   }
@@ -115,10 +117,15 @@ const Game: NextPage = () => {
               </div>
               ))}
             </div>
-            <div className="flex items-center justify-center">
+            <h1 className="text-2xl mt-9 font-bold text-center">Download Links</h1>
+              <p className='text-center'>Try another link if one can't get you what you want</p>
+            <div className="flex mt-5 flex-wrap pb-4 items-center justify-center">
             <a className='flex text-lg px-3 py-2 bg-stone-800 rounded-md
+              hover:bg-stone-700 duration-200 items-center' href={`https://steamunlocked.net/?s=${downName}`} target='_blank'>
+              SteamUnlocked<BiDownload className='text-2xl ml-2' /></a>
+              <a className='flex ml-4 text-lg px-3 py-2 bg-stone-800 rounded-md
               hover:bg-stone-700 duration-200 items-center' href={`https://gamingbeasts.com/?s=${downName}`} target='_blank'>
-              Download<BiDownload className='text-2xl ml-2' /></a>
+              GamingBeasts<BiDownload className='text-2xl ml-2' /></a>
               </div>
           </div>
         </div>

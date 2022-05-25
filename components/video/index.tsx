@@ -73,7 +73,7 @@ const Video = ({video}: Props) => {
   
 
   return (
-    <div className="container flex justify-center">
+    <div className=" mt-4 w-full flex justify-center">
       <div className="video-wrapper">
         <video
           src={video}
