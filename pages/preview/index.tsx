@@ -8,7 +8,7 @@ const Preview: NextPage = () => {
     <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
       <Navbar />
       <div className="flex h-full w-full">
-        <SideBar />
+        <SideBar active='store' />
       </div>
     </div>
   )
