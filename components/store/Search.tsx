@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import { useRouter } from 'next/router'
 
-const SearchForm = () => {
+type Props = {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const SearchForm = ({setLoading}: Props) => {
     const [rev, setRev] = useState<boolean>(false)
     const [searchInput, setSearchInput] = useState('')
     const router = useRouter()
@@ -18,6 +22,7 @@ const SearchForm = () => {
 
     const subSearch = (e: any)=>{
       e.preventDefault()
+      setLoading(true)
       if (searchInput!=='') {
         router.push(`/store/search/${searchInput}`)
       }

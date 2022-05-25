@@ -19,7 +19,7 @@ const CardLoader = () => {
 
 export default CardLoader
 
-function Card(){
+export function Card(){
     return(
         <div className='rounded-xl animc bg-stone-900 mx-auto h-[250px] min-w-[200px] overflow-hidden relative flex flex-col'>
             <div className="absolute top-0 left-0 w-full 

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Axios from 'axios'
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Navbar from '../../components/Navbar';
 import SideBar from '../../components/SideBar';
 import StoreComp from '../../components/store/StoreComp';
@@ -25,13 +25,14 @@ const Store: NextPage = ({gameData}: any) => {
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar active='store' />
-        <StoreComp gameData ={ gameData } loading={isLoading} />
+        <StoreComp gameData ={ gameData }
+         setLoading={SetIsLoading} loading={isLoading} />
       </div>
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async()=>{
+export const getServerSideProps: GetServerSideProps = async()=>{
   
   const res = await Axios.get('https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d')
   return {

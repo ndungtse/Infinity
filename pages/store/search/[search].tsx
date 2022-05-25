@@ -20,6 +20,7 @@ const Search = () => {
     console.log(search);
     
     const getSearchedItem = async()=>{
+      setLoading(true)
       const res = await Axios.get(`https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&search=${search}`)
       setSearchRes(res.data.results)
       setLoading(false)
@@ -36,7 +37,7 @@ const Search = () => {
         <SideBar active='store' />
         <div className="flex h-full w-full bg-stone-900 text-white xtab:p-6">
           <div className="flex h-[84vh] w-full flex-col overflow-auto overflow-x-hidden">
-            <SearchForm />
+            <SearchForm setLoading={setLoading} />
             <div className="mt-5 flex w-full px-[10%] items-center justify-between">
               <Link href="/store">
                 <button>

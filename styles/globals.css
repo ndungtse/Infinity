@@ -19,7 +19,7 @@
 
 .animc {
     width: 100%;
-    height: 120;
+    /* height: 120; */
     overflow: hidden;
     --tw-bg-opacity: 1;
     background-color: rgb(41 37 36 / var(--tw-bg-opacity))

@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import GameCard from '../Home/GameCard'
 import CardLoader from '../Loaders/CardLoader'
@@ -9,10 +9,11 @@ import SearchForm from './Search'
 
 interface Props {
     gameData: any,
-    loading: boolean
+    loading: boolean,
+    setLoading: React.Dispatch<SetStateAction<boolean>>
   }
 
-const StoreComp = ({gameData, loading}: Props)=> {
+const StoreComp = ({gameData, loading, setLoading}: Props)=> {
     const firstPageGames = gameData.results.slice(0,28)
     const [page, setPage] = useState(1)
     const [pageGames, setPageGames] = useState(firstPageGames)
@@ -36,7 +37,7 @@ const StoreComp = ({gameData, loading}: Props)=> {
   return (
     <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
         <div className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
-            <SearchForm />
+            <SearchForm setLoading={setLoading} />
             <Filter filterGames={ filterGames } />
             <h2 className="ml-2 text-xl font-bold mt-3">Games</h2>
             {loading?(
