@@ -10,6 +10,7 @@ type Props = {
 
 function SideBar({active, setLinear}: Props) {
   const [mobile, setMobile]= useState<boolean>(false)
+  const [test, settest]= useState<boolean>(false)
   
   const navHandler = ()=>{
     setMobile(false)
@@ -21,12 +22,12 @@ function SideBar({active, setLinear}: Props) {
     <>
     <BiMenu
       onClick={()=>setMobile(!mobile)}
-     className='text-4xl cursor-pointer
-       absolute top-4 left-1 xtab:hidden' />
+     className='text-4xl z-20 cursor-pointer
+       absolute top-3 left-1 xtab:hidden' />
     <div 
-    className={`xtab:flex xtab:relative duration-500 z-10 h-full
+    className={`xtab:flex top-0 h-full xtab:h-full xtab:relative duration-500 z-10
      bg-stone-800 left-[-500px] xtab:left-0 ${mobile?'mob':''}
-     absolute xtab:relative text-white w-[180px] flex-col justify-between`}>
+     absolute xtab:relative text-white xtab:w-[200px] flex-col justify-between`}>
       <div className="flex flex-col">
         <div className="ml-7 xtab:hidden flex w-[100px]">
           <img className="w-full" src="/images/inlogo.png" alt="logo" />
