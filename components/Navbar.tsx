@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BiBell, BiCog, BiMenu, BiSearch } from 'react-icons/bi'
+import { BiBell, BiCog, BiSearch } from 'react-icons/bi'
 import { useRouter } from 'next/router'
 
 type Props = {
@@ -34,7 +34,6 @@ const Navbar = ({setLinear}: Props) => {
             <div className="xtab:ml-7 xtab:flex hidden xtab:w-[180px] ">
               <img className="w-[100px] cursor-pointer" src="/images/inlogo.png" alt="logo" />
             </div>
-            <BiMenu className='text-4xl xtab:hidden' />
         </div>
         <form onSubmit={subSearch}
          className="flex  xtab:w-full">

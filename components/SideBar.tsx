@@ -1,22 +1,32 @@
 import Link from 'next/link'
-import React from 'react'
-import { BiGroup, BiHome, BiJoystick, BiLibrary, BiStore,  } from 'react-icons/bi'
+import React, {useState} from 'react'
+import { BiGroup, BiMenu, BiHome, BiJoystick, BiLibrary, BiStore,  } from 'react-icons/bi'
 
 type Props = {
   active: string
 }
 
 function SideBar({active}: Props) {
+  const [mobile, setMobile]= useState<boolean>(false)
     
   return (
-    <div className="xtab:flex h-full hidden absolute xtab:relative text-white w-[180px] flex-col justify-between">
+    <>
+    <BiMenu
+      onClick={()=>setMobile(!mobile)}
+     className='text-4xl cursor-pointer
+       absolute top-4 left-1 xtab:hidden' />
+    <div 
+    className={`xtab:flex xtab:relative duration-500 z-10 h-full
+     bg-stone-800 left-[-500px] xtab:left-0 ${mobile?'mob':''}
+     absolute xtab:relative text-white w-[180px] flex-col justify-between`}>
       <div className="flex flex-col">
         <div className="ml-7 xtab:hidden flex w-[100px]">
           <img className="w-full" src="/images/inlogo.png" alt="logo" />
         </div>
         <div className="flex mt-11 flex-col px-3">
           <Link href="/">
-            <div className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
+            <div onClick={()=> setMobile(false)} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer ${active==='home'? 'bg-stone-700': 'bg-stone-900'}  
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiHome className='text-lg' />
@@ -24,7 +34,8 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
+            <div onClick={()=> setMobile(false)} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                    cursor-pointer ${active==='store'? 'bg-stone-700': 'bg-stone-900'} 
                    text-md rounded-xl duration-200`}>
               <BiStore className='text-lg' />
@@ -32,7 +43,8 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
+            <div onClick={()=> setMobile(false)} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='library'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiLibrary className='text-lg' />
@@ -40,7 +52,8 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
+            <div onClick={()=> setMobile(false)} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='mygames'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiJoystick className='text-lg' />
@@ -48,7 +61,8 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
+            <div onClick={()=> setMobile(false)} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='community'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiGroup className='text-lg' />
@@ -58,6 +72,7 @@ function SideBar({active}: Props) {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

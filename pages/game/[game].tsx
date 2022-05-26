@@ -1,4 +1,5 @@
  /* eslint-disable */ 
+import axios from 'axios'
 import Axios from 'axios'
 import { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -6,20 +7,54 @@ import React, { useEffect, useState } from 'react'
 import { BiDownload } from 'react-icons/bi'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
-import Video from '../../components/video'
+// import Video from '../../components/video'
 
 const Game: NextPage = () => {
   const [gameDetails, setGameDet] = useState<any>(undefined)
   const [gameTrailers, setGameTrailers] = useState<any>(undefined)
   const [isLinear, setLinear] = useState<boolean>(false)
+  const [index, setIndex] = useState<number>(0)
+  const [indexImg, setIndexImg] = useState<number>(0)
+  const [ren, setRen] = useState<boolean>(true)
+  const [extra, setExtra] = useState<any>([])
 
   const router: any = useRouter()
   const { game }: any = router.query
 
   console.log(gameDetails);
   console.log(gameTrailers);
+
+  const nextTrailer = (act: string)=>{
+    setRen(false)
+    if (act==='next') {
+      if(index < gameTrailers.length -1){
+        setIndex(index+1)
+        console.log(index);
+      }
+    }else{
+      if(index > 0){
+        setIndex(index-1)
+      }
+    }
+    setTimeout(()=>{
+      setRen(true)
+    }, 1000)
+    // setRen(true)
+  }
+
+  const nextImage = (act: string)=>{
+    setRen(false)
+    if (act==='next') {
+      if(indexImg < extra.length -2){
+        setIndexImg(indexImg+1)
+      }
+    }else{
+      if(indexImg > 0){
+        setIndexImg(indexImg-1)
+      }
+    }
+  }
   
-  const low = 480
   
   const getGame = async()=>{
     if (game!==undefined) {
@@ -29,7 +64,7 @@ const Game: NextPage = () => {
   }
   const getGameTrailers = async()=>{
     if (gameDetails!==undefined) {
-    const res = await Axios.get(`https://api.rawg.io/api/games/${game}/movies?key=a5c36a8abe0c4ddb9489dc567b3cf68d`)
+    const res = await Axios.get(`https://api.rawg.io/api/games/${game}/movies?key=a5c36a8abe0c4ddb9489dc567b3cf68d`)    
     setGameTrailers(res.data.results)
   }
   }
@@ -41,13 +76,33 @@ const Game: NextPage = () => {
     console.log(downName);
     
   }
+
+  const getExtraImages = async()=>{
+    if (gameDetails !== undefined) {
+      let app = 'screenshots'
+    const options = {
+      method: 'GET',
+      url: 'https://bing-image-search1.p.rapidapi.com/images/search',
+      params: {q: gameDetails.name+app},
+      headers: {
+        'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com',
+        'X-RapidAPI-Key': 'bbce629d3cmsh48cb41094daa35cp1157cejsn05466969482c'
+      }
+    };
+    const res = await axios.request(options)
+    setExtra(res.data.value)
+    console.log(res.data.value);
+    
+  }
+  }
   
   useEffect(()=>{
     getGame()
   },[game])
 
   useEffect(()=>{
-    getGameTrailers()
+    getGameTrailers();
+    getExtraImages()
   },[gameDetails])
 
   return (
@@ -99,14 +154,52 @@ const Game: NextPage = () => {
               </div>
             </div>
             {( gameTrailers!==undefined && gameTrailers.length !==0) &&(
-             <>
-            <h1 className="text-center text-2xl font-semibold mt-4">Trailers</h1>
-            <Video video={gameTrailers[0].data[480]} />
-            </> )}
+             <div className='h-[500px] w-full'>
+                <h1 className="text-center text-2xl font-semibold mt-4">Trailers</h1>
+                {/* <Video video={gameTrailers[0].data[480]} /> */}
+                 {ren &&(<video
+                  className='w-1/2 mx-auto min-w-[250px]'
+                 width="720" height="340" controls>
+                  <source src={gameTrailers[index].data[480]} type="" />
+                </video>)} 
+                <div className={`flex ${!ren && 'mt-[275px]'} justify-center mt-4 items-center w-full`}>
+                  <button 
+                   onClick={()=>nextTrailer('prev')}
+                  className='bg-stone-800 py-2 px-3 rounded-md hover:bg-stone-700
+                    duration-200'>Previous</button>
+                  <button onClick={()=>nextTrailer('next')}
+                  className='bg-stone-800 py-2 px-3 rounded-md hover:bg-stone-700
+                    duration-200 ml-3'>Next</button>
+                </div>
+              </div> )}
             <div className="flex mt-4 flex-col w-full">
               <p className='font-semibold text-lg'>Game Description:</p>
               <p className=' text-md'>{gameDetails.description_raw}</p>
             </div>
+            {( gameTrailers!==undefined && extra.length !==0) &&(
+              <>
+                  <h1 className="text-center text-2xl font-semibold mt-4">ScreenShots</h1>
+                  <div className="flex justify-between">
+                    <div className="w-[49%] aspect-video overflow-hidden">
+                      <img className='min-w-full min-h-full object-cover'
+                      src={extra[indexImg].contentUrl} alt="sreenshot" />
+                    </div>
+                    <div className="w-[49%] aspect-video overflow-hidden">
+                      <img className='min-w-full min-h-full object-cover'
+                      src={extra[indexImg+1].contentUrl} alt="sreenshot" />
+                    </div>
+                  </div>
+                <div className={`flex justify-center mt-4 items-center w-full`}>
+                  <button 
+                   onClick={()=>nextImage('prev')}
+                  className='bg-stone-800 py-2 px-3 rounded-md hover:bg-stone-700
+                    duration-200'>Previous</button>
+                  <button onClick={()=>nextImage('next')}
+                  className='bg-stone-800 py-2 px-3 rounded-md hover:bg-stone-700
+                    duration-200 ml-3'>Next</button>
+                </div>
+              </>  
+            )}
             <div className="flex mt-4 flex-col w-full">
               <p className='font-semibold text-lg'>System Requirements:</p>
               {gameDetails.platforms.map((pla: any, index: any)=>(

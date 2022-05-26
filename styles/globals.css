@@ -133,3 +133,6 @@ video {
   li button, li div{
     color: white!important;
   }
+  .mob{
+    left: 0!important;
+  }
