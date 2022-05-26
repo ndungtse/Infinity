@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import CardLoader from '../Loaders/CardLoader'
@@ -22,7 +24,7 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
                  className='object-cover rounded-xl min-h-full min-w-full '
                  src="/images/battlefield.jpg" alt="" />
                  <div className="absolute top-9 left-5">
-                    <p>NEW GAME HERE</p>
+                    <p>GET ALL GAMES HERE</p>
                     <h1 className="text-2xl mt-3">Games are games, Games are infinity. Just Play</h1>
                     <button className='px-3 py-2 mt-5 bg-pink-500 rounded-lg'>Start Now</button>
                  </div>
@@ -56,7 +58,9 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   )
 }
 
-
+// const getServerSideProps: GetServerSideProps = async()=>{
+//   const res = await axios.get('')
+// }
 
 export default HomeComp
 
