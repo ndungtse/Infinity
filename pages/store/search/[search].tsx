@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { BiArrowBack, BiSearch } from 'react-icons/bi'
 import GameCard from '../../../components/Home/GameCard'
 import CardLoader from '../../../components/Loaders/CardLoader'
+import LinearIndeterminate from '../../../components/Loaders/LinearLoad'
 import Navbar from '../../../components/Navbar'
 import SideBar from '../../../components/SideBar'
 import Filter from '../../../components/store/Filter'
@@ -33,10 +34,11 @@ const Search = () => {
     },[search])
 
   return (
-    <div className="flex h-screen w-full flex-col bg-stone-800 py-2">
-      <Navbar setLinear={setLinear} />
+    <div className="flex h-screen w-full flex-col bg-stone-800">
+      {isLinear&&<LinearIndeterminate />}
+      <Navbar/>
       <div className="flex h-full w-full">
-        <SideBar active='store' />
+        <SideBar active='store' setLinear={setLinear}  />
         <div className="flex h-full w-full bg-stone-900 text-white xtab:p-6">
           <div className="flex h-[84vh] w-full flex-col overflow-auto overflow-x-hidden">
             <SearchForm setLoading={setLoading} />

@@ -23,11 +23,11 @@ const Store: NextPage = ({gameData}: any) => {
   },[])
   
   return (
-    <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
-      <LinearIndeterminate />
-      <Navbar setLinear={setLinear} />
+    <div className="flex w-full flex-col h-screen bg-stone-800">
+      {isLinear&&<LinearIndeterminate />}
+      <Navbar/>
       <div className="flex h-full w-full">
-        <SideBar active='store' />
+        <SideBar active='store'  setLinear={setLinear}  />
         <StoreComp gameData ={ gameData }
          setLoading={SetIsLoading} loading={isLoading} />
       </div>

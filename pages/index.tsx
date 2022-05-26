@@ -27,9 +27,9 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
     {isLoading?<HomeLoader />:( 
     <div className="flex w-full flex-col h-screen bg-stone-800">
       {isLinear &&<LinearIndeterminate />}
-      <Navbar setLinear={setLinear} />
+      <Navbar/>
       <div className="flex h-full w-full">
-        <SideBar active='home' />
+        <SideBar active='home' setLinear={setLinear} />
         <HomeComp gameData={ gameData }
          loading={isLoading} />
       </div>

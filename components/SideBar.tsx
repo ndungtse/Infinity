@@ -3,12 +3,20 @@ import React, {useState} from 'react'
 import { BiGroup, BiMenu, BiHome, BiJoystick, BiLibrary, BiStore,  } from 'react-icons/bi'
 
 type Props = {
-  active: string
+  active: string,
+  setLinear: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function SideBar({active}: Props) {
+
+function SideBar({active, setLinear}: Props) {
   const [mobile, setMobile]= useState<boolean>(false)
-    
+  
+  const navHandler = ()=>{
+    setMobile(false)
+    setLinear(true)
+  }
+  
+
   return (
     <>
     <BiMenu
@@ -25,7 +33,7 @@ function SideBar({active}: Props) {
         </div>
         <div className="flex mt-11 flex-col px-3">
           <Link href="/">
-            <div onClick={()=> setMobile(false)} 
+            <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer ${active==='home'? 'bg-stone-700': 'bg-stone-900'}  
                   bg-stone-900 text-md rounded-xl duration-200`}>
@@ -34,7 +42,7 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div onClick={()=> setMobile(false)} 
+            <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                    cursor-pointer ${active==='store'? 'bg-stone-700': 'bg-stone-900'} 
                    text-md rounded-xl duration-200`}>
@@ -43,7 +51,7 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div onClick={()=> setMobile(false)} 
+            <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='library'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
@@ -52,7 +60,7 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div onClick={()=> setMobile(false)} 
+            <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='mygames'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
@@ -61,7 +69,7 @@ function SideBar({active}: Props) {
             </div>
           </Link>
           <Link href="/store">
-            <div onClick={()=> setMobile(false)} 
+            <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='community'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>

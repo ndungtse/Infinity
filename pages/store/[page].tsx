@@ -10,6 +10,7 @@ import Filter from '../../components/store/Filter'
 import CardLoader from '../../components/Loaders/CardLoader'
 import SearchForm from '../../components/store/Search'
 import PaginationRanges from '../../components/Loaders/Pagination'
+import LinearIndeterminate from '../../components/Loaders/LinearLoad'
 
 const Page = ({ gameData }: any) => {
   const router: any = useRouter()
@@ -60,10 +61,11 @@ const Page = ({ gameData }: any) => {
   }, [page])
 
   return (
-    <div className="flex h-screen w-full flex-col bg-stone-800 py-2">
-      <Navbar setLinear={setLinear} />
+    <div className="flex h-screen w-full flex-col bg-stone-800">
+      {isLinear&&<LinearIndeterminate />}
+      <Navbar />
       <div className="flex h-full w-full">
-        <SideBar active='store' />
+        <SideBar active='store' setLinear={setLinear} />
         
         <div className="flex h-full w-full bg-stone-900 text-white xtab:p-6">
           <div 

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
+import Footer from '../Footer'
 import CardLoader from '../Loaders/CardLoader'
 import Feed from './Feed'
 import GameCard from './GameCard'
@@ -17,8 +18,8 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   console.log(newest);
 
   return (
-    <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
-        <div className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
+    <div className='w-full text-white flex h-full xtab:px-6 pt-6 bg-stone-900'>
+        <div className="flex flex-col overflow-x-hidden w-full h-[88vh] overflow-auto">
             <div className="flex relative w-full h-[30vh] rounded-xl">
                 <img
                  className='object-cover rounded-xl min-h-full min-w-full '
@@ -52,6 +53,7 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
             </div>
             </>
             )}
+            {/* <Footer /> */}
         </div>
         <Feed />
     </div>

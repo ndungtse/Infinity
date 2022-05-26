@@ -3,15 +3,15 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import allGames from '../contexts/allGames'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 // import { GameProvider } from '../contexts/gameContext'
 
 function MyApp({ Component, pageProps, }: AppProps) {
   const [isLoading, SetIsLoading] = useState(true)
 
-  const delay = ()=>{
-    setTimeout(()=>{
+  const delay = async()=>{
+    await axios.get('https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d')
       SetIsLoading(false)
-    }, 3000)
   }
   
   useEffect(()=>{
