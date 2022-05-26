@@ -53,15 +53,6 @@ function SideBar({active, setLinear}: Props) {
           <Link href="/store">
             <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
-                  cursor-pointer  ${active==='library'? 'bg-stone-700': 'bg-stone-900'} 
-                  bg-stone-900 text-md rounded-xl duration-200`}>
-              <BiLibrary className='text-lg' />
-              <p className='ml-4'>Library</p>
-            </div>
-          </Link>
-          <Link href="/store">
-            <div onClick={navHandler} 
-            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='mygames'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiJoystick className='text-lg' />
@@ -74,7 +65,7 @@ function SideBar({active, setLinear}: Props) {
                   cursor-pointer  ${active==='community'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiGroup className='text-lg' />
-              <p className='ml-4'>Community</p>
+              <p className='ml-4'>Providers</p>
             </div>
           </Link>
         </div>

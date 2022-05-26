@@ -4,7 +4,7 @@ import Axios from 'axios'
 import { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { BiDownload } from 'react-icons/bi'
+import { BiDownload, BiJoystickAlt } from 'react-icons/bi'
 import LinearIndeterminate from '../../components/Loaders/LinearLoad'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
@@ -17,13 +17,30 @@ const Game: NextPage = () => {
   const [index, setIndex] = useState<number>(0)
   const [indexImg, setIndexImg] = useState<number>(0)
   const [ren, setRen] = useState<boolean>(true)
-  const [extra, setExtra] = useState<any>([])
+  const [extra, setExtra] = useState<any>([]);
+  const [localGames, setLocalGames]= useState([])
 
   const router: any = useRouter()
   const { game }: any = router.query
 
   console.log(gameDetails);
   console.log(gameTrailers);
+
+  const getSavedGames = () => {
+    const storage: any = localStorage.getItem('games')
+    const local = JSON.parse(storage)
+    if (local) {
+      setLocalGames(local)
+    }
+  }
+  const saveGame = () => {
+    const newGames = [...localGames, gameDetails];
+    localStorage.setItem('games', JSON.stringify(newGames))
+  }
+
+  useEffect(()=>{
+    getSavedGames();
+  },[])
 
   const nextTrailer = (act: string)=>{
     setRen(false)
@@ -155,6 +172,12 @@ const Game: NextPage = () => {
                 </div>
               </div>
             </div>
+            <div onClick={saveGame}
+             className=" mt-5 px-2 text-violet-500
+              cursor-pointer flex py-2 bg-stone-800 w-[180px]">
+              <BiJoystickAlt className=' text-2xl' />
+              <p>Add to MyGames</p>
+            </div>
             {( gameTrailers!==undefined && gameTrailers.length !==0) &&(
              <div className='h-[500px] w-full'>
                 <h1 className="text-center text-2xl font-semibold mt-4">Trailers</h1>
@@ -233,34 +256,5 @@ const Game: NextPage = () => {
     </>
   )
 }
-
-// export const getStaticPaths = async () => {
-//   const res = await fetch('https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&3498');
-//   const data = await res.json();
-//   console.log(data);
-  
-//   const paths = data.results.map((game: { id: { toString: () => any } }) => {
-//     return {
-//       params: { game: game.id.toString() }
-//     }
-//   })
-
-//   return {
-//     paths,
-//     fallback: false
-//   }
-// }
-
-// export const getStaticProps: GetStaticProps = async(context)=>{
-//   const game = context.params.id
-
-//   const res = await Axios.get(`https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&3498&${game}`)
-
-//   return{
-//     props: {
-//       gameDetails: res.data
-//     }
-//   }
-// }
 
 export default Game
