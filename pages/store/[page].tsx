@@ -1,8 +1,7 @@
+ /* eslint-disable */ 
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Axios from 'axios'
-import { GetStaticProps } from 'next'
-import { BiSearch } from 'react-icons/bi'
 import GameCard from '../../components/Home/GameCard'
 import Link from 'next/link'
 import Navbar from '../../components/Navbar'

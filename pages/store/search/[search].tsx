@@ -1,3 +1,4 @@
+ /* eslint-disable */ 
 import Axios from 'axios'
 import Link from 'next/link'
 import { NextRouter, useRouter } from 'next/router'

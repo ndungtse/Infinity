@@ -1,3 +1,4 @@
+ /* eslint-disable */ 
 import Axios from 'axios'
 import { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -91,7 +92,7 @@ const Game: NextPage = () => {
                   ))}
                 </div>
                 <div className="flex mt-3 pb-4 items-center flex-wrap"><p>Website:</p>
-                    <a href={gameDetails.website} rel='no-refferer'
+                    <a href={gameDetails.website} rel="noreferrer"
                     target='_blank' className="ml-3 my-1 bg-stone-800 px-1">{`${gameDetails.website}`} </a>
                 </div>
               </div>
@@ -121,10 +122,11 @@ const Game: NextPage = () => {
               <p className='text-center'>Try another link if one can't get you what you want</p>
             <div className="flex mt-5 flex-wrap pb-4 items-center justify-center">
             <a className='flex text-lg px-3 py-2 bg-stone-800 rounded-md
-              hover:bg-stone-700 duration-200 items-center' href={`https://steamunlocked.net/?s=${downName}`} target='_blank'>
+              hover:bg-stone-700 duration-200 items-center' rel="noreferrer" href={`https://steamunlocked.net/?s=${downName}`} target='_blank'>
               SteamUnlocked<BiDownload className='text-2xl ml-2' /></a>
               <a className='flex ml-4 text-lg px-3 py-2 bg-stone-800 rounded-md
-              hover:bg-stone-700 duration-200 items-center' href={`https://gamingbeasts.com/?s=${downName}`} target='_blank'>
+              hover:bg-stone-700 duration-200 items-center' rel="noreferrer"
+               href={`https://gamingbeasts.com/?s=${downName}`} target='_blank'>
               GamingBeasts<BiDownload className='text-2xl ml-2' /></a>
               </div>
           </div>
