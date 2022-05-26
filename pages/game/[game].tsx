@@ -11,6 +11,7 @@ import Video from '../../components/video'
 const Game: NextPage = () => {
   const [gameDetails, setGameDet] = useState<any>(undefined)
   const [gameTrailers, setGameTrailers] = useState<any>(undefined)
+  const [isLinear, setLinear] = useState<boolean>(false)
 
   const router: any = useRouter()
   const { game }: any = router.query
@@ -53,7 +54,7 @@ const Game: NextPage = () => {
     <>
     {gameDetails!==undefined&&(
     <div className="flex text-white w-full flex-col overflow-hidden h-screen bg-stone-800 py-2">
-      <Navbar />
+      <Navbar setLinear={setLinear} />
       <div className="flex h-full w-full">
         <SideBar active='store' />
         <div className="flex h-[90vh] w-full overflow-auto p-1 bg-stone-900 text-white xtab:p-6">

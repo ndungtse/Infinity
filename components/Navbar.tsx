@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { BiBell, BiCog, BiMenu, BiSearch } from 'react-icons/bi'
 import { useRouter } from 'next/router'
 
-const Navbar = () => {
+type Props = {
+  setLinear: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Navbar = ({setLinear}: Props) => {
   const [rev, setRev] = useState<boolean>(false)
   const [searchInput, setSearchInput] = useState('')
   const router = useRouter()

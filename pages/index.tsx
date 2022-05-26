@@ -26,11 +26,12 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
       </Head>
     {isLoading?<HomeLoader />:( 
     <div className="flex w-full flex-col h-screen bg-stone-800">
-      {is<LinearIndeterminate />
-      <Navbar />
+      {isLinear &&<LinearIndeterminate />}
+      <Navbar setLinear={setLinear} />
       <div className="flex h-full w-full">
         <SideBar active='home' />
-        <HomeComp gameData={ gameData } loading={isLoading} />
+        <HomeComp gameData={ gameData }
+         loading={isLoading} />
       </div>
     </div>
     )} 

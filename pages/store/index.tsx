@@ -9,6 +9,7 @@ import LinearIndeterminate from '../../components/Loaders/LinearLoad';
 
 const Store: NextPage = ({gameData}: any) => {
   const [isLoading, SetIsLoading] = useState(true)
+  const [isLinear, setLinear] = useState<boolean>(false)
   console.log(gameData);
 
   const delay = ()=>{
@@ -24,7 +25,7 @@ const Store: NextPage = ({gameData}: any) => {
   return (
     <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
       <LinearIndeterminate />
-      <Navbar />
+      <Navbar setLinear={setLinear} />
       <div className="flex h-full w-full">
         <SideBar active='store' />
         <StoreComp gameData ={ gameData }

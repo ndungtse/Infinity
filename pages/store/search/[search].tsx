@@ -16,6 +16,7 @@ const Search = () => {
     const router: NextRouter = useRouter()
     const [searchRes, setSearchRes] = useState([])
     const [loading, setLoading] = useState(true)
+    const [isLinear, setLinear] = useState<boolean>(false)
 
     const { search }: ParsedUrlQuery = router.query
     console.log(search);
@@ -33,7 +34,7 @@ const Search = () => {
 
   return (
     <div className="flex h-screen w-full flex-col bg-stone-800 py-2">
-      <Navbar />
+      <Navbar setLinear={setLinear} />
       <div className="flex h-full w-full">
         <SideBar active='store' />
         <div className="flex h-full w-full bg-stone-900 text-white xtab:p-6">

@@ -15,6 +15,7 @@ const Page = ({ gameData }: any) => {
   const router: any = useRouter()
   const [pageGames, setPageGames] = useState<any>([])
   const [loading, setLoading] = useState<boolean>(true)
+  const [isLinear, setLinear] = useState<boolean>(false)
   const [filteredGames, setFilteredGames] = useState(pageGames)
   const { page }: any = router.query
   // const nextPage = parseInt(page)+1
@@ -60,7 +61,7 @@ const Page = ({ gameData }: any) => {
 
   return (
     <div className="flex h-screen w-full flex-col bg-stone-800 py-2">
-      <Navbar />
+      <Navbar setLinear={setLinear} />
       <div className="flex h-full w-full">
         <SideBar active='store' />
         
