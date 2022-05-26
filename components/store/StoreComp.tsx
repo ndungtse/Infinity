@@ -1,9 +1,10 @@
 import Axios from 'axios'
 import Link from 'next/link'
-import React, { SetStateAction, useState } from 'react'
+import React, { SetStateAction, useRef, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import GameCard from '../Home/GameCard'
 import CardLoader from '../Loaders/CardLoader'
+import PaginationRanges from '../Loaders/Pagination'
 import Filter from './Filter'
 import SearchForm from './Search'
 
@@ -18,7 +19,9 @@ const StoreComp = ({gameData, loading, setLoading}: Props)=> {
     const [page, setPage] = useState(1)
     const [pageGames, setPageGames] = useState(firstPageGames)
     const [filteredGames, setFilteredGames] = useState(pageGames)
+    const panelRef: React.MutableRefObject<null> = useRef(null)
 
+    const panel: any = panelRef.current
 
     const filterGames = (genre:string) =>{
       let arr = [];
@@ -34,9 +37,15 @@ const StoreComp = ({gameData, loading, setLoading}: Props)=> {
       setFilteredGames(arr)
   }
 
+  const scrollToTop = ()=>{
+    panel.scrollTop = 0;
+  }
+
   return (
     <div className='w-full text-white flex h-full xtab:p-6 bg-stone-900'>
-        <div className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
+        <div
+          ref={panelRef}
+         className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
             <SearchForm setLoading={setLoading} />
             <Filter filterGames={ filterGames } />
             <h2 className="ml-2 text-xl font-bold mt-3">Games</h2>
@@ -48,11 +57,7 @@ const StoreComp = ({gameData, loading, setLoading}: Props)=> {
               ))}
             </div>
              )}
-            <Link href="/store/2">
-              <button
-               className='bg-stone-800 w-[150px] mx-auto mt-4 hover:bg-stone-700
-               duration-200 px-3 py-2 rounded-md'>Next</button>
-             </Link>
+             <PaginationRanges  top={scrollToTop}  />
         </div>
     </div>
   )

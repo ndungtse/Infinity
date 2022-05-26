@@ -127,3 +127,9 @@ video {
     color: white;
     font-size: 20px;
   }
+  #text{
+    color: white!important;
+  }
+  li button, li div{
+    color: white!important;
+  }

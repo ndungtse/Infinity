@@ -9,6 +9,7 @@ import SideBar from '../../components/SideBar'
 import Filter from '../../components/store/Filter'
 import CardLoader from '../../components/Loaders/CardLoader'
 import SearchForm from '../../components/store/Search'
+import PaginationRanges from '../../components/Loaders/Pagination'
 
 const Page = ({ gameData }: any) => {
   const router: any = useRouter()
@@ -16,7 +17,7 @@ const Page = ({ gameData }: any) => {
   const [loading, setLoading] = useState<boolean>(true)
   const [filteredGames, setFilteredGames] = useState(pageGames)
   const { page }: any = router.query
-  const nextPage = parseInt(page)+1
+  // const nextPage = parseInt(page)+1
   const panelRef: React.MutableRefObject<null> = useRef(null)
 
   console.log(page);
@@ -82,12 +83,7 @@ const Page = ({ gameData }: any) => {
               )}
             </div>
              )}
-            <Link href={`/store/${nextPage}`}>
-              <button 
-              onClick={scrollToTop}
-              className="rounded-md hover:bg-stone-700 w-[100px] mx-auto
-              bg-stone-800 mt-5 duration-200 px-3 py-2">Next</button>
-            </Link>
+            <PaginationRanges top={scrollToTop}/>
           </div>
         </div>
       </div>

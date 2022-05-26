@@ -7,6 +7,7 @@ import SideBar from '../components/SideBar'
 import { GetStaticProps } from "next";
 import { useEffect, useState } from 'react'
 import HomeLoader from '../components/Loaders/HomeLoader'
+import LinearIndeterminate from '../components/Loaders/LinearLoad'
 
 type Props = {
   isLoading: boolean,
@@ -15,6 +16,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
   console.log(isLoading);
+  const [isLinear, setLinear] = useState<boolean>(false)
   
   return (
     <>
@@ -23,7 +25,8 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
         <link rel="icon" href="/logo2.png" />
       </Head>
     {isLoading?<HomeLoader />:( 
-    <div className="flex w-full flex-col h-screen bg-stone-800 py-2">
+    <div className="flex w-full flex-col h-screen bg-stone-800">
+      <LinearIndeterminate />
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar active='home' />
