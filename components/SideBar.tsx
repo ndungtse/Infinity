@@ -63,7 +63,7 @@ function SideBar({active, setLinear}: Props) {
           <Link href="/providers/1">
             <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
-                  cursor-pointer  ${active==='community'? 'bg-stone-700': 'bg-stone-900'} 
+                  cursor-pointer  ${active==='providers'? 'bg-stone-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiGroup className='text-lg' />
               <p className='ml-4'>Providers</p>

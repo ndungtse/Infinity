@@ -25,7 +25,7 @@ const Page = ({ gameData }: any) => {
   const getNextPageGames = async () => {
     setLoading(true)
     const res = await Axios.get(
-      `https://api.rawg.io/api/developers?key=a5c36a8abe0c4ddb9489dc567b3cf68d&page=${page}`
+      `https://api.rawg.io/api/developers?key=${process.env.NEXT_PUBLIC_KEY}&page=${page}`
     )
     console.log(res)
     setLoading(false)
@@ -45,7 +45,7 @@ const Page = ({ gameData }: any) => {
       {isLinear && <LinearIndeterminate />}
       <Navbar />
       <div className="flex h-full w-full">
-        <SideBar active="store" setLinear={setLinear} />
+        <SideBar active="providers" setLinear={setLinear} />
 
         <div className="flex h-full w-full bg-stone-900 text-white xtab:p-6">
           <div

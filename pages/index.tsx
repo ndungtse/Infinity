@@ -9,13 +9,14 @@ import { useEffect, useState } from 'react'
 import HomeLoader from '../components/Loaders/HomeLoader'
 import LinearIndeterminate from '../components/Loaders/LinearLoad'
 
+
 type Props = {
   isLoading: boolean,
   setIsLoading: any
 }
 
 const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
-  console.log(isLoading);
+  console.log(process.env.NEXT_PUBLIC_KEY);
   const [isLinear, setLinear] = useState<boolean>(false)
 
 
@@ -41,7 +42,7 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
 }
 
 export const getStaticProps: GetStaticProps = async()=>{
-  
+  console.log(process.env.REACT_APP_API_KEY);
   const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`)
   return {
     props: {
