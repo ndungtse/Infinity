@@ -14,7 +14,7 @@ interface Props {
 
 const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   const newest: object[] = gameData.results.slice(0, 8)
-  const featured: object[]= gameData.results.slice(100, 108)
+  const featured: object[]= gameData.results.slice(10, 18)
   console.log(newest);
 
   return (
@@ -30,7 +30,7 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
                     <button className='px-3 py-2 mt-5 bg-pink-500 rounded-lg'>Start Now</button>
                  </div>
             </div>
-            <h2 className="ml-2 text-xl font-bold mt-3">Newest</h2>
+            <h2 className="ml-2 text-xl font-bold mt-3">Recommended</h2>
             {loading? <CardLoader />:(
               <>
             <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
@@ -53,9 +53,9 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
             </div>
             </>
             )}
-            {/* <Footer /> */}
+            <Footer />
         </div>
-        <Feed />
+        {/* <Feed /> */}
     </div>
   )
 }
