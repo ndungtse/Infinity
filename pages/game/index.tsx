@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 import Game from './[game]'
 
-const index = () => {
+const GamePage = () => {
   const [isLinear, setLinear] = useState<boolean>(false)
   return (
     <div className="flex w-full flex-col h-screen bg-stone-800">
@@ -20,4 +20,4 @@ const index = () => {
   )
 }
 
-export default index
+export default GamePage
