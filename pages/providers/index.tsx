@@ -27,7 +27,7 @@ const Providers: NextPage = ({storeData}: any) => {
 }
 
 export const getStaticProps: GetStaticProps = async()=>{
-    const res = await axios.get(`https://api.rawg.io/api/stores?key=${process.env.REACT_APP_API_KEY}`)
+    const res = await axios.get(`https://api.rawg.io/api/stores?key=${process.env.NEXT_PUBLIC_KEY}`)
     return {
       props: {
         storeData: res.data
