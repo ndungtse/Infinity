@@ -136,3 +136,6 @@ video {
   .mob{
     left: 0!important;
   }
+  body{
+    background-color: rgb(39, 37, 37);
+  }
