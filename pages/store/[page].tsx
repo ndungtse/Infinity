@@ -44,7 +44,7 @@ const Page = ({ gameData }: any) => {
   const getNextPageGames = async () => {
       setLoading(true)
     const res = await Axios.get(
-      `https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&page=${page}`
+      `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=${page}`
     )
     console.log(res)
     setLoading(false)
@@ -93,15 +93,5 @@ const Page = ({ gameData }: any) => {
     </div>
   )
 }
-
-// export const getStaticProps: GetStaticProps = async()=>{
-
-//     const res = await Axios.get('https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d')
-//     return {
-//       props: {
-//         gameData: res.data
-//       },
-//     };
-//   };
 
 export default Page

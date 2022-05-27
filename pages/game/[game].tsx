@@ -76,13 +76,13 @@ const Game: NextPage = () => {
   
   const getGame = async()=>{
     if (game!==undefined) {
-    const res = await Axios.get(`https://api.rawg.io/api/games/${game}?key=a5c36a8abe0c4ddb9489dc567b3cf68d`)
+    const res = await Axios.get(`https://api.rawg.io/api/games/${game}?key=${process.env.API_KEY}`)
     setGameDet(res.data)
   }
   }
   const getGameTrailers = async()=>{
     if (gameDetails!==undefined) {
-    const res = await Axios.get(`https://api.rawg.io/api/games/${game}/movies?key=a5c36a8abe0c4ddb9489dc567b3cf68d`)    
+    const res = await Axios.get(`https://api.rawg.io/api/games/${game}/movies?key=${process.env.API_KEY}`)    
     setGameTrailers(res.data.results)
   }
   }
@@ -104,7 +104,7 @@ const Game: NextPage = () => {
       params: {q: gameDetails.name+app},
       headers: {
         'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com',
-        'X-RapidAPI-Key': 'bbce629d3cmsh48cb41094daa35cp1157cejsn05466969482c'
+        'X-RapidAPI-Key': `${process.env.RAPID_IM_KEY}`
       }
     };
     const res = await axios.request(options)

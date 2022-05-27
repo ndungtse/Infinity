@@ -60,9 +60,6 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   )
 }
 
-// const getServerSideProps: GetServerSideProps = async()=>{
-//   const res = await axios.get('')
-// }
 
 export default HomeComp
 

@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
 
 export const getStaticProps: GetStaticProps = async()=>{
   
-  const res = await Axios.get('https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d')
+  const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)
   return {
     props: {
       gameData: res.data
