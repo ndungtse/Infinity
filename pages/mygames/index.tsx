@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { BiDownload } from 'react-icons/bi'
+import LinearIndeterminate from '../../components/Loaders/LinearLoad'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 
@@ -35,6 +36,7 @@ const MyGames: NextPage = () => {
       <>
       {myGames !== undefined &&(
     <div className="flex text-white w-full flex-col overflow-hidden h-screen bg-stone-800 ">
+      {isLinear&&<LinearIndeterminate />}
        <Navbar />
        <div className="flex h-full w-full">
           <SideBar active='mygames' setLinear={setLinear} />

@@ -9,10 +9,10 @@ module.exports = {
       five: '500px',
       tablet: '640px',
       // => @media (min-width: 640px) { ... }
-      tablet: '780px',
-      ltab: '960px',
+      ltab: '780px',
+      xtab: '960px',
       // => @media (min-width: 1024px) { ... }
-      
+      // ltab: '960px',
       desktop: '1280px',
       // => @media (min-width: 1280px) { ... }
     },
