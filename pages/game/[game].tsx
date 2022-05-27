@@ -8,6 +8,7 @@ import { BiDownload, BiJoystickAlt } from 'react-icons/bi'
 import LinearIndeterminate from '../../components/Loaders/LinearLoad'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
+import { compare } from '../../contexts/utilities'
 // import Video from '../../components/video'
 
 const Game: NextPage = () => {
@@ -19,35 +20,49 @@ const Game: NextPage = () => {
   const [ren, setRen] = useState<boolean>(true)
   const [extra, setExtra] = useState<any>([]);
   const [localGames, setLocalGames]= useState([])
+  const [added, setAdded] = useState<boolean>(false)
 
   const router: any = useRouter()
   const { game }: any = router.query
 
-  console.log(gameDetails);
-  console.log(gameTrailers);
-
   const getSavedGames = () => {
+  if (gameDetails!==undefined) {
+    
     const storage: any = localStorage.getItem('games')
     const local = JSON.parse(storage)
+    
     if (local) {
       setLocalGames(local)
+        const bool:any = compare(game, local)
+        setAdded(bool)
+      }
     }
+
   }
   const saveGame = () => {
-    const newGames = [...localGames, gameDetails];
+     const newGames:any = [...localGames, gameDetails];
+     localStorage.setItem('games', JSON.stringify(newGames))
+     setLocalGames(newGames)
+     setAdded(true)
+  }
+
+  const removeGame =()=>{
+    const newGames = localGames.filter((g:any)=> g.id !== Number(game))
+    setLocalGames(newGames)
     localStorage.setItem('games', JSON.stringify(newGames))
+    
+    setAdded(false)
   }
 
   useEffect(()=>{
     getSavedGames();
-  },[])
+  },[gameDetails])
 
   const nextTrailer = (act: string)=>{
     setRen(false)
     if (act==='next') {
       if(index < gameTrailers.length -1){
         setIndex(index+1)
-        console.log(index);
       }
     }else{
       if(index > 0){
@@ -91,7 +106,6 @@ const Game: NextPage = () => {
     const new0 = gameDetails.name.replace('(','')
     const new1 = new0.replace(')','')
     downName = new1.split(' ').join('+')
-    console.log(downName);
     
   }
 
@@ -109,8 +123,6 @@ const Game: NextPage = () => {
     };
     const res = await axios.request(options)
     setExtra(res.data.value)
-    console.log(res.data.value);
-    
   }
   }
   
@@ -133,14 +145,16 @@ const Game: NextPage = () => {
         <SideBar active='store' setLinear={setLinear} />
         <div className="flex h-[90vh] w-full overflow-auto p-1 bg-stone-900 text-white xtab:p-6">
           <div className="flex flex-col w-full">
-            <div className="flex">
-              <div className="w-1/4 min-w-[250px] h-[40vh] flex">
-                  <img src={gameDetails.background_image} className="min-w-full
-                  object-cover min-h-full" alt="image" />
-              </div>
-              <div className="w-1/4 min-w-[250px] h-[40vh] flex">
-                  <img src={gameDetails.background_image_additional} className="min-w-full
-                  object-cover min-h-full" alt="image" />
+            <div className="flex flex-col ltab:flex-row w-full">
+              <div className="flex ltab:w-1/2 aspect-video">
+                <div className=" w-full h-full flex">
+                    <img src={gameDetails.background_image} className="min-w-full
+                    object-cover min-h-full" alt="image" />
+                </div>
+                <div className="hidden  ltab:flex w-full h-full">
+                    <img src={gameDetails.background_image_additional} className="min-w-full
+                    object-cover min-h-full" alt="image" />
+                </div>
               </div>
               <div className="ml-7 flex flex-col">
                 <h2 className='tablet:text-2xl font-bold'>{gameDetails.name}</h2>
@@ -172,11 +186,11 @@ const Game: NextPage = () => {
                 </div>
               </div>
             </div>
-            <div onClick={saveGame}
-             className=" mt-5 px-2 text-violet-500
-              cursor-pointer flex py-2 bg-stone-800 w-[180px]">
+            <div onClick={added?removeGame:saveGame}
+             className={` mt-5 px-2 text-violet-500 flexx items-center
+              cursor-pointer flex py-2 ${added?'bg-stone-800':'bg-stone-700'} w-[200px]`}>
               <BiJoystickAlt className=' text-2xl' />
-              <p>Add to MyGames</p>
+              <p>{added?'Added to MyGames':'Add to MyGames'}</p>
             </div>
             {( gameTrailers!==undefined && gameTrailers.length !==0) &&(
              <div className='h-[500px] w-full'>

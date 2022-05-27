@@ -51,7 +51,7 @@ function SideBar({active, setLinear}: Props) {
               <p className='ml-4'>Store</p>
             </div>
           </Link>
-          <Link href="/store">
+          <Link href="/mygames">
             <div onClick={navHandler} 
             className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
                   cursor-pointer  ${active==='mygames'? 'bg-stone-700': 'bg-stone-900'} 
