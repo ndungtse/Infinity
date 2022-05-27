@@ -1,10 +1,8 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import allGames from '../contexts/allGames'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-// import { GameProvider } from '../contexts/gameContext'
 
 function MyApp({ Component, pageProps, }: AppProps) {
   const [isLoading, SetIsLoading] = useState(true)
