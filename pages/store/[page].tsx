@@ -44,7 +44,7 @@ const Page = ({ gameData }: any) => {
   const getNextPageGames = async () => {
       setLoading(true)
     const res = await Axios.get(
-      `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=${page}`
+      `https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d&page=${page}`
     )
     console.log(res)
     setLoading(false)

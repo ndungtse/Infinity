@@ -17,7 +17,8 @@ type Props = {
 const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
   console.log(isLoading);
   const [isLinear, setLinear] = useState<boolean>(false)
-  
+
+
   return (
     <>
       <Head>
@@ -41,7 +42,7 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
 
 export const getStaticProps: GetStaticProps = async()=>{
   
-  const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)
+  const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`)
   return {
     props: {
       gameData: res.data

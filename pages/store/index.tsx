@@ -37,7 +37,7 @@ const Store: NextPage = ({gameData}: any) => {
 
 export const getServerSideProps: GetServerSideProps = async()=>{
   
-  const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)
+  const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`)
   return {
     props: {
       gameData: res.data
