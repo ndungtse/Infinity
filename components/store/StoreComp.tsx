@@ -2,6 +2,7 @@ import Axios from 'axios'
 import Link from 'next/link'
 import React, { SetStateAction, useRef, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
+import Footer from '../Footer'
 import GameCard from '../Home/GameCard'
 import CardLoader from '../Loaders/CardLoader'
 import PaginationRanges from '../Loaders/Pagination'
@@ -47,7 +48,8 @@ const StoreComp = ({gameData, loading, setLoading}: Props)=> {
           ref={panelRef}
          className="flex flex-col overflow-x-hidden w-full h-[84vh] overflow-auto">
             <SearchForm setLoading={setLoading} />
-            <Filter filterGames={ filterGames } />
+            <Filter filterGames={ filterGames }
+             setFilteredGames={setFilteredGames} pageGames={pageGames} />
             <h2 className="ml-2 text-xl font-bold mt-3">Games</h2>
              {loading?<CardLoader />:(
             <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
@@ -58,6 +60,7 @@ const StoreComp = ({gameData, loading, setLoading}: Props)=> {
             </div>
              )}
              <PaginationRanges  top={scrollToTop}  />
+             <Footer />
         </div>
     </div>
   )

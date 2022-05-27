@@ -11,6 +11,7 @@ import CardLoader from '../../components/Loaders/CardLoader'
 import SearchForm from '../../components/store/Search'
 import PaginationRanges from '../../components/Loaders/Pagination'
 import LinearIndeterminate from '../../components/Loaders/LinearLoad'
+import Footer from '../../components/Footer'
 
 const Page = ({ gameData }: any) => {
   const router: any = useRouter()
@@ -72,7 +73,8 @@ const Page = ({ gameData }: any) => {
           ref={panelRef}
           className="flex h-[84vh] w-full flex-col overflow-auto overflow-x-hidden">
             <SearchForm setLoading={setLoading} />
-            <Filter filterGames={filterGames} />
+            <Filter filterGames={filterGames} pageGames={pageGames}
+               setFilteredGames={filteredGames} />
             <h2 className="ml-2 mt-3 text-xl font-bold">Games</h2>
             {loading?<CardLoader />:(
             <div
@@ -87,6 +89,7 @@ const Page = ({ gameData }: any) => {
             </div>
              )}
             <PaginationRanges top={scrollToTop}/>
+            <Footer />
           </div>
         </div>
       </div>

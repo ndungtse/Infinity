@@ -19,14 +19,11 @@ const MyGames: NextPage = () => {
           
       }
     }
-    let downName
-//   if (myGames !== undefined) {
-//     const new0 = game.name.replace('(','')
-//     const new1 = new0.replace(')','')
-//     downName = new1.split(' ').join('+')
-//     console.log(downName);
-    
-//   }
+    const removeGame =(id:number)=>{
+      const newGames = myGames.filter((g:any)=> g.id !== Number(id))
+      setMyGames(newGames)
+      localStorage.setItem('games', JSON.stringify(newGames))
+    }
 
     useEffect(()=>{
         getSavedGames()
@@ -45,7 +42,7 @@ const MyGames: NextPage = () => {
                 <h2 className="text-xl font-semibold">Your Saved Games</h2>
                 
                 {myGames.length !==0?(myGames.map((game: any, index:number)=>(
-                    <MyGame game={game} key={index} myGames={myGames}/>
+                    <MyGame game={game} key={index} myGames={myGames} removeGame={removeGame}/>
                 ))):(
                     <p className="text-center">No Saved Games Found</p>
                 )}
@@ -60,7 +57,7 @@ const MyGames: NextPage = () => {
 
 export default MyGames
 
-function MyGame({game, myGames}:any){
+function MyGame({game, myGames, removeGame}:any){
 
     let downName
       if (myGames !== undefined) {
@@ -84,16 +81,20 @@ function MyGame({game, myGames}:any){
                         <p className='text-lg font-medium'>Released: {game.released}</p>
                     </div>
                     <div className="flex flex-col text-sm items-start py-2 pr-3">
+                        <p onClick={()=>removeGame(game.id)}
+                         className="bg-red-400 cursor-pointer rounded-md w-full my-2 px-2 py-1">
+                          Remove
+                        </p>
                         <Link href={`/game/${game.id}`}>
-                            <div className='flex cursor-pointer text-sm px-3 py-2 bg-stone-900 rounded-md
+                            <div className='flex w-full cursor-pointer text-sm px-3 py-2 bg-stone-900 rounded-md
                             hover:bg-stone-700 duration-200 items-center'>
                             More details
                             </div>
                         </Link>
-                        <a className='flex mt-2 text-sm px-3 py-2 bg-stone-900 rounded-md
+                        <a className='flex  w-full mt-2 text-sm px-3 py-2 bg-stone-900 rounded-md
                         hover:bg-stone-700 duration-200 items-center' rel="noreferrer" href={`https://steamunlocked.net/?s=${downName}`} target='_blank'>
                          SteamUnlocked<BiDownload className='text-xl ml-2' /></a>
-                        <a className='flex mt-2 text-sm px-3 py-2 bg-stone-900 rounded-md
+                        <a className='flex w-full mt-2 text-sm px-3 py-2 bg-stone-900 rounded-md
                         hover:bg-stone-700 duration-200 items-center' rel="noreferrer"
                          href={`https://gamingbeasts.com/?s=${downName}`} target='_blank'>
                         GamingBeasts<BiDownload className='text-xl ml-2' /></a>

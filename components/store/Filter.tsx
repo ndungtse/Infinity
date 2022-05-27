@@ -1,13 +1,16 @@
 import React from 'react'
 
 type Props = {
-    filterGames: (genre: string) => void
+    filterGames: (genre: string) => void,
+    pageGames: any,
+    setFilteredGames: React.Dispatch<any>
 }
 
-const Filter = ({filterGames}: Props) => {
+const Filter = ({filterGames, pageGames, setFilteredGames}: Props) => {
   return (
     <div className="mx-auto mt-6 flex">
               <button
+                onClick={()=>setFilteredGames(pageGames)}
                 className="flex items-center justify-center rounded-xl border-2
             border-stone-800 bg-stone-800 px-3 py-2 duration-200 hover:bg-stone-800"
               >
