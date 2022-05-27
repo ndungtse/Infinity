@@ -15,7 +15,6 @@ const MyGames: NextPage = () => {
       const local = JSON.parse(loc)
       if (local) {
           setMyGames(local)
-          console.log(local);
           
       }
     }

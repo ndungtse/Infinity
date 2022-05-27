@@ -16,7 +16,6 @@ type Props = {
 }
 
 const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
-  console.log(process.env.NEXT_PUBLIC_KEY);
   const [isLinear, setLinear] = useState<boolean>(false)
 
 
@@ -42,7 +41,6 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
 }
 
 export const getStaticProps: GetStaticProps = async()=>{
-  console.log(process.env.REACT_APP_API_KEY);
   const res = await Axios.get(`https://api.rawg.io/api/games?key=a5c36a8abe0c4ddb9489dc567b3cf68d`)
   return {
     props: {

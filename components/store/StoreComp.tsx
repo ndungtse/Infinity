@@ -34,7 +34,6 @@ const StoreComp = ({gameData, loading, setLoading}: Props)=> {
           }
           
       }
-      console.log(arr);
       setFilteredGames(arr)
   }
 

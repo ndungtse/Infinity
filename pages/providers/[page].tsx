@@ -17,7 +17,6 @@ const Page = ({ gameData }: any) => {
   const { page }: any = router.query
   const panelRef: React.MutableRefObject<null> = useRef(null)
 
-  console.log(page)
 
   const panel: any = panelRef.current
 
@@ -26,7 +25,6 @@ const Page = ({ gameData }: any) => {
     const res = await Axios.get(
       `https://api.rawg.io/api/developers?key=${process.env.NEXT_PUBLIC_KEY}&page=${page}`
     )
-    console.log(res)
     setLoading(false)
     setPageStores(res.data.results)
   }
@@ -55,7 +53,8 @@ const Page = ({ gameData }: any) => {
                 {loading?<StoreLoader />:(
                   pageStores.map(
                   (store: any, index: React.Key | null | undefined) => (
-                    <div className="mx-auto mt-7 w-9/12 min-w-[280px] flex-col items-center justify-between rounded-xl bg-stone-800 tablet:flex tablet:w-full tablet:flex-row">
+                    <div key={index}
+                     className="mx-auto mt-7 w-9/12 min-w-[280px] flex-col items-center justify-between rounded-xl bg-stone-800 tablet:flex tablet:w-full tablet:flex-row">
                       <div className="flex aspect-video overflow-hidden rounded-2xl  p-1 tablet:w-[250px]">
                         <img
                           className="min-h-full min-w-full w-full object-cover"
@@ -72,7 +71,7 @@ const Page = ({ gameData }: any) => {
                             <div className='flex flex-wrap w-full'>
                                 {store.games.map((game: any, index: number)=>(
                                 
-                                        <Link href={`/game/${game.id}`}>
+                                        <Link key={index} href={`/game/${game.id}`}>
                                             <p className='px-2 py-1 bg-stone-900 m-1 cursor-pointer'>{game.name}</p>
                                         </Link>
                                 ))}

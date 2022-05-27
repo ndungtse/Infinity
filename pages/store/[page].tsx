@@ -23,7 +23,6 @@ const Page = ({ gameData }: any) => {
   // const nextPage = parseInt(page)+1
   const panelRef: React.MutableRefObject<null> = useRef(null)
 
-  console.log(page);
   
 
   const panel: any = panelRef.current
@@ -38,7 +37,6 @@ const Page = ({ gameData }: any) => {
           }
           
       }
-      console.log(arr);
       setFilteredGames(arr)
   }
 
@@ -47,7 +45,6 @@ const Page = ({ gameData }: any) => {
     const res = await Axios.get(
       `https://api.rawg.io/api/games?key=${process.env.NEXT_PUBLIC_KEY}&page=${page}`
     )
-    console.log(res)
     setLoading(false)
     setPageGames(res.data.results)
     setFilteredGames(res.data.results)

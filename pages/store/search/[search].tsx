@@ -20,7 +20,6 @@ const Search = () => {
     const [isLinear, setLinear] = useState<boolean>(false)
 
     const { search }: ParsedUrlQuery = router.query
-    console.log(search);
     
     const getSearchedItem = async()=>{
       setLoading(true)

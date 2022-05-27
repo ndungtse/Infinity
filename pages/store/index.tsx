@@ -10,7 +10,6 @@ import LinearIndeterminate from '../../components/Loaders/LinearLoad';
 const Store: NextPage = ({gameData}: any) => {
   const [isLoading, SetIsLoading] = useState(true)
   const [isLinear, setLinear] = useState<boolean>(false)
-  console.log(gameData);
 
   const delay = ()=>{
     setTimeout(()=>{
