@@ -6,6 +6,7 @@ import Footer from '../Footer'
 import CardLoader from '../Loaders/CardLoader'
 import Feed from './Feed'
 import GameCard from './GameCard'
+import Stores from './Store'
 
 interface Props {
   gameData: any,
@@ -53,6 +54,7 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
             </div>
             </>
             )}
+            {/* <Stores /> */}
             <Footer />
         </div>
         {/* <Feed /> */}

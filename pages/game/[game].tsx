@@ -5,6 +5,7 @@ import { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BiDownload, BiJoystickAlt } from 'react-icons/bi'
+import { FaStar } from 'react-icons/fa'
 import LinearIndeterminate from '../../components/Loaders/LinearLoad'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
@@ -24,6 +25,11 @@ const Game: NextPage = () => {
 
   const router: any = useRouter()
   const { game }: any = router.query
+
+  let rating: number = 0
+  if (gameDetails!==undefined) {
+     rating = Math.round(gameDetails.rating) 
+  }
 
   const getSavedGames = () => {
   if (gameDetails!==undefined) {
@@ -186,11 +192,28 @@ const Game: NextPage = () => {
                 </div>
               </div>
             </div>
-            <div onClick={added?removeGame:saveGame}
-             className={` mt-5 px-2 text-violet-500 flexx items-center
-              cursor-pointer flex py-2 ${added?'bg-stone-800':'bg-stone-700'} w-[200px]`}>
-              <BiJoystickAlt className=' text-2xl' />
-              <p>{added?'Added to MyGames':'Add to MyGames'}</p>
+            <div className="flex three:flex-row flex-col mt-5 items-center">
+              <div onClick={added?removeGame:saveGame}
+               className={`px-2 text-violet-500 flexx items-center
+                cursor-pointer flex py-2 ${added?'bg-stone-800':'bg-stone-700'} w-[200px]`}>
+                <BiJoystickAlt className=' text-2xl' />
+                <p>{added?'Added to MyGames':'Add to MyGames'}</p>
+              </div>
+              <div className="flex items-center ml-3 flex-col">
+                    <p>Star Ratings</p>
+                  <div className="flex">
+                    <FaStar
+                     className={`${rating>=1 && 'text-orange-500'}`}/>
+                    <FaStar
+                     className={`${rating>=2 && 'text-orange-500'}`}/>
+                    <FaStar
+                     className={`${rating>=3 && 'text-orange-500'}`}/>
+                    <FaStar
+                     className={`${rating>=4 && 'text-orange-500'}`}/>
+                    <FaStar
+                     className={`${rating>=5 && 'text-orange-500'}`}/>
+                  </div>
+              </div>
             </div>
             {( gameTrailers!==undefined && gameTrailers.length !==0) &&(
              <div className='h-[500px] w-full'>
