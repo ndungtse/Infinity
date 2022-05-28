@@ -2,6 +2,7 @@
 import axios from 'axios'
 import Axios from 'axios'
 import { GetStaticProps, NextPage } from 'next'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { BiDownload, BiJoystickAlt } from 'react-icons/bi'
@@ -154,12 +155,12 @@ const Game: NextPage = () => {
             <div className="flex flex-col ltab:flex-row w-full">
               <div className="flex ltab:w-1/2 aspect-video">
                 <div className=" w-full h-full flex">
-                    <img src={gameDetails.background_image} className="min-w-full
-                    object-cover min-h-full" alt="image" />
+                    <Image src={gameDetails.background_image} className="min-w-full
+                    object-cover min-h-full" alt="image" height={1920} width={1080} />
                 </div>
                 <div className="hidden  ltab:flex w-full h-full">
-                    <img src={gameDetails.background_image_additional} className="min-w-full
-                    object-cover min-h-full" alt="image" />
+                    <Image src={gameDetails.background_image_additional} className="min-w-full
+                    object-cover min-h-full" alt="image"  height={1920} width={1080}/>
                 </div>
               </div>
               <div className="ml-7 flex flex-col">

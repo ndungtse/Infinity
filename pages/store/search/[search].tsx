@@ -22,10 +22,13 @@ const Search = () => {
     const { search }: ParsedUrlQuery = router.query
     
     const getSearchedItem = async()=>{
+      if (search!==undefined) { 
       setLoading(true)
       const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.NEXT_PUBLIC_KEY}&search=${search}`)
+      console.log(res.data.results);
       setSearchRes(res.data.results)
       setLoading(false)
+    }
     }
 
     useEffect(()=>{
@@ -56,9 +59,10 @@ const Search = () => {
               className="grid gap-4 five:w-full mx-auto w-[270px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
               five:grid-cols-2 grid-cols-[50%] ltop:grid-cols-3  desktop:grid-cols-4 mt-4"
             >
-              {searchRes.map((game, index)=>(
+              {searchRes.length !== 0 &&(
+              searchRes.map((game, index)=>(
                 <GameCard item={game} key={index}/>
-                ))}
+                )))}
             </div>
             )}
           </div>
