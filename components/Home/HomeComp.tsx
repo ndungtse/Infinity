@@ -18,13 +18,16 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   const featured: object[]= gameData.results.slice(10, 18)
   console.log(newest);
 
+  const introImg = ['https://media.rawg.io/media/games/370/3703c683968a54f09630dcf03366ea35.jpg',
+                  'images/battlefield.jpg']
+
   return (
     <div className='w-full text-white flex h-full xtab:px-6 pt-6 bg-stone-900'>
         <div className="flex flex-col overflow-x-hidden w-full h-[88vh] overflow-auto">
             <div className="flex relative w-full h-[30vh] rounded-xl">
                 <img
                  className='object-cover rounded-xl min-h-full min-w-full '
-                 src="/images/battlefield.jpg" alt="" />
+                 src={introImg[Math.floor(Math.random()*introImg.length)]} alt="" />
                  <div className="absolute top-9 left-5">
                     <p>GET ALL GAMES HERE</p>
                     <h1 className="text-2xl mt-3">Games are games, Games are infinity. Just Play</h1>
@@ -34,15 +37,15 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
             <h2 className="ml-2 text-xl font-bold mt-3">Recommended</h2>
             {loading? <CardLoader />:(
               <>
-            <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
-              five:grid-cols-2 grid-cols-[50%]  desktop:grid-cols-4 mt-4">
+            <div className="grid gap-4 five:w-full mx-auto w-[270px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
+              five:grid-cols-2 grid-cols-[50%] ltop:grid-cols-3  desktop:grid-cols-4 mt-4">
               {newest.map((game, index)=>(
               <GameCard item={game} key={index} />
               ))}
             </div>
             <h2 className="ml-2 text-xl font-bold mt-3">Featured</h2>
-            <div className="grid gap-4 five:w-full mx-auto w-[230px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
-              five:grid-cols-2 grid-cols-[50%]  desktop:grid-cols-4 mt-4">
+            <div className="grid gap-4 five:w-full mx-auto w-[270px] px-2 xtab:grid-cols-2 ltab:grid-cols-3
+              five:grid-cols-2 grid-cols-[50%]  ltop:grid-cols-3  desktop:grid-cols-4 mt-4">
               {featured.map((feature, index) => (
               <GameCard item={ feature } key={index} />
               ))}

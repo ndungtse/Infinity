@@ -53,8 +53,8 @@ const Search = () => {
             </div>
             {loading?<CardLoader />:(
             <div
-              className="mx-auto mt-4  grid w-[230px] grid-cols-[50%] gap-4 px-2 
-            five:grid-cols-2 five:w-full tablet:w-full  tablet:grid-cols-3 desktop:grid-cols-4"
+              className="grid gap-4 five:w-full mx-auto w-[270px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
+              five:grid-cols-2 grid-cols-[50%] ltop:grid-cols-3  desktop:grid-cols-4 mt-4"
             >
               {searchRes.map((game, index)=>(
                 <GameCard item={game} key={index}/>

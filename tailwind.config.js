@@ -13,7 +13,7 @@ module.exports = {
       ltab: '780px',
       xtab: '960px',
       // => @media (min-width: 1024px) { ... }
-      // ltab: '960px',
+      ltop: '1050px',
       desktop: '1280px',
       // => @media (min-width: 1280px) { ... }
     },

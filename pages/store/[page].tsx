@@ -75,8 +75,8 @@ const Page = ({ gameData }: any) => {
             <h2 className="ml-2 mt-3 text-xl font-bold">Games</h2>
             {loading?<CardLoader />:(
             <div
-              className="mx-auto mt-4  grid w-[230px] grid-cols-[50%] gap-4 px-2 
-            five:grid-cols-2 five:w-full tablet:w-full  tablet:grid-cols-3 desktop:grid-cols-4"
+              className="grid gap-4 five:w-full mx-auto w-[270px] px-2 xtab:grid-cols-2 tablet:grid-cols-3
+              five:grid-cols-2 grid-cols-[50%] ltop:grid-cols-3  desktop:grid-cols-4 mt-4"
             >
               {filteredGames.map(
                 (game: any, index: React.Key | null | undefined) => (

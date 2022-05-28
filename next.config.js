@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+  images: {
+    domains: ['media.rawg.io'],
+  }
 }
-const withImages = require('next-images')
-module.exports = withImages({})
