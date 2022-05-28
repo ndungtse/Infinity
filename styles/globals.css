@@ -120,3 +120,6 @@ video {
   body{
     background-color: rgb(39, 37, 37);
   }
+  .input::-webkit-inner-spin-button{
+    appearance: none;
+  }
