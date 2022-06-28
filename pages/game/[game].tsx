@@ -153,12 +153,12 @@ const Game: NextPage = () => {
         <div className="flex h-[90vh] w-full overflow-auto p-1 bg-stone-900 text-white xtab:p-6">
           <div className="flex flex-col w-full">
             <div className="flex flex-col ltab:flex-row w-full">
-              <div className="flex ltab:w-1/2 aspect-video">
+              <div className="flex overflow-hidden ltab:w-1/2 aspect-video">
                 <div className=" w-full h-full flex">
                     <Image src={gameDetails.background_image} className="min-w-full
                     object-cover min-h-full" alt="image" height={1920} width={1080} />
                 </div>
-                <div className="hidden  ltab:flex w-full h-full">
+                <div className="hidden  three:flex w-full h-full">
                     <Image src={gameDetails.background_image_additional} className="min-w-full
                     object-cover min-h-full" alt="image"  height={1920} width={1080}/>
                 </div>
@@ -166,9 +166,9 @@ const Game: NextPage = () => {
               <div className="ml-7 flex flex-col">
                 <h2 className='tablet:text-2xl font-bold'>{gameDetails.name}</h2>
                 {/* <p className="">developers: {gameDetails.developers[0].name}</p> */}
-                <div className="flex mt-3"><p>Developers:</p>
+                <div className="flex mt-3 flex-wrap"><p className='my-2'>Developers:</p>
                   {gameDetails.developers.map((gen:any, index: any)=>(
-                    <p key={index} className="ml-3 bg-stone-800">{`${gen.name}`} </p>
+                    <p key={index} className="ml-3 my-2 bg-stone-800">{`${gen.name}`} </p>
                   ))}
                 </div>
                 <div className="flex mt-3"><p>Genres:</p>
@@ -277,11 +277,11 @@ const Game: NextPage = () => {
             </div>
             <h1 className="text-2xl mt-9 font-bold text-center">Download Links</h1>
               <p className='text-center'>Try another link if one can't get you what you want</p>
-            <div className="flex mt-5 flex-wrap pb-4 items-center justify-center">
-            <a className='flex text-lg px-3 py-2 bg-stone-800 rounded-md
+            <div className="flex flex-wrap pb-4 items-center justify-center">
+            <a className='flex mt-5 text-lg px-3 py-2 bg-stone-800 rounded-md
               hover:bg-stone-700 duration-200 items-center' rel="noreferrer" href={`https://steamunlocked.net/?s=${downName}`} target='_blank'>
               SteamUnlocked<BiDownload className='text-2xl ml-2' /></a>
-              <a className='flex ml-4 text-lg px-3 py-2 bg-stone-800 rounded-md
+              <a className='flex mt-5 ml-4 text-lg px-3 py-2 bg-stone-800 rounded-md
               hover:bg-stone-700 duration-200 items-center' rel="noreferrer"
                href={`https://gamingbeasts.com/?s=${downName}`} target='_blank'>
               GamingBeasts<BiDownload className='text-2xl ml-2' /></a>

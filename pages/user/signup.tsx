@@ -49,30 +49,26 @@ const Signup = () => {
             onSubmit={register}>
             <img className='w-1/3 mx-auto' src="/images/log.png" alt="" />            
             <h2 className='text-xl font-medium text-center'>Join the Gaming Community from around the globe</h2>
-            <div className='border-2 border-stone-400 h-[40px] mt-4  flex  p-3 rounded-md items-center w-full'>
-                <label
-                 className='text-white' htmlFor='email'><AiFillMail className='text-xl' /></label>
+            <div className='border-2 border-stone-400 h-[40px] mt-4  flex  p-3 rounded-md flex-row-reverse items-center w-full'>
                 <input
                     onChange={(e: any) => setData({ ...data, email: e.target.value })}
-                 className='w-full outline-none text-lg bg-transparent ml-2' id='email' type='email' placeholder='Email' />
-            </div>
-            <div className='border-2 border-stone-400 h-[40px] mt-4  flex  p-3 rounded-md items-center w-full'>
+                 className='w-full outline-none text-lg bg-transparent input ml-2' id='email' type='email' placeholder='Email' />
                 <label
-                 className='text-white' htmlFor='name'><BiUserCircle className='text-2xl' /></label>
+                 className='text-white' htmlFor='email'><AiFillMail className='text-xl' /></label>
+            </div>
+            <div className='border-2 holder border-stone-400 h-[40px] mt-4  flex flex-row-reverse  p-3 rounded-md items-center w-full'>
                 <input
                 onChange={(e: any) => setData({ ...data, name: e.target.value })}
-                 className='w-full outline-none text-lg bg-transparent ml-2' id='name' type='text' placeholder='Names' />
+                 className='w-full input outline-none text-lg bg-transparent ml-2' id='name' type='text' placeholder='Names' />
+                <label
+                 className='text-white' htmlFor='name'><BiUserCircle className='text-2xl' /></label>
             </div>
-            {/* <div className='border-2 border-stone-400 h-[40px] mt-4  flex  p-3 rounded-md items-center w-full'>
-                <label className='text-white' htmlFor='username'><BiUserCircle className='text-2xl' /></label>
-                <input className='w-full outline-none text-lg bg-transparent ml-2' id='username' type='text' placeholder='username' />
-            </div> */}
-            <div className='border-2 border-stone-400 h-[40px] mt-4  flex  p-3 rounded-md items-center w-full'>
-                <label 
-                 className='text-white' htmlFor='password'><BiLock className='text-2xl' /></label>
+            <div className='border-2 border-stone-400 h-[40px] mt-4  flex  p-3 rounded-md flex-row-reverse items-center w-full'>
                 <input 
                 onChange={(e: any) => setData({ ...data, password: e.target.value })}
-                 className='w-full outline-none text-lg bg-transparent ml-2' id='password' type='password' placeholder='Password' />
+                 className='w-full outline-none text-lg bg-transparent input ml-2' id='password' type='password' placeholder='Password' />
+                <label 
+                 className='text-white' htmlFor='password'><BiLock className='text-2xl' /></label>
             </div>
             <p className='text-center text-pink-600'>{status}</p>
             <input className='w-full cursor-pointer h-[40px] mt-4  text-center text-lg flex items-center duration-500
