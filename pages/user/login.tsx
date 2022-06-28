@@ -14,26 +14,40 @@ const Login = () => {
 
     const continueWithGoogle = async () => {
         try {
-            const user: any = await signInWithGoogle()
-            console.log(user);
-            // const googledata = {name: user.user.displayName, email: user.user.email, profilePicture: user.user.photoURL };
-            // const res = await axios.post('http://localhost:5000/api/user/login', googledata)
-            // console.log(res)
-            // if (res.statusText === 'Created') {
-            //     localStorage.setItem('token', user.user.accessToken)   
-            //     window.location.replace('http://localhost:6060')
-            // }else{
-            //     setStatus(res.data.message);
-            // }
+            const user: any = await signInWithGoogle();
+            const googledata = {name: user.user.displayName, email: user.user.email, profilePicture: user.user.photoURL };
+            const res = await axios.post('http://localhost:5000/api/user/login/google', {email: user.user.email});
+            console.log(res)
+            if (res.data.message === 'Login success') {
+                localStorage.setItem('token', user.user.accessToken);
+                localStorage.setItem('user', JSON.stringify(googledata));
+                window.location.replace('http://localhost:6060')
+            }else{
+                setStatus(res.data.message);
+            }
         } catch (error) {
             console.log(error)
         }
         
     }
 
+    const signin = async (e: any) => {
+        e.preventDefault()
+        const res = await axios.post('http://localhost:5000/api/user/login', data)
+        console.log(res)
+        if (res.data.statusText === 'OK') {
+            localStorage.setItem('token', res.data.token) ;
+            localStorage.setItem('user', JSON.stringify(res.data.user)) ;
+            window.location.replace('http://localhost:6060')
+        }else{
+            setStatus(res.data.message);
+        }
+    }
+
   return (
     <div className='w-full flex flex-col items-center justify-center h-screen'>
         <div className='w-1/3 text-white min-w-[280px]  max-w-[400px] flex flex-col rounded-lg bg-slate-900 p-5'>
+            <form onSubmit={signin}>
             <img className='w-1/3 mx-auto' src="/images/log.png" alt="" />
             <h2 className='text-xl font-medium text-center'>Log Into your Account</h2>
             <div className='border-2 border-stone-400 h-[40px] flex-row-reverse mt-8  flex  p-3 rounded-md items-center w-full'>
@@ -46,7 +60,7 @@ const Login = () => {
             </div>
             <input className='w-full bg-gradient-to-r from-pink-500 to-violet-800 hover:bg-pink-600 duration-500 cursor-pointer h-[40px] mt-8  text-center text-lg flex items-center justify-center bg-pink-500  rounded-md'
              type="submit" value="Login" />
-
+            </form>
              <div className="flex flex-col items-center">
                 <p className='text-xl my-2'>Or</p>
                 <button onClick={continueWithGoogle}

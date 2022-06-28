@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import AppProvider from '../contexts/AppContext'
 
 function MyApp({ Component, pageProps, }: AppProps) {
   const [isLoading, SetIsLoading] = useState(true)
@@ -23,10 +24,12 @@ function MyApp({ Component, pageProps, }: AppProps) {
         <link rel="icon" href="/images/inlogo.png" />
         <title>Infinity</title>
       </Head>
-      {/* <GameProvider> */}
-        <Component {...pageProps} isLoading={isLoading}
-         setIsLoading={SetIsLoading} />
-      {/* </GameProvider> */}
+      <AppProvider>
+          {/* <GameProvider> */}
+            <Component {...pageProps} isLoading={isLoading}
+             setIsLoading={SetIsLoading} />
+          {/* </GameProvider> */}
+      </AppProvider>
     </>
   )
 }
