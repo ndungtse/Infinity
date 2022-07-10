@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React, {useState} from 'react'
-import { BiGroup, BiMenu, BiHome, BiJoystick, BiLibrary, BiStore,  } from 'react-icons/bi'
+import { BiGroup, BiMenu, BiHome, BiJoystick, BiLibrary, BiStore, BiUser,  } from 'react-icons/bi'
 
 type Props = {
   active: string,
@@ -67,6 +67,15 @@ function SideBar({active, setLinear}: Props) {
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiGroup className='text-lg' />
               <p className='ml-4'>Providers</p>
+            </div>
+          </Link>
+          <Link href="/profile">
+            <div onClick={navHandler} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
+                  cursor-pointer  ${active==='profile'? 'bg-stone-700': 'bg-stone-900'} 
+                  bg-stone-900 text-md rounded-xl duration-200`}>
+              <BiUser className='text-lg' />
+              <p className='ml-4'>Profile</p>
             </div>
           </Link>
         </div>

@@ -1,7 +1,8 @@
+import jwtDecode from "jwt-decode";
 import { useContext, createContext, useState, useEffect, ReactNode } from "react";
 
 type appContextType = {
-    user: object;
+    user: any;
     setUser: (user: object) => void;
     games: Array<object>;
     setGames: (games: Array<object>) => void;
@@ -33,17 +34,28 @@ type Props = {
 }
 
 export default function AppProvider({ children }: Props) {
-    const [user, setUser] = useState<any>({});
+    const [user, setUser] = useState<any>(null);
     const [games, setGames] = useState<any>([]);
     const [token, setToken] = useState("");
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
-        const user = localStorage.getItem("user");
+        const userInfo = localStorage.getItem("user");
         const token = localStorage.getItem("token");
-        if (user && token) {
-            setUser(JSON.parse(user));
-            setToken(token);
+        if(userInfo){
+            setUserData(JSON.parse(user));
+        }
+        if (token) {
+            try {
+                const user: any = jwtDecode(token);
+                console.log(user);
+                
+                if (user.email_verified) {
+                    setUser(user);
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     }, []);
 
@@ -67,3 +79,4 @@ export default function AppProvider({ children }: Props) {
         </appContext.Provider>
     );
 }
+
