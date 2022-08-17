@@ -43,7 +43,7 @@ const Navbar = () => {
                 </label>
                 <input
                 onChange={detectChange}
-                className='sm:w-full text-[0.9em] w-[100px] tablet:w-[300px] px-2 outline-none bg-transparent'
+                className='sm:w-full text-[0.9em] w-[100px] three:min-w-[200px] five:w-[300px] px-2 outline-none bg-transparent'
                  type="text" placeholder='Search ' />
             </div>
             <input type="submit" id='s1' className='hidden' />

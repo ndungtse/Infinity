@@ -35,17 +35,13 @@ type Props = {
 }
 
 export default function AppProvider({ children }: Props) {
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<any>(undefined);
     const [games, setGames] = useState<any>([]);
     const [token, setToken] = useState("");
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
-        const userInfo = localStorage.getItem("user");
         const token = getCookie("token");
-        if(userInfo){
-            setUserData(JSON.parse(user));
-        }
         if (token) {
             try {
                 const user: any = jwtDecode(token);
@@ -53,11 +49,14 @@ export default function AppProvider({ children }: Props) {
                 
                 if (user.email_verified) {
                     setUser(user);
+                    return
                 }
             } catch (error) {
                 console.log(error);
+                setUser(null)
             }
         }
+        setUser(null);
     }, []);
 
     useEffect(() => {
@@ -75,9 +74,13 @@ export default function AppProvider({ children }: Props) {
     }, []);
 
     return (
+        <>
+        {user !== undefined && (
         <appContext.Provider value={{ user, setUser, games, setGames, token, setToken, setUserData, userData }}>
             {children}
         </appContext.Provider>
+        )}
+        </>
     );
 }
 
