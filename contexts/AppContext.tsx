@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import { useContext, createContext, useState, useEffect, ReactNode } from "react";
+import { getCookie } from "./utilities";
 
 type appContextType = {
     user: any;
@@ -41,7 +42,7 @@ export default function AppProvider({ children }: Props) {
 
     useEffect(() => {
         const userInfo = localStorage.getItem("user");
-        const token = localStorage.getItem("token");
+        const token = getCookie("token");
         if(userInfo){
             setUserData(JSON.parse(user));
         }

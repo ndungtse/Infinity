@@ -8,6 +8,7 @@ import { GetStaticProps } from "next";
 import { useEffect, useState } from 'react'
 import HomeLoader from '../components/Loaders/HomeLoader'
 import LinearIndeterminate from '../components/Loaders/LinearLoad'
+import LinearLoader from '../components/Loaders/LinearProgress'
 
 
 type Props = {
@@ -27,7 +28,7 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
       </Head>
     {isLoading?<HomeLoader />:( 
     <div className="flex w-full flex-col h-screen bg-stone-800">
-      {isLinear &&<LinearIndeterminate />}
+      {isLinear &&<LinearLoader />}
       <Navbar/>
       <div className="flex h-full w-full">
         <SideBar active='home' setLinear={setLinear} />

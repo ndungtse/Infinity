@@ -2,6 +2,7 @@ import axios from 'axios'
 import { GetStaticProps, NextPage } from 'next'
 import React, { useState } from 'react'
 import LinearIndeterminate from '../../components/Loaders/LinearLoad'
+import LinearLoader from '../../components/Loaders/LinearProgress'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 
@@ -14,7 +15,7 @@ const Providers: NextPage = ({storeData}: any) => {
 
   return (
     <div className="flex w-full flex-col h-screen bg-stone-800">
-      {isLinear&&<LinearIndeterminate />}
+      {isLinear&&<LinearLoader />}
       <Navbar/>
       <div className="flex h-full w-full">
         <SideBar active='store'  setLinear={setLinear}  />

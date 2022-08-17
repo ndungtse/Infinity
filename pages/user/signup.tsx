@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { AiFillMail } from 'react-icons/ai'
 import { BiLock, BiTag, BiUserCircle } from 'react-icons/bi'
+import { setCookie } from '../../contexts/utilities'
 import { signInWithGoogle } from '../../Firebase'
 // import auth from 'firebase/auth'
 
@@ -11,10 +12,12 @@ const Signup = () => {
     const [data, setData] = React.useState<any>({
         email: '', name: '', password: '', })
         const router = useRouter()
-    const [status, setStatus] = React.useState('')   
+    const [status, setStatus] = React.useState('') 
+    const [disabled, setDisabled] = React.useState(false)
         
     const register = async (e: any) => {
         e.preventDefault()
+        setDisabled(true)
         const res = await axios.post('http://localhost:5000/api/user/newUser', data)
         console.log(res)
         if (res.data.statusText === 'Created') {
@@ -22,16 +25,19 @@ const Signup = () => {
         }else{
             setStatus(res.data.message);
         }
+        setDisabled(false)
     }
 
     const continueWithGoogle = async () => {
+        setDisabled(true)
         try {
             const user: any = await signInWithGoogle()
             const googledata = {name: user.user.displayName, email: user.user.email, profilePicture: user.user.photoURL };
             const res = await axios.post('http://localhost:5000/api/user/newUser/google', googledata)
             console.log(res)
             if (res.statusText === 'Created') {
-                localStorage.setItem('token', user.user.accessToken)   
+                setCookie('token', user.user.accessToken, 999)   
+                localStorage.setItem('user', JSON.stringify(googledata));
                 window.location.replace('http://localhost:6060')
             }else{
                 setStatus(res.data.message);
@@ -39,7 +45,7 @@ const Signup = () => {
         } catch (error) {
             console.log(error)
         }
-        
+        setDisabled(false)
     }
   return (
     <div className='w-full flex flex-col items-center justify-center h-screen'>
@@ -71,9 +77,9 @@ const Signup = () => {
                  className='text-white' htmlFor='password'><BiLock className='text-2xl' /></label>
             </div>
             <p className='text-center text-pink-600'>{status}</p>
-            <input className='w-full cursor-pointer h-[40px] mt-4  text-center text-lg flex items-center duration-500
+            <button className='w-full cursor-pointer h-[40px] mt-4  text-center text-lg flex items-center duration-500
              bg-gradient-to-r from-pink-500 to-violet-700 justify-center rounded-md'
-             type="submit" value="Sign Up" />
+             type="submit" disabled={disabled} >Sign Up </button>
              </form>
 
              <div className="flex flex-col items-center">

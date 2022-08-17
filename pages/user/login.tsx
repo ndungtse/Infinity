@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { AiFillMail } from 'react-icons/ai'
 import { BiLock} from 'react-icons/bi'
+import { setCookie } from '../../contexts/utilities'
 import { signInWithGoogle } from '../../Firebase'
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
             const res = await axios.post('http://localhost:5000/api/user/login/google', {email: user.user.email});
             console.log(res)
             if (res.data.message === 'Login success') {
-                localStorage.setItem('token', user.user.accessToken);
+                setCookie('token', user.user.accessToken, 999);
                 localStorage.setItem('user', JSON.stringify(googledata));
                 window.location.replace('http://localhost:6060')
             }else{
@@ -36,7 +37,7 @@ const Login = () => {
         const res = await axios.post('http://localhost:5000/api/user/login', data)
         console.log(res)
         if (res.data.statusText === 'OK') {
-            localStorage.setItem('token', res.data.token) ;
+            setCookie('token', res.data.token, 999) ;
             localStorage.setItem('user', JSON.stringify(res.data.user)) ;
             window.location.replace('http://localhost:6060')
         }else{

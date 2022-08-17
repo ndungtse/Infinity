@@ -8,6 +8,7 @@ import LinearIndeterminate from '../../components/Loaders/LinearLoad'
 import Link from 'next/link'
 import ProRanges from '../../components/Loaders/pagin'
 import StoreLoader from '../../components/Loaders/storesLoader'
+import LinearLoader from '../../components/Loaders/LinearProgress'
 
 const Page = ({ gameData }: any) => {
   const router: any = useRouter()
@@ -39,7 +40,7 @@ const Page = ({ gameData }: any) => {
 
   return (
     <div className="flex h-screen w-full flex-col bg-stone-800">
-      {isLinear && <LinearIndeterminate />}
+      {isLinear && <LinearLoader />}
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar active="providers" setLinear={setLinear} />

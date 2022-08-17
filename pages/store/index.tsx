@@ -6,6 +6,7 @@ import SideBar from '../../components/SideBar';
 import StoreComp from '../../components/store/StoreComp';
 import { useEffect, useState } from 'react';
 import LinearIndeterminate from '../../components/Loaders/LinearLoad';
+import LinearLoader from '../../components/Loaders/LinearProgress';
 
 const Store: NextPage = ({gameData}: any) => {
   const [isLoading, SetIsLoading] = useState(true)
@@ -23,7 +24,7 @@ const Store: NextPage = ({gameData}: any) => {
   
   return (
     <div className="flex w-full flex-col h-screen bg-stone-800">
-      {isLinear&&<LinearIndeterminate />}
+      {isLinear&&<LinearLoader />}
       <Navbar/>
       <div className="flex h-full w-full">
         <SideBar active='store'  setLinear={setLinear}  />

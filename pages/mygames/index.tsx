@@ -3,12 +3,13 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { BiDownload } from 'react-icons/bi'
 import LinearIndeterminate from '../../components/Loaders/LinearLoad'
+import LinearLoader from '../../components/Loaders/LinearProgress'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 
 const MyGames: NextPage = () => {
     const [isLinear, setLinear] = useState<boolean>(false)
-    const [myGames, setMyGames] = useState<any>(undefined)
+    const [myGames, setMyGames] = useState<any>([])
 
     const getSavedGames = ()=>{
       const loc: any =  localStorage.getItem('games')
@@ -29,10 +30,8 @@ const MyGames: NextPage = () => {
     },[])
 
   return (
-      <>
-      {myGames !== undefined &&(
     <div className="flex text-white w-full flex-col overflow-hidden h-screen bg-stone-800 ">
-      {isLinear&&<LinearIndeterminate />}
+      {isLinear&&<LinearLoader />}
        <Navbar />
        <div className="flex h-full w-full">
           <SideBar active='mygames' setLinear={setLinear} />
@@ -49,8 +48,6 @@ const MyGames: NextPage = () => {
           </div>
        </div> 
     </div>
-    )}
-    </>
   )
 }
 
@@ -59,13 +56,10 @@ export default MyGames
 function MyGame({game, myGames, removeGame}:any){
 
     let downName
-      if (myGames !== undefined) {
-        const new0 = game.name.replace('(','')
-        const new1 = new0.replace(')','')
-        downName = new1.split(' ').join('+')
-        console.log(downName);
-        
-      }
+      const new0 = game.name.replace('(','')
+      const new1 = new0.replace(')','')
+      downName = new1.split(' ').join('+')
+      console.log(downName);
 
     return(
         <div className="tablet:flex flex-col mt-7 items-center tablet:flex-row mx-auto justify-between w-1/2 min-w-[250px] tablet:w-full rounded-xl bg-stone-800">

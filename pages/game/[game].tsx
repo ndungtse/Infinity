@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 import { BiDownload, BiJoystickAlt } from 'react-icons/bi'
 import { FaStar } from 'react-icons/fa'
 import LinearIndeterminate from '../../components/Loaders/LinearLoad'
+import LinearLoader from '../../components/Loaders/LinearProgress'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 import { compare } from '../../contexts/utilities'
@@ -146,7 +147,7 @@ const Game: NextPage = () => {
     <>
     {gameDetails!==undefined&&(
     <div className="flex text-white w-full flex-col overflow-hidden h-screen bg-stone-800 ">
-      {isLinear&&<LinearIndeterminate />}
+      {isLinear&&<LinearLoader />}
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar active='store' setLinear={setLinear} />

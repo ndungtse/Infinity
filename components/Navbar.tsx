@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { BiBell, BiCog, BiSearch } from 'react-icons/bi'
 import { useRouter } from 'next/router'
+import { useApp } from '../contexts/AppContext'
+import Link from 'next/link'
 
 const Navbar = () => {
   const [rev, setRev] = useState<boolean>(false)
   const [searchInput, setSearchInput] = useState('')
   const router = useRouter()
+  const { user } = useApp()
 
   const detectChange = (e: any)=>{
       if (e.target.value !== '') {
@@ -46,8 +49,24 @@ const Navbar = () => {
             <input type="submit" id='s1' className='hidden' />
         </form>
         <div className="flex items-center">
+          {user?(
+            <>
             <BiBell className='p-2 cursor-pointer text-4xl rounded-full  bg-stone-900 text-gray-700'/>
             <BiCog className='p-2 cursor-pointer text-4xl ml-2  rounded-full bg-stone-900 text-gray-700'/>
+            </>
+            ):(
+              <div className='flex items-center'>
+                <Link href='/user/login'>
+                <p  className='py-1 px-3 cursor-pointer  bg-stone-900 text-gray-400'>
+                  Login </p>
+                </Link>
+                  <p className='mx-2 text-white'>OR</p>
+                <Link href='/user/signup'>
+                <p className='py-1 px-3 cursor-pointer ml-2  bg-pink-500 text-white'>
+                  Register </p>
+                </Link>
+              </div>
+            )}
         </div>
     </div>
   )

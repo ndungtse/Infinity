@@ -8,6 +8,7 @@ import { BiArrowBack, BiSearch } from 'react-icons/bi'
 import GameCard from '../../../components/Home/GameCard'
 import CardLoader from '../../../components/Loaders/CardLoader'
 import LinearIndeterminate from '../../../components/Loaders/LinearLoad'
+import LinearLoader from '../../../components/Loaders/LinearProgress'
 import Navbar from '../../../components/Navbar'
 import SideBar from '../../../components/SideBar'
 import Filter from '../../../components/store/Filter'
@@ -37,7 +38,7 @@ const Search = () => {
 
   return (
     <div className="flex h-screen w-full flex-col bg-stone-800">
-      {isLinear&&<LinearIndeterminate />}
+      {isLinear&&<LinearLoader />}
       <Navbar/>
       <div className="flex h-full w-full">
         <SideBar active='store' setLinear={setLinear}  />
