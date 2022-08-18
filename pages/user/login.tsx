@@ -47,7 +47,7 @@ const Login = () => {
 
   return (
     <div className='w-full flex flex-col items-center justify-center h-screen'>
-        <div className='w-1/3 text-white min-w-[280px]  max-w-[400px] flex flex-col rounded-lg bg-slate-900 p-5'>
+        <div className='w-1/3 text-white min-w-[280px] five:min-w-[400px]  max-w-[400px] flex flex-col rounded-lg bg-stone-900 p-5'>
             <form onSubmit={signin}>
             <img className='w-1/3 mx-auto' src="/images/log.png" alt="" />
             <h2 className='text-xl font-medium text-center'>Log Into your Account</h2>
