@@ -20,7 +20,7 @@ const LinearLoader = () => {
       };
     },[])
   return (
-    <Stack sx={{ width: '100%', color: 'pink' , position: 'absolute', top: 0}}>
+    <Stack sx={{ width: '100%', color: 'violet' , position: 'absolute', top: 0}}>
       {/* <LinearProgress color='inherit' variant='determinate'  value={progress}/> */}
       <LinearProgress color='inherit' variant='determinate'  value={progress}/>
     </Stack>

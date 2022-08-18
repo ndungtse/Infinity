@@ -6,6 +6,7 @@ import Footer from '../Footer'
 import CardLoader from '../Loaders/CardLoader'
 import Feed from './Feed'
 import GameCard from './GameCard'
+import Post from './Post'
 import Stores from './Store'
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const HomeComp: React.FC <Props> = ({gameData, loading}) => {
-  const newest: object[] = gameData.results.slice(0, 8)
+  const newest: object[] = gameData.results.slice(0, 4)
   const featured: object[]= gameData.results.slice(10, 18)
   console.log(newest);
 
@@ -31,7 +32,7 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
                  <div className="absolute top-9 left-5">
                     <p>GET ALL GAMES HERE</p>
                     <h1 className="text-2xl mt-3">Games are games, Games are infinity. Just Play</h1>
-                    <button className='px-3 py-2 mt-5 bg-pink-500 rounded-lg'>Start Now</button>
+                    <button className='px-3 py-2 mt-5 bg-violet-600 rounded-lg'>Start Now</button>
                  </div>
             </div>
             <h2 className="ml-2 text-xl font-bold mt-3">Recommended</h2>
@@ -43,17 +44,21 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
               <GameCard item={game} key={index} />
               ))}
             </div>
-            <h2 className="ml-2 text-xl font-bold mt-3">Featured</h2>
-            <div className="grid gap-4 five:w-full mx-auto w-[270px] px-2 xtab:grid-cols-2 ltab:grid-cols-3
-              five:grid-cols-2 grid-cols-[50%]  ltop:grid-cols-3  desktop:grid-cols-4 mt-4">
-              {featured.map((feature, index) => (
-              <GameCard item={ feature } key={index} />
-              ))}
-            </div>
-            <div className="flex mt-5 w-full">
-            <Link href="/store">
-              <button className='bg-pink-500 px-3 py-2 rounded-md'>See More</button>
+            
+            <div className="flex mt-5 w-full justify-center">
+              <Link href="/store">
+              <button className='bg-violet-700 px-3 py-2 rounded-md'>See More</button>
               </Link>
+            </div>
+            <h2 className="ml-2 text-xl text-center font-bold mt-3">News Feed</h2>
+            <div className="flex  mt-6 w-full">
+              <div className="flex w-full tablet:w-[60%] items-center flex-col">
+                <h2 className='my-2 text-xl'>Posts</h2>
+                <div className="w-4/5 max-w-[500px]">
+                  <Post />
+                </div>
+              </div>
+              <div className="tablet:flex flex-col hidden"></div>
             </div>
             </>
             )}

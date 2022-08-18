@@ -35,8 +35,8 @@ function SideBar({active, setLinear}: Props) {
         <div className="flex mt-11 flex-col px-3">
           <Link href="/">
             <div onClick={navHandler} 
-            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
-                  cursor-pointer ${active==='home'? 'bg-stone-700': 'bg-stone-900'}  
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-violet-800
+                  cursor-pointer ${active==='home'? 'bg-violet-700': 'bg-stone-900'}  
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiHome className='text-lg' />
               <p className='ml-4'>Home</p>
@@ -44,8 +44,8 @@ function SideBar({active, setLinear}: Props) {
           </Link>
           <Link href="/store">
             <div onClick={navHandler} 
-            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
-                   cursor-pointer ${active==='store'? 'bg-stone-700': 'bg-stone-900'} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-violet-800
+                   cursor-pointer ${active==='store'? 'bg-violet-700': 'bg-stone-900'} 
                    text-md rounded-xl duration-200`}>
               <BiStore className='text-lg' />
               <p className='ml-4'>Store</p>
@@ -53,8 +53,8 @@ function SideBar({active, setLinear}: Props) {
           </Link>
           <Link href="/mygames">
             <div onClick={navHandler} 
-            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
-                  cursor-pointer  ${active==='mygames'? 'bg-stone-700': 'bg-stone-900'} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-violet-800
+                  cursor-pointer  ${active==='mygames'? 'bg-violet-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiJoystick className='text-lg' />
               <p className='ml-4'>My Games</p>
@@ -62,8 +62,8 @@ function SideBar({active, setLinear}: Props) {
           </Link>
           <Link href="/providers/1">
             <div onClick={navHandler} 
-            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
-                  cursor-pointer  ${active==='providers'? 'bg-stone-700': 'bg-stone-900'} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-violet-800
+                  cursor-pointer  ${active==='providers'? 'bg-violet-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiGroup className='text-lg' />
               <p className='ml-4'>Providers</p>
@@ -71,8 +71,8 @@ function SideBar({active, setLinear}: Props) {
           </Link>
           <Link href="/profile">
             <div onClick={navHandler} 
-            className={`flex items-center px-3 py-2 mt-2 hover:bg-stone-700
-                  cursor-pointer  ${active==='profile'? 'bg-stone-700': 'bg-stone-900'} 
+            className={`flex items-center px-3 py-2 mt-2 hover:bg-violet-800
+                  cursor-pointer  ${active==='profile'? 'bg-violet-700': 'bg-stone-900'} 
                   bg-stone-900 text-md rounded-xl duration-200`}>
               <BiUser className='text-lg' />
               <p className='ml-4'>Profile</p>

@@ -2,6 +2,6 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['media.rawg.io'],
+    domains: ['media.rawg.io', 'lh3.googleusercontent.com'],
   }
 }
