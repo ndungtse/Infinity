@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import Footer from '../Footer'
 import CardLoader from '../Loaders/CardLoader'
+import Suggested from '../profile/Suggested'
 import Feed from './Feed'
 import GameCard from './GameCard'
 import Post from './Post'
@@ -24,7 +25,7 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
 
   return (
     <div className='w-full text-white flex h-full xtab:px-6 pt-6 bg-stone-900'>
-        <div className="flex flex-col overflow-x-hidden w-full h-[88vh] overflow-auto">
+        <div className="flex flex-col relative w-full h-[88vh] overflow-auto">
             <div className="flex relative w-full h-[30vh] rounded-xl">
                 <img
                  className='object-cover rounded-xl min-h-full min-w-full '
@@ -51,15 +52,36 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
               </Link>
             </div>
             <h2 className="ml-2 text-xl text-center font-bold mt-3">News Feed</h2>
-            <div className="flex  mt-6 w-full">
-              <div className="flex w-full tablet:w-[60%] items-center flex-col">
+            <div className="flex mt-6 sticky top-0 h-[83vh] w-full">
+              <div className="flex w-full overflow-auto tablet:w-full items-center flex-col">
                 <h2 className='my-2 text-xl'>Posts</h2>
-                <div className="w-4/5 max-w-[500px]">
-                  <Post />
+                <div className="w-4/5 h-full max-w-[500px]">
+                  {/* { featured.map((game, index)=>( */}
+                    <Post />
+                    <Post />
+                  {/* ))} */}
                 </div>
               </div>
-              <div className="tablet:flex flex-col hidden"></div>
+              <div className="tablet:flex sticky top-0 w-[30%] min-w-[300px] items-center flex-col hidden">
+                <h2 className='my-2 text-xl'>Suggested Gamers</h2>
+                <div className="flex w-full flex-col">
+                  <Suggested />
+                  <Suggested />
+                  <Suggested />
+                  <Suggested />
+                  <Suggested />
+                  <Suggested />
+                </div>
+              </div>
             </div>
+            {/* <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post /> */}
             </>
             )}
             {/* <Stores /> */}

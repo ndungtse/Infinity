@@ -5,7 +5,7 @@ import { FaThumbsUp } from 'react-icons/fa'
 const Post = () => {
   return (
     
-    <div className='w-full py-3 rounded-lg shadow-md border-2 bg-stone-900 border-stone-700 flex-col'>
+    <div className='w-full mt-5 py-3 rounded-lg shadow-md border-2 bg-stone-900 border-stone-700 flex-col'>
         <div className="flex w-full px-3 items-center justify-between">
             <div className="flex items-center">
                 <img className='w-[40px] h-[40px] rounded-full object-cover' src="/images/infinity.jpg" alt="" />
