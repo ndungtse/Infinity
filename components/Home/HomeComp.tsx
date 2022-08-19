@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import Footer from '../Footer'
 import CardLoader from '../Loaders/CardLoader'
+import PostForm from '../profile/PostForm'
 import Suggested from '../profile/Suggested'
 import Feed from './Feed'
 import GameCard from './GameCard'
@@ -18,6 +19,7 @@ interface Props {
 const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   const newest: object[] = gameData.results.slice(0, 4)
   const featured: object[]= gameData.results.slice(10, 18)
+  const [showPostForm, setPostForm] = React.useState(false)
   console.log(newest);
 
   const introImg = ['https://media.rawg.io/media/games/370/3703c683968a54f09630dcf03366ea35.jpg',
@@ -25,6 +27,7 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
 
   return (
     <div className='w-full text-white flex h-full xtab:px-6 pt-6 bg-stone-900'>
+        {showPostForm? <PostForm setPostForm={setPostForm} />:null}
         <div className="flex flex-col relative w-full h-[88vh] overflow-auto">
             <div className="flex relative w-full h-[30vh] rounded-xl">
                 <img
@@ -54,7 +57,11 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
             <h2 className="ml-2 text-xl text-center font-bold mt-3">News Feed</h2>
             <div className="flex mt-6 sticky top-0 h-[83vh] w-full">
               <div className="flex w-full overflow-auto tablet:w-full items-center flex-col">
-                <h2 className='my-2 text-xl'>Posts</h2>
+                <div className="flex items-center">
+                  <h2 className='my-2 text-xl'>Posts</h2>
+                  <button onClick={()=>setPostForm(true)} 
+                   className='py-1 ml-2 px-3 bg-violet-800'>Create a Post</button>
+                 </div>
                 <div className="w-4/5 h-full max-w-[500px]">
                   {/* { featured.map((game, index)=>( */}
                     <Post />
