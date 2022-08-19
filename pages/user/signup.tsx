@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { AiFillMail } from 'react-icons/ai'
 import { BiLock, BiTag, BiUserCircle } from 'react-icons/bi'
+import { api } from '../../contexts/apiCallMethods'
 import { setCookie } from '../../contexts/utilities'
 import { signInWithGoogle } from '../../Firebase'
 // import auth from 'firebase/auth'
@@ -18,7 +19,7 @@ const Signup = () => {
     const register = async (e: any) => {
         e.preventDefault()
         setDisabled(true)
-        const res = await axios.post('http://localhost:5000/api/user/newUser', data)
+        const res = await api.post('/api/user/newUser', data)
         console.log(res)
         if (res.data.statusText === 'Created') {
             router.push('/login')
@@ -32,14 +33,20 @@ const Signup = () => {
         setDisabled(true)
         try {
             const user: any = await signInWithGoogle()
-            const googledata = {name: user.user.displayName, email: user.user.email, profilePicture: user.user.photoURL };
-            const res = await axios.post('http://localhost:5000/api/user/newUser/google', googledata)
+            const googledata = {name: user.user.displayName, email: user.user.email, picture: user.user.photoURL };
+            const res = await api.post('/api/user/newUser/google', googledata)
             console.log(res)
             if (res.statusText === 'Created') {
                 setCookie('token', user.user.accessToken, 999)   
                 localStorage.setItem('user', JSON.stringify(googledata));
-                window.location.replace('http://localhost:6060')
-            }else{
+                window.location.href = '/'
+            }
+            else if(res.data.message === "Email already exists") {
+                setCookie('token', user.user.accessToken, 999)
+                localStorage.setItem('user', JSON.stringify(googledata));
+                window.location.href = '/'
+            }
+            else{
                 setStatus(res.data.message);
             }
         } catch (error) {

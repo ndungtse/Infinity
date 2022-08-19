@@ -1,3 +1,5 @@
+import  Axios from "axios";
+
 export const compare = (a:any, b:any)=>{
    
     for (let i = 0; i < b.length; i++) {
@@ -7,6 +9,8 @@ export const compare = (a:any, b:any)=>{
     }
     return false
 }
+
+
 
 export function setCookie(cname: string, cvalue: string, exdays: number) {
     const d = new Date();

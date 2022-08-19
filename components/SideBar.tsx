@@ -22,7 +22,7 @@ function SideBar({active, setLinear}: Props) {
     <>
     <BiMenu
       onClick={()=>setMobile(!mobile)}
-     className='text-4xl z-20 cursor-pointer
+     className='text-3xl z-20 text-white cursor-pointer
        absolute top-3 left-1 xtab:hidden' />
     <div 
     className={`xtab:flex top-0 h-full xtab:h-full xtab:relative duration-500 z-10

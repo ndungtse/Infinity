@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import { useContext, createContext, useState, useEffect, ReactNode } from "react";
+import { getApi } from "./apiCallMethods";
 import { getCookie } from "./utilities";
 
 type appContextType = {
@@ -40,23 +41,33 @@ export default function AppProvider({ children }: Props) {
     const [token, setToken] = useState("");
     const [userData, setUserData] = useState({});
 
-    useEffect(() => {
+    const getToken = async() => {
         const token = getCookie("token");
         if (token) {
             try {
                 const user: any = jwtDecode(token);
                 console.log(user);
-                
-                if (user.email_verified) {
-                    setUser(user);
-                    return
+                let provider = "";
+                let final
+                if (user.email_verified){ 
+                    provider = "google";
+                    final = await getApi(`api/user/google/${user.user_id}`, { headers: { Authorization: token, provider: provider } });
+                } else { 
+                    provider = "email";
+                    final = await getApi(`api/user/${user.id}`, { headers: { Authorization: token, provider: provider } });
                 }
+                setUser(final);
+                return
             } catch (error) {
                 console.log(error);
                 setUser(null)
             }
         }
         setUser(null);
+    }
+
+    useEffect(() => {
+        getToken();
     }, []);
 
     useEffect(() => {
