@@ -1,4 +1,5 @@
 import React from 'react'
+import AuthElement from '../utils/AuthElement'
 
 const Suggested = () => {
   return (
@@ -14,7 +15,8 @@ const Suggested = () => {
           <p>Wed 5 Jan</p>
         </div>
       </div>
-      <p className="text-violet-700">Add Friend</p>
+      {/* <p className="text-violet-700">Add Friend</p> */}
+      <AuthElement el={'p'} content="Add Friend"  className="text-violet-700" props={{}}>Add Friend</AuthElement>
     </div>
   )
 }

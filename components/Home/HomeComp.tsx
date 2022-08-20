@@ -6,6 +6,7 @@ import Footer from '../Footer'
 import CardLoader from '../Loaders/CardLoader'
 import PostForm from '../profile/PostForm'
 import Suggested from '../profile/Suggested'
+import AuthElement from '../utils/AuthElement'
 import Feed from './Feed'
 import GameCard from './GameCard'
 import Post from './Post'
@@ -59,8 +60,10 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
               <div className="flex w-full overflow-auto tablet:w-full items-center flex-col">
                 <div className="flex items-center">
                   <h2 className='my-2 text-xl'>Posts</h2>
-                  <button onClick={()=>setPostForm(true)} 
-                   className='py-1 ml-2 px-3 bg-violet-800'>Create a Post</button>
+                  {/* <button onClick={()=>setPostForm(true)} 
+                   className='py-1 ml-2 px-3 bg-violet-800'>Create a Post</button> */}
+                   <AuthElement props={{ className: 'py-1 ml-2 px-3 bg-violet-800'}}
+                    el={'button'} content="Create a Post" fn={()=>setPostForm(true)} />
                  </div>
                 <div className="w-4/5 h-full max-w-[500px]">
                   {/* { featured.map((game, index)=>( */}

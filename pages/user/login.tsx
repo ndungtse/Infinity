@@ -20,12 +20,10 @@ const Login = () => {
         setDisabled(true)
         const user: any = await signInWithGoogle();
         try {
-            const googledata = {name: user.user.displayName, email: user.user.email, profilePicture: user.user.photoURL };
             const res = await api.post('/api/user/login/google', {email: user.user.email});
             console.log(res)
             if (res.data.message === 'Login success') {
-                setCookie('token', user.user.accessToken, 999);
-                localStorage.setItem('user', JSON.stringify(googledata));
+                setCookie('token', res.data.token, 999);
                 window.location.href = '/'
             }else {
                 setStatus(res.data.message);
@@ -36,8 +34,14 @@ const Login = () => {
             if(error.response.data.message === 'User not found') {
                 const res = await api.post('/api/user/newUser/google', {email: user.user.email, name: user.user.displayName, picture: user.user.photoURL, googleId: user.user.uid});
                 if (res.data.message === 'User created') {
-                    setCookie('token', user.user.accessToken, 999);
-                    window.location.href = '/'
+                    const res1 = await api.post('/api/user/login/google', {email: user.user.email});
+                    if (res1.data.message === 'Login success') {
+                        setCookie('token', res1.data.token, 999);
+                        window.location.href = '/'
+                        }else {
+                            setStatus(res1.data.message);
+                            setDisabled(false)
+                        }
                 }
             }else{
                 setStatus("Something went wrong")
@@ -55,7 +59,6 @@ const Login = () => {
         console.log(res)
         if (res.data.statusText === 'OK') {
             setCookie('token', res.data.token, 999) ;
-            localStorage.setItem('user', JSON.stringify(res.data.user)) ;
             window.location.href = '/'
         }else{
             setStatus(res.data.message);
