@@ -11,7 +11,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 const Login = () => {
     const [data, setData] = React.useState<any>({
-        email: '', name: '', password: '', })
+        email: '', password: '', })
         const router = useRouter()
     const [status, setStatus] = React.useState('') 
     const [disabled, setDisabled] = React.useState(false)
@@ -55,15 +55,22 @@ const Login = () => {
     const signin = async (e: any) => {
         e.preventDefault()
         setDisabled(true)
-        const res = await api.post('/api/user/login', data)
-        console.log(res)
-        if (res.data.statusText === 'OK') {
-            setCookie('token', res.data.token, 999) ;
-            window.location.href = '/'
-        }else{
-            setStatus(res.data.message);
+        try {
+            const res = await api.post('/api/user/login', data)
+            console.log(res)
+            if (res.data.message === 'Login success') {
+                setCookie('token', res.data.token, 999) ;
+                console.log(res.data.token);
+                window.location.href = '/'
+            }else{
+                setStatus(res.data.message);
+                setDisabled(false)
+            }
+        } catch (error) {
             setDisabled(false)
+            setStatus("Something went wrong")
         }
+        
     }
 
   return (
@@ -72,17 +79,19 @@ const Login = () => {
             <form onSubmit={signin}>
             <img className='w-1/3 mx-auto' src="/images/log.png" alt="" />
             <h2 className='text-xl font-medium text-center'>Log Into your Account</h2>
-            <div className='border-2 border-stone-400 h-[40px] flex-row-reverse mt-8  flex  p-3 rounded-md items-center w-full'>
-                <input className='w-full input text-lg outline-none input bg-transparent ml-2' id='email' type='email' placeholder='Email' />
+            <p className="text-center mt-2 text-yellow-500">{status}</p>
+            <div className='border-2 border-stone-400 h-[40px] flex-row-reverse mt-5  flex  p-3 rounded-md items-center w-full'>
+                <input onChange={(e) => setData({...data, email: e.target.value})}
+                className='w-full input text-lg outline-none input bg-transparent ml-2' id='email' type='email' placeholder='Email' />
                 <label className='text-white' htmlFor='email'><AiFillMail className='text-xl' /></label>
             </div>
             <div className='border-2 border-stone-400 h-[40px] flex-row-reverse mt-8  flex  p-3 rounded-md items-center w-full'>
-                <input className='w-full input text-lg outline-none input bg-transparent ml-2' id='password' type='password' placeholder='Password' />
+                <input onChange={(e) => setData({...data, password: e.target.value})}
+                 className='w-full input text-lg outline-none input bg-transparent ml-2' id='password' type='password' placeholder='Password' />
                 <label className='text-white' htmlFor='password'><BiLock className='text-xl' /></label>
             </div>
-            <p className="text-center">{status}</p>
             {!disabled &&<input className='w-full bg-gradient-to-r from-pink-500 to-violet-800 hover:bg-pink-600 duration-500 cursor-pointer h-[40px] mt-8  text-center text-lg flex items-center justify-center bg-pink-500  rounded-md'
-             type="submit" value="Login" disabled={disabled} />}
+             type="submit" onClick={signin} value="Login" disabled={disabled} />}
             </form>
              <div className="flex flex-col items-center">
                 {disabled?(

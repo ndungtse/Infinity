@@ -21,7 +21,7 @@ const Signup = () => {
         setDisabled(true)
         const res = await api.post('/api/user/newUser', data)
         console.log(res)
-        if (res.data.statusText === 'Created') {
+        if (res.statusText === 'Created') {
             const res1 = await api.post('/api/user/login', {email: data.email});
             if (res1.data.message === 'Login success') {
             setCookie('token', res1.data.token, 999);
@@ -57,9 +57,9 @@ const Signup = () => {
                 setStatus(res.data.message);
             }
         } catch (error: any) {
-            // console.log(error)
             if(error.response.data?.message === "Email already exists") {
                 const res1 = await api.post('/api/user/login/google', {email: user.user.email});
+                console.log(res1);
                 if (res1.data.message === 'Login success') {
                 setCookie('token', res1.data.token, 999);
                 window.location.href = '/'
@@ -100,7 +100,7 @@ const Signup = () => {
                 <label 
                  className='text-white' htmlFor='password'><BiLock className='text-2xl' /></label>
             </div>
-            <p className='text-center text-pink-600'>{status}</p>
+            <p className='text-center text-yellow-600'>{status}</p>
             {!disabled && <button className='w-full cursor-pointer h-[40px] mt-4  text-center text-lg flex items-center duration-500
              bg-gradient-to-r from-pink-500 to-violet-700 justify-center rounded-md'
              type="submit" disabled={disabled} >Sign Up </button>}
