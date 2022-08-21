@@ -1,6 +1,7 @@
+import { LoadingButton } from '@mui/lab';
 import { Button, ButtonProps, styled } from '@mui/material'
 import { blue } from '@mui/material/colors';
-import React from 'react'
+import React, { useState } from 'react'
 import { BiX } from 'react-icons/bi';
 import { postApi } from '../../contexts/apiCallMethods';
 import { useApp } from '../../contexts/AppContext';
@@ -10,6 +11,7 @@ const PostForm = ({setPostForm}: any) => {
     const [imgString, setImgString] = React.useState('')
     const [data, setData] = React.useState<any>({ text: '', pictures: [], creatorId: '', videos: [] })
     const { user, authHeaders } = useApp()
+    const [uploading, setUploading] = useState(false)
 
     const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
         backgroundColor: '#7b00ff',
@@ -31,8 +33,9 @@ const PostForm = ({setPostForm}: any) => {
     
       const handleSubmit = async (e: any) => {
         e.preventDefault()
+        setUploading(true)
         setData({...data, pictures: [ imgString ], creatorId: user._id})
-        const res = await postApi('api/post/newPost', data, {
+        const res = await postApi('api/post/newPost', {...data, pictures: [ imgString ], creatorId: user._id}, {
           headers: authHeaders
         })
         if(res.message === 'Created'){
@@ -41,6 +44,7 @@ const PostForm = ({setPostForm}: any) => {
           setPostForm(false)
           setImgString('')
         }
+        setUploading(false)
       }
       
   return (
@@ -59,8 +63,14 @@ const PostForm = ({setPostForm}: any) => {
             <img className='max-h-full mx-auto object-cover my-1' src={preview.src} alt="" /></div>}
             <div className="flex w-full items-center mt-2 justify-between">
                 <label htmlFor='postfile' className='py-[0.4rem] rounded-md cursor-pointer px-3 bg-violet-700'>Add a Photo</label>
+                {uploading?(
+                  <LoadingButton sx={{backgroundColor: '#75067f', width: 150, marginTop: 5}} loading variant="outlined">
+                  Submit
+                </LoadingButton>
+                ):(
                 <ColorButton variant='contained' onClick={handleSubmit}
                 sx={{backgroungColor: 'pink'}} className='py-1 px-3'>Post</ColorButton>
+                )}
                 <input onChange={handleFileChange} accept="image/jpg, image/jpeg, image/png"
                  className='hidden' type="file" name="" id="postfile" />
             </div>
