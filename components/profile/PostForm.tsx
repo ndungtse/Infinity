@@ -2,13 +2,14 @@ import { Button, ButtonProps, styled } from '@mui/material'
 import { blue } from '@mui/material/colors';
 import React from 'react'
 import { BiX } from 'react-icons/bi';
+import { postApi } from '../../contexts/apiCallMethods';
 import { useApp } from '../../contexts/AppContext';
 
 const PostForm = ({setPostForm}: any) => {
     const [preview, setPreview] = React.useState({sate: false, src: ''})
     const [imgString, setImgString] = React.useState('')
-    const [data, setData] = React.useState<any>({ text: '', pictures: [], creatorId: '', vidoes: [] })
-    const { user } = useApp()
+    const [data, setData] = React.useState<any>({ text: '', pictures: [], creatorId: '', videos: [] })
+    const { user, authHeaders } = useApp()
 
     const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
         backgroundColor: '#7b00ff',
@@ -28,9 +29,18 @@ const PostForm = ({setPostForm}: any) => {
         console.log(imgString)
       }
     
-      const handleSubmit = (e: any) => {
+      const handleSubmit = async (e: any) => {
         e.preventDefault()
         setData({...data, pictures: [ imgString ], creatorId: user._id})
+        const res = await postApi('api/post/newPost', data, {
+          headers: authHeaders
+        })
+        if(res.message === 'Created'){
+          setData({ text: '', pictures: [], creatorId: '', videos: [] })
+          setPreview({sate: false, src: ''})
+          setPostForm(false)
+          setImgString('')
+        }
       }
       
   return (
@@ -45,12 +55,13 @@ const PostForm = ({setPostForm}: any) => {
             <textarea onChange={(e) => setData({...data, text: e.target.value})}
              className='outline-none p-2 h-[15vh] bg-transparent border-2 border-violet-600'
             name="" id="" maxLength={1000}></textarea>
-            {preview.sate &&<img className='h-[20vh] my-1' src={preview.src} alt="" />}
+            {preview.sate && <div className='h-[20vh] w-full'>
+            <img className='max-h-full mx-auto object-cover my-1' src={preview.src} alt="" /></div>}
             <div className="flex w-full items-center mt-2 justify-between">
                 <label htmlFor='postfile' className='py-[0.4rem] rounded-md cursor-pointer px-3 bg-violet-700'>Add a Photo</label>
-                <ColorButton variant='contained'
+                <ColorButton variant='contained' onClick={handleSubmit}
                 sx={{backgroungColor: 'pink'}} className='py-1 px-3'>Post</ColorButton>
-                <input onChange={handleFileChange}
+                <input onChange={handleFileChange} accept="image/jpg, image/jpeg, image/png"
                  className='hidden' type="file" name="" id="postfile" />
             </div>
         </div>

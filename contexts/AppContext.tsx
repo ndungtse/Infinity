@@ -12,6 +12,7 @@ type appContextType = {
     setToken: (token: string) => void;
     setUserData: (userData: object) => void;
     userData: object;
+    authHeaders: object;
 }
 
 const appContextDefaultValues: appContextType = {
@@ -23,6 +24,7 @@ const appContextDefaultValues: appContextType = {
     setToken: () => {},
     setUserData: () => {},
     userData: {},
+    authHeaders: {},
 }
 
 const appContext = createContext<appContextType>(appContextDefaultValues);
@@ -43,6 +45,7 @@ export default function AppProvider({ children }: Props) {
 
     const getToken = async() => {
         const token = getCookie("token");
+        setToken(token);
         if (token) {
             try {
                 const user: any = jwtDecode(token);
@@ -66,6 +69,11 @@ export default function AppProvider({ children }: Props) {
         setUser(null);
     }
 
+    const authHeaders = {
+        "Authorization": token,
+        "Content-Type": "application/json"
+    }
+
     useEffect(() => {
         getToken();
     }, []);
@@ -87,7 +95,7 @@ export default function AppProvider({ children }: Props) {
     return (
         <>
         {user !== undefined && (
-        <appContext.Provider value={{ user, setUser, games, setGames, token, setToken, setUserData, userData }}>
+        <appContext.Provider value={{ user, setUser, games, setGames, token, setToken, setUserData, userData, authHeaders }}>
             {children}
         </appContext.Provider>
         )}

@@ -16,7 +16,7 @@ const Suggested = () => {
         </div>
       </div>
       {/* <p className="text-violet-700">Add Friend</p> */}
-      <AuthElement el={'p'} content="Add Friend"  className="text-violet-700" props={{}}>Add Friend</AuthElement>
+      <AuthElement el={'p'} content="Add Friend" props={{className: "text-violet-700 cursor-pointer"}}>Add Friend</AuthElement>
     </div>
   )
 }
