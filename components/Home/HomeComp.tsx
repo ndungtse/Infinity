@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { usePosts } from '../../contexts/PostContext'
 import Footer from '../Footer'
 import CardLoader from '../Loaders/CardLoader'
 import PostForm from '../profile/PostForm'
@@ -21,7 +23,11 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
   const newest: object[] = gameData.results.slice(0, 4)
   const featured: object[]= gameData.results.slice(10, 18)
   const [showPostForm, setPostForm] = React.useState(false)
-  console.log(newest);
+  const { posts, getPosts } = usePosts()
+
+  useEffect(() => {
+     if(posts.length === 0) getPosts()
+  }, [])
 
   const introImg = ['https://media.rawg.io/media/games/370/3703c683968a54f09630dcf03366ea35.jpg',
                   'images/battlefield.jpg']
@@ -66,20 +72,14 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
                     el={'button'} content="Create a Post" fn={()=>setPostForm(true)} />
                  </div>
                 <div className="w-4/5 h-full max-w-[500px]">
-                  {/* { featured.map((game, index)=>( */}
-                    <Post />
-                    <Post />
-                  {/* ))} */}
+                  {posts.map((post, index)=>(
+                    <Post post={post} key={index} />
+                  ))}
                 </div>
               </div>
               <div className="tablet:flex sticky top-0 w-[30%] min-w-[300px] items-center flex-col hidden">
                 <h2 className='my-2 text-xl'>Suggested Gamers</h2>
                 <div className="flex w-full flex-col">
-                  <Suggested />
-                  <Suggested />
-                  <Suggested />
-                  <Suggested />
-                  <Suggested />
                   <Suggested />
                 </div>
               </div>

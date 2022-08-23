@@ -1,10 +1,17 @@
-import React from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
 import { BiFace } from 'react-icons/bi'
 import { FaFacebook } from 'react-icons/fa'
 import { useApp } from '../../contexts/AppContext'
+import { usePosts } from '../../contexts/PostContext'
 
 const ProComp = () => {
     const { user } = useApp()
+    const { posts, getPosts } = usePosts()
+
+    useEffect(() => {
+       if(posts.length === 0) getPosts()
+    }, [])
   return (
     <div className='w-9/12 flex flex-col'>
         <div className="flex flex-col w-full rounded-lg bg-violet-900/80">

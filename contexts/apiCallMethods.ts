@@ -47,3 +47,14 @@ export const postCustom = async (url: string, body: any, _options?: any)=>{
         return {error: error, message: error?.message}
     }
 }
+
+export const getCustom = async (url: string, _options?: any)=>{
+    try {
+        const res = await axios.get(url, _options);
+        const data = await res.data
+        return data
+    } catch (error: any) {
+        console.log(error);
+        return {error: error, message: error?.message}
+    }
+}

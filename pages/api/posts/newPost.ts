@@ -8,18 +8,19 @@ export default async function newPost(req: NextApiRequest, res: NextApiResponse)
     const { text, creatorId, pictures, videos } = req.body;
     try {
         await connectDB();
-        const res = await cloudinary.uploader.upload(pictures[0], {
+        const res1 = await cloudinary.uploader.upload(pictures[0], {
             folder: '/infinity/posts',
             use_filename: true,
             unique_filename: true
         });
-        console.log(res);
+        console.log(res1);
         const post = await Post.create({
             text,
             creatorId,
-            pictures: [res.secure_url],
+            pictures: [res1.secure_url],
             videos
         })
+        console.log("post:", post);
         res.status(201).json({message: "Created", data: post});
     } catch (error: any) {
         console.log(error);

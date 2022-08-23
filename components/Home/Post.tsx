@@ -2,9 +2,9 @@ import React from 'react'
 import { BiCommentDots, BiDotsVerticalRounded, BiSend, BiShare, BiSmile } from 'react-icons/bi'
 import { FaThumbsUp } from 'react-icons/fa'
 
-const Post = () => {
-  return (
+const Post = ({post}: any) => {
     
+  return (
     <div className='w-full mt-5 py-3 rounded-lg shadow-md border-2 bg-stone-900 border-stone-700 flex-col'>
         <div className="flex w-full px-3 items-center justify-between">
             <div className="flex items-center">

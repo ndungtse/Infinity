@@ -25,6 +25,26 @@ const postSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    likes: {
+        count: {
+            type: Number,
+            default: 0
+        },
+        users: {
+            type: Array,
+            default: []
+        }
+    },
+    comments: {
+        count: {
+            type: Number,
+            default: 0
+        },
+        users: {
+            type: Array,
+            default: []
+        }
+    },
     createdAt: {
         type: Date,
         default: Date.now
