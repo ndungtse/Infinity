@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api = axios.create({ baseURL: 'https://infinity3.herokuapp.com/' })
+export const api = axios.create({ baseURL: 'http://localhost:5000' })
 //https://infinity3.herokuapp.com/
 export const dbApi = axios.create({
     baseURL: 'http://localhost:5173/api'
@@ -25,6 +25,17 @@ export const getApi = async (path: string, _options?: any) => {
 export const postApi = async (path: string, body: any, _options?: any)=>{
     try {
         const res = await api.post(`/${path}`, body, _options);
+        const data = await res.data
+        return data
+    } catch (error: any) {
+        console.log(error);
+        return {error: error, message: error?.message}
+    }
+}
+
+export const postCustom = async (url: string, body: any, _options?: any)=>{
+    try {
+        const res = await axios.post(url, body, _options);
         const data = await res.data
         return data
     } catch (error: any) {

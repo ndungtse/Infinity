@@ -44,6 +44,7 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
 export const getStaticProps: GetStaticProps = async()=>{
   const page = Math.ceil(Math.random()*30)
   const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.NEXT_PUBLIC_KEY}&page=${page}&page_size=8`)
+  console.log(res);
   return {
     props: {
       gameData: res.data
