@@ -23,26 +23,20 @@ const PostForm = ({setPostForm}: any) => {
       const handleFileChange = (e: any) => {
         const file = e.target.files[0]
         setPreview({sate: true, src: URL.createObjectURL(file)})
-        // const reader = new FileReader()
-        // reader.onload = (e: any) => {
-        //   setImgString(e.target.result)
-        // }
-        // reader.readAsDataURL(file)
-        // console.log(imgString)
+        const reader = new FileReader()
+        reader.onload = (e: any) => {
+          setImgString(e.target.result)
+        }
+        reader.readAsDataURL(file)
+        console.log(imgString)
       }
     
       const handleSubmit = async (e: any) => {
         e.preventDefault()
         setUploading(true)
-        const preset: any = process.env.NEXT_PUBLIC_PRESET
-        const formData = new FormData()
-        formData.append('file', preview.src)
-        formData.append('upload_preset', preset)
         try {
-            const pres = await postCustom(`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/infinity/posts/image/upload`, formData)
-            console.log(pres)
-            setData({...data, pictures: [ pres.secure_url ], creatorId: user._id})
-            const res = await postApi('api/post/newPost', {...data, pictures: [ imgString ], creatorId: user._id}, {
+            setData({...data, pictures: [ imgString ], creatorId: user._id})
+            const res = await postCustom('api/posts/newPost', {...data, pictures: [ imgString ], creatorId: user._id}, {
               headers: authHeaders
             })
             if(res.message === 'Created'){

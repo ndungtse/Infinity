@@ -35,7 +35,11 @@ export const postApi = async (path: string, body: any, _options?: any)=>{
 
 export const postCustom = async (url: string, body: any, _options?: any)=>{
     try {
-        const res = await axios.post(url, body, _options);
+        const res = await axios.post(url, body, {
+            ..._options,
+            maxBodyLength: Infinity,
+            maxContentLength: Infinity
+        });
         const data = await res.data
         return data
     } catch (error: any) {
