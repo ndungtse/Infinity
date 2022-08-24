@@ -4,17 +4,29 @@ import { BiCommentDots, BiDotsVerticalRounded, BiSend, BiShare, BiSmile } from '
 import { FaThumbsUp } from 'react-icons/fa'
 import Moment from 'react-moment'
 import { getApi } from '../../contexts/apiCallMethods'
+import { likePost } from '../../contexts/apiCalls'
 import { useApp } from '../../contexts/AppContext'
 
 const Post = ({post}: any) => {
     const [creator, setCreator] = React.useState<any>(null)
     const { user, authHeaders } = useApp()
+    const [postData, setPostData] = React.useState<any>({likes: post.likes.length, comments: post.likes.length})
 
     const getCreator = async()=>{
         const data = await getApi(`api/user/${post.creatorId}`, {
             headers: authHeaders
         })
         setCreator(data)
+    }
+
+    const handleLike = async()=> {
+        try {
+           const res = await likePost(post._id, user._id)
+           if(res.success) setPostData({...postData, likes: postData.likes + 1})
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
 
     React.useEffect(()=>{
@@ -40,12 +52,12 @@ const Post = ({post}: any) => {
         <div className="flex mt-2 items-center justify-between px-2">
             <div className="flex items-start">
                 <div className="flex items-start">
-                    <FaThumbsUp className='thumbs text-xl' />
-                    <span className='ml-2'>12</span>
+                    <FaThumbsUp onClick={handleLike} className='thumbs cursor-pointer text-xl' />
+                    <span className='ml-2'>{postData?.likes}</span>
                 </div>
                 <div className="flex ml-2 items-start">
                     <BiCommentDots className='thumbs text-2xl' />
-                    <span className='ml-2'>12</span>
+                    <span className='ml-2'>{postData?.comments}</span>
                 </div>
             </div>
             <div className="flex items-start">

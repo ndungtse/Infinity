@@ -21,8 +21,10 @@ export const commentOnPost = async (comment: any)=> {
 }
 
 export const likePost = async (postId: string, userId: string)=> {
+    console.log(postId, userId);
     try {
-        await Post.findByIdAndUpdate(postId, {$push: {likes: userId}});
+        const res = await Post.findByIdAndUpdate(postId, {$push: {likes: userId}});
+        console.log(res);
         return { success: true };
     } catch (error) {
         return { error: error, success: false };

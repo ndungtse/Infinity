@@ -7,6 +7,6 @@ const commentSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
 })
 
-const Comment = models.Comment || model("Comment", commentSchema);
+const Comment = models?.Comment || model("Comment", commentSchema);
 
 export default Comment;

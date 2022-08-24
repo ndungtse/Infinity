@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { BiX } from 'react-icons/bi';
 import { postApi, postCustom } from '../../contexts/apiCallMethods';
 import { useApp } from '../../contexts/AppContext';
+import { usePosts } from '../../contexts/PostContext';
 
 const PostForm = ({setPostForm}: any) => {
     const [preview, setPreview] = React.useState({sate: false, src: ''})
@@ -12,6 +13,7 @@ const PostForm = ({setPostForm}: any) => {
     const [data, setData] = React.useState<any>({ text: '', pictures: [], creatorId: '', videos: [] })
     const { user, authHeaders } = useApp()
     const [uploading, setUploading] = useState(false)
+    const { getPosts } = usePosts()
 
     const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
         backgroundColor: '#7b00ff',
@@ -42,6 +44,7 @@ const PostForm = ({setPostForm}: any) => {
             if(res.message === 'Created'){
               setData({ text: '', pictures: [], creatorId: '', videos: [] })
               setPreview({sate: false, src: ''})
+              getPosts()
               setPostForm(false)
               setImgString('')
             }

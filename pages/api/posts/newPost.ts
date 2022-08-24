@@ -10,7 +10,6 @@ export default async function newPost(req: NextApiRequest, res: NextApiResponse)
     if(!verified) return
     try {
         await connectDB();
-        console.log(req.body)
         const res1 = await cloudinary.uploader.upload(pictures[0], {
             folder: '/infinity/posts',
             use_filename: true,
@@ -28,5 +27,14 @@ export default async function newPost(req: NextApiRequest, res: NextApiResponse)
     } catch (error: any) {
         console.log(error);
         res.status(400).json({ success: false });
+    }
+}
+
+export const config = {
+    api: {
+        responseLimit: false,
+        bodyParser: {
+            sizeLimit: '114mb' // Set desired value here
+        }
     }
 }
