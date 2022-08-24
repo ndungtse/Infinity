@@ -21,16 +21,16 @@ const Post = ({post}: any) => {
         getCreator();
         console.log(creator);
 
-    },[post])
+    },[])
 
   return (
     <div className='w-full mt-5 py-3 rounded-lg shadow-md border-2 bg-stone-900 border-stone-700 flex-col'>
         <div className="flex w-full px-3 items-center justify-between">
             <div className="flex items-center">
-                {/* <img className='w-[40px] h-[40px] rounded-full object-cover' src={creator.picture} alt="" /> */}
+                <img className='w-[40px] h-[40px] rounded-full object-cover' src={creator?.picture} alt="" />
                 <div className="flex text-sm ml-2 flex-col">
-                    {/* <p>{creator?.name}</p>
-                    <Moment fromNow>{post.createdAt}</Moment> */}
+                    <p>{creator?.name}</p>
+                    <Moment fromNow>{post.createdAt}</Moment>
                 </div>
             </div>
             <BiDotsVerticalRounded className='text-3xl' />

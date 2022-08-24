@@ -1,4 +1,4 @@
-import mongoose, { model, models} from 'mongoose';
+import mongoose, { model, models } from 'mongoose';
 // const { registerSchema } = require('swaggiffy');
 
 const postSchema = new mongoose.Schema({
@@ -26,24 +26,12 @@ const postSchema = new mongoose.Schema({
         default: []
     },
     likes: {
-        count: {
-            type: Number,
-            default: 0
-        },
-        users: {
-            type: Array,
-            default: []
-        }
+        type: Array,
+        default: []
     },
     comments: {
-        count: {
-            type: Number,
-            default: 0
-        },
-        users: {
-            type: Array,
-            default: []
-        }
+        type: Array,
+        default: []
     },
     createdAt: {
         type: Date,
