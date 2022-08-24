@@ -25,10 +25,10 @@ export default function PostProvider({children}: Props) {
 
     const getPosts = async() => {
         try {
-            const posts = await getCustom(`api/posts`, {
+            const data = await getCustom(`api/posts`, {
                 headers: authHeaders,   
             });
-            setPosts(posts);
+            if(data.success) setPosts(data.data);
         } catch (error) {
             console.log(error);
         }

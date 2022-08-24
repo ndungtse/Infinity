@@ -3,7 +3,7 @@ import { BiCommentDots, BiDotsVerticalRounded, BiSend, BiShare, BiSmile } from '
 import { FaThumbsUp } from 'react-icons/fa'
 
 const Post = ({post}: any) => {
-    
+
   return (
     <div className='w-full mt-5 py-3 rounded-lg shadow-md border-2 bg-stone-900 border-stone-700 flex-col'>
         <div className="flex w-full px-3 items-center justify-between">
@@ -16,6 +16,7 @@ const Post = ({post}: any) => {
             </div>
             <BiDotsVerticalRounded className='text-3xl' />
         </div>
+        <p className='px-2'> {post.text} </p>
         <img className='object-cover min-h-full min-w-full' src="/images/battlefield.jpg" alt="" />
         <div className="flex mt-2 items-center justify-between px-2">
             <div className="flex items-start">

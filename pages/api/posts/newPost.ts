@@ -2,10 +2,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import cloudinary from "../../../components/utils/cloudinary";
 import Post from "../../../components/utils/models/postModel";
 import connectDB from "../../../components/utils/mongo";
-
+import verifyToken from "../../../components/utils/authoririze";
 
 export default async function newPost(req: NextApiRequest, res: NextApiResponse) {
     const { text, creatorId, pictures, videos } = req.body;
+    const verified = await verifyToken(req.headers.authorization);
+    if(!verified) return
     try {
         await connectDB();
         const res1 = await cloudinary.uploader.upload(pictures[0], {
