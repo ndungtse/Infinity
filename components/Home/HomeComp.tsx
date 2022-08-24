@@ -71,9 +71,9 @@ const HomeComp: React.FC <Props> = ({gameData, loading}) => {
                    <AuthElement props={{ className: 'py-1 ml-2 px-3 bg-violet-800'}}
                     el={'button'} content="Create a Post" fn={()=>setPostForm(true)} />
                  </div>
-                <div className="w-4/5 h-full max-w-[500px]">
-                  {posts.map((post, index)=>(
-                    <Post post={post} key={index} />
+                <div className="w-full h-full max-w-[500px]">
+                  {posts.map((post: any)=>(
+                    <Post post={post} key={post._id} />
                   ))}
                 </div>
               </div>

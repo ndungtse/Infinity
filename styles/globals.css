@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,7 +6,9 @@
 ::-webkit-scrollbar {
     width: 6px;
 }
-
+*{
+  font-family: 'Oxanium', cursive;
+}
 .anim {
     position: absolute;
     top: 0;

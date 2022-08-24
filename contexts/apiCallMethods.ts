@@ -38,7 +38,10 @@ export const postCustom = async (url: string, body: any, _options?: any)=>{
         const res = await axios.post(url, body, {
             ..._options,
             maxBodyLength: Infinity,
-            maxContentLength: Infinity
+            maxContentLength: Infinity,
+            onUploadProgress: (progressEvent) => {
+                console.log(progressEvent.loaded / progressEvent.total)
+            }
         });
         const data = await res.data
         return data

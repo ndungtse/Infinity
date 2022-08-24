@@ -143,6 +143,16 @@ const Game: NextPage = () => {
     getExtraImages()
   },[gameDetails])
 
+  useEffect(()=>{
+    console.log('mounted');
+    return () => {
+      console.log('unmounted');
+      setGameDet(undefined)
+      setGameTrailers(undefined)
+      setExtra(undefined)
+    }
+  },[])
+
   return (
     <>
     {gameDetails!==undefined&&(

@@ -35,8 +35,8 @@ const Navbar = () => {
             </div>
         </div>
         <form onSubmit={subSearch}
-         className="flex  xtab:w-full">
-            <div className={`flex tr sm:ml-0 three:w-[80%] tablet:w-[300px] ml- bg-stone-900 text-sm tablet:text-lg text-white
+         className="flex xtab:w-full">
+            <div className={`flex tr sm:ml-0  three:w-[200px] tablet:w-[300px] ml- bg-stone-900 text-sm tablet:text-lg text-white
               ${rev && 'flex-row-reverse'}  rounded-xl items-center px-3 py-1`}>
                 <label htmlFor="s1" className='cursor-pointer'>
                 <BiSearch className='text-sm mt-1 tablet:text-xl' />

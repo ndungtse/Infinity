@@ -67,7 +67,7 @@ const PostForm = ({setPostForm}: any) => {
             name="" id="" maxLength={1000}></textarea>
             {preview.sate && <div className='h-[20vh] w-full'>
             <img className='max-h-full mx-auto object-cover my-1' src={preview.src} alt="" /></div>}
-            <div className="flex w-full items-center mt-2 justify-between">
+            <div className="flex w-full items-center mt-4 justify-between">
                 <label htmlFor='postfile' className='py-[0.4rem] rounded-md cursor-pointer px-3 bg-violet-700'>Add a Photo</label>
                 {uploading?(
                   <LoadingButton sx={{backgroundColor: '#75067f', width: 150}} loading variant="outlined">
