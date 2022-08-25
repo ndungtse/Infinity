@@ -49,7 +49,7 @@ const Post = ({post}: any) => {
         </div>
         <p className='px-2'> {post.text} </p>
         <img className='object-cover min-h-full min-w-full' src={post.pictures[0]} alt="" />
-        <div className="flex mt-2 items-center justify-between px-2">
+        <div className="flex mt-2 items-center justify-between px-3">
             <div className="flex items-start">
                 <div className="flex items-start">
                     <FaThumbsUp onClick={handleLike} className='thumbs cursor-pointer text-xl' />
@@ -67,7 +67,7 @@ const Post = ({post}: any) => {
                 </div>
             </div>
         </div>
-        <div className="flex items-center rounded-3xl mx-auto py-1 px-2 w-[95%] bg-stone-800">
+        <div className="flex items-center rounded-3xl mt-2 mx-auto py-1 px-2 w-[95%] bg-stone-800">
             <BiSmile className='text-2xl' />
             <textarea className='h-[40px] outline-none bg-transparent w-full ml-2' name="" id="" maxLength={700} />
             <BiSend className='text-xl ml-1' />

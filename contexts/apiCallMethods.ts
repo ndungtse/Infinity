@@ -15,10 +15,10 @@ export const getApi = async (path: string, _options?: any) => {
     try {
         const res = await api.get(`/${path}`, _options);
         const data = await res.data
-        return data
+        return {data: data, }
     } catch (error: any) {
         console.log(error);
-        return null
+        return { error: error.message, data: null}
     }
 }
 

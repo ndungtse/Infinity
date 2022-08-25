@@ -36,14 +36,14 @@ const Navbar = () => {
         </div>
         <form onSubmit={subSearch}
          className="flex xtab:w-full">
-            <div className={`flex tr sm:ml-0  three:w-[200px] tablet:w-[300px] ml- bg-stone-900 text-sm tablet:text-lg text-white
+            <div className={`flex tr sm:ml-0 w-[120px]  three:w-[200px] tablet:w-[300px] ml- bg-stone-900 text-sm tablet:text-lg text-white
               ${rev && 'flex-row-reverse'}  rounded-xl items-center px-3 py-1`}>
                 <label htmlFor="s1" className='cursor-pointer'>
                 <BiSearch className='text-sm mt-1 tablet:text-xl' />
                 </label>
                 <input
                 onChange={detectChange}
-                className='sm:w-full text-[0.9em] min-w-[60px] w-[100px] px-2 outline-none bg-transparent'
+                className='sm:w-full text-[0.9em] w-full px-2 outline-none bg-transparent'
                  type="text" placeholder='Search ' />
             </div>
             <input type="submit" id='s1' className='hidden' />

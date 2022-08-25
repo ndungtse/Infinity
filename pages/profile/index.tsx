@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Navbar from '../../components/Navbar'
@@ -7,11 +8,22 @@ import { useApp } from '../../contexts/AppContext'
 import { useRouter } from 'next/router'
 import LinearLoader from '../../components/Loaders/LinearProgress'
 import ProComp from '../../components/profile/ProComp'
+import { getCustom } from '../../contexts/apiCallMethods'
+import Post from '../../components/Home/Post'
 
 const Profile = () => {
-    const { user } = useApp()
+    const { user, authHeaders, } = useApp()
     const [isLinear, setLinear] = useState<boolean>(false)
     const [isLoading, SetIsLoading] = useState(true)
+    const [userPosts, setUserPosts] = useState([])
+
+    const getUserPosts = async()=>{
+        const data = await getCustom(`api/user/posts/${user._id}`, {
+            headers: authHeaders
+        });
+        console.log(data);
+      if(!data.error) setUserPosts(data.data);
+    }
 
     const router = useRouter()
     
@@ -21,7 +33,8 @@ const Profile = () => {
         }else{
             SetIsLoading(false)
         }
-    }, [])
+        getUserPosts()
+    }, [user])
 
   return (
     <>{!isLoading && (
@@ -30,8 +43,24 @@ const Profile = () => {
       <Navbar />
       <div className="flex h-full w-full">
         <SideBar active='profile'  setLinear={setLinear}  />
-        <div className="flex h-full items-center flex-col w-full bg-stone-900 text-white pt-6 xtab:p-6">
-          <ProComp />
+        <div className="flex h-[92vh] overflow-auto items-center flex-col w-full bg-stone-900 text-white pt-6 xtab:p-6"> 
+          <div className='xtab:w-9/12 w-[98%] overflow-auto flex flex-col'>
+            <ProComp posts={userPosts} />
+            <div className="flex flex-col mt-3 w-full rounded-lg bg-stone-800 p-2">
+              <div className="flex w-full items-center justify-center">
+                <p className=' cursor-pointer border-b-2 border-violet-800'>Posts</p>
+                <p className=' cursor-pointer ml-3'>Friends</p>
+                <p className=' cursor-pointer ml-3'>Games</p>
+              </div>
+              <div className="max-w-[600px] flex-col flex mx-auto">
+              {userPosts.map((post: any) => (
+                <div key={post._id} className="1" >
+                  <Post post={post}/>
+                </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>)}

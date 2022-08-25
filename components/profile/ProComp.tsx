@@ -1,19 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
-import { BiFace } from 'react-icons/bi'
+/* eslint-disable */
+import React, { useEffect, useState } from 'react'
 import { FaFacebook } from 'react-icons/fa'
+import { getApi, getCustom } from '../../contexts/apiCallMethods'
 import { useApp } from '../../contexts/AppContext'
 import { usePosts } from '../../contexts/PostContext'
 
-const ProComp = () => {
-    const { user } = useApp()
-    const { posts, getPosts } = usePosts()
-
-    useEffect(() => {
-       if(posts.length === 0) getPosts()
-    }, [])
+const ProComp = ({posts}: any) => {
+    const { user, authHeaders } = useApp()
   return (
-    <div className='w-9/12 flex flex-col'>
         <div className="flex flex-col w-full rounded-lg bg-violet-900/80">
             <div className="w-full overflow-hidden h-[30vh] aspect-video rounded-t-lg">
                 <img className='object-cover min-h-full min-w-full' src="/images/battlefield.jpg" alt="" />
@@ -24,30 +18,30 @@ const ProComp = () => {
                 </div>
                 <div className="flex pt-11 w-full pb-2 px-2 items-center justify-between">
                     <div className="flex items-center">
-                        <div className="flex flex-col items-center px-3">
-                            <p className='text-xl font-semibold'>7</p>
+                        <div className="three:flex hidden flex-col items-center px-3">
+                            <p className='text-xl font-semibold'>{posts?.length}</p>
                             <p className='font-semibold text-xs'>POSTS</p>
                         </div>
-                        <div className="flex border- flex-col items-center px-3">
-                            <p className='text-xl font-semibold'>7</p>
-                            <p className='font-semibold text-xs'>POSTS</p>
+                        <div className="five:flex hidden border- flex-col items-center px-3">
+                            <p className='text-xl font-semibold'>{user.friends.length}</p>
+                            <p className='font-semibold text-xs'>FRIENDS</p>
                         </div>
-                        <div className="flex flex-col items-center px-3">
-                            <p className='text-xl font-semibold'>7</p>
-                            <p className='font-semibold text-xs'>POSTS</p>
+                        <div className="five:flex hidden flex-col items-center px-3">
+                            <p className='text-xl font-semibold'>{user.ownGames}</p>
+                            <p className='font-semibold text-xs'>GAMES</p>
                         </div>
                     </div>
                     <div className="flex absolute left-1/2 -translate-x-1/2 flex-col items-center">
                         <p className="font-semibold text-xl">{user.name}</p>
                         <p>{user.email}</p>
                     </div>
-                    <div className="flex items-center justify-center">
+                    <div className="three:flex hidden items-center justify-center">
                         <FaFacebook />
                     </div>
+                    <div className='three:hidden flex p-4'></div>
                 </div>
             </div>
         </div>
-    </div>
   )
 }
 

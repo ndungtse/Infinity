@@ -42,6 +42,7 @@ export default function AppProvider({ children }: Props) {
     const [games, setGames] = useState<any>([]);
     const [token, setToken] = useState("");
     const [userData, setUserData] = useState({});
+    const [showError, setShowError] = useState(false);
 
     const getToken = async() => {
         const token = getCookie("token");
@@ -51,15 +52,21 @@ export default function AppProvider({ children }: Props) {
                 const user: any = jwtDecode(token);
                 console.log(user);
                 let provider = "";
-                let final
+                let final: any
                 if (user.email_verified){ 
                     provider = "google";
                     final = await getApi(`api/user/google/${user.user_id}`, { headers: { Authorization: token, provider: provider } });
                 } else { 
                     provider = "email";
                     final = await getApi(`api/user/${user.id}`, { headers: { Authorization: token, provider: provider } });
+                    // while (final.message === "Network Error") {
+                    //     setShowError(true);
+                    //     console.log("Network Error");
+                    //     final = await getApi(`api/user/${user.id}`, { headers: { Authorization: token, provider: provider } });
+                    // }
+                    // setShowError(false);
                 }
-                setUser(final);
+                setUser(final.data);
                 return
             } catch (error) {
                 console.log(error);
@@ -94,6 +101,8 @@ export default function AppProvider({ children }: Props) {
 
     return (
         <>
+        {showError && <div className="bg-yellow-300 absolute top-0 p-2">
+           <p>Network Error. Retrying...</p></div>}
         {user !== undefined && (
         <appContext.Provider value={{ user, setUser, games, setGames, token, setToken, setUserData, userData, authHeaders }}>
             {children}

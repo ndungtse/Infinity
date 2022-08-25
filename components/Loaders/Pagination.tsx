@@ -41,10 +41,10 @@ export default function PaginationRanges({top}: Props) {
          className='w-[200px] outline-none input
         bg-transparent' type="number" placeholder="Page Number<30000" />
       </form>
-      <button className='bg-pink-500 h-full px-3'
+      <button className='bg-violet-700 h-full px-3'
          type="submit">Go</button>
       </div>
-      <p className='text-pink-500'>{status}</p>
+      <p className='text-violet-700'>{status}</p>
     <Stack spacing={2} sx={{color: "#FFF", margin: '20px auto'}}>
       <Pagination
       onChange={goToNextPage}
