@@ -6,23 +6,30 @@ import Moment from 'react-moment'
 import { getApi } from '../../contexts/apiCallMethods'
 import { likePost } from '../../contexts/apiCalls'
 import { useApp } from '../../contexts/AppContext'
+import CommentBox from './commentBox'
 
 const Post = ({post}: any) => {
     const [creator, setCreator] = React.useState<any>(null)
     const { user, authHeaders } = useApp()
-    const [postData, setPostData] = React.useState<any>({likes: post.likes.length, comments: post.likes.length})
+    const [postData, setPostData] = React.useState<any>({likes: {state: false, count:post.likes.length}, comments: post.comments.length})
+    const [liked, setLiked] = React.useState<boolean>(false)
+    const [showComments, setShowComments] = React.useState<boolean>(false)
+    const [comments, setComments] = React.useState<any>(post.comments)
 
     const getCreator = async()=>{
         const data = await getApi(`api/user/${post.creatorId}`, {
             headers: authHeaders
         })
-        setCreator(data)
+        setCreator(data.data)
     }
 
     const handleLike = async()=> {
+        const {likes: { state, count }} = postData
+        setLiked(!liked)
         try {
            const res = await likePost(post._id, user._id)
-           if(res.success) setPostData({...postData, likes: postData.likes + 1})
+           console.log(res);
+           if(res.success) setPostData({...postData, likes:{ state: !state, count: state? count - 1 : count + 1 }})
         } catch (error) {
             console.log(error);
             
@@ -32,11 +39,11 @@ const Post = ({post}: any) => {
     React.useEffect(()=>{
         getCreator();
         console.log(creator);
-
     },[])
 
   return (
     <div className='w-full mt-5 py-3 rounded-lg shadow-md border-2 bg-stone-900 border-stone-700 flex-col'>
+        {showComments && <CommentBox setShowComments={setShowComments} post={post} creator={creator} comments={comments} setComments={setComments} />}
         <div className="flex w-full px-3 items-center justify-between">
             <div className="flex items-center">
                 <img className='w-[40px] h-[40px] rounded-full object-cover' src={creator?.picture} alt="" />
@@ -52,11 +59,12 @@ const Post = ({post}: any) => {
         <div className="flex mt-2 items-center justify-between px-3">
             <div className="flex items-start">
                 <div className="flex items-start">
-                    <FaThumbsUp onClick={handleLike} className='thumbs cursor-pointer text-xl' />
-                    <span className='ml-2'>{postData?.likes}</span>
+                    <FaThumbsUp onClick={handleLike} className={`thumbs cursor-pointer ${liked && 'text-violet-600'} text-xl`} />
+                    <span className='ml-2'>{postData.likes.count}</span>
                 </div>
                 <div className="flex ml-2 items-start">
-                    <BiCommentDots className='thumbs text-2xl' />
+                    <BiCommentDots onClick={()=> setShowComments(true)}
+                     className='thumbs text-2xl cursor-pointer ' />
                     <span className='ml-2'>{postData?.comments}</span>
                 </div>
             </div>

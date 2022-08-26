@@ -5,8 +5,8 @@ import connectDB from "../../../components/utils/mongo";
 
 export default async function likePost(req: NextApiRequest, res: NextApiResponse) {
     const { userId, postId } = req.body;
-    const verified = await verifyToken(req.headers.authorization);
-    if(!verified) return
+    // const verified = await verifyToken(req.headers.authorization);
+    // if(!verified) return res.status(401).json({message: "Unauthorized"});
     try {
         await connectDB();
         const post = await Post.findById(postId);

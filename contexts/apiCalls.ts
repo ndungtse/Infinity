@@ -1,5 +1,6 @@
 import Comment from "../components/utils/models/commentModel";
 import Post from "../components/utils/models/postModel";
+import { getCustom, postCustom } from "./apiCallMethods";
 
 export const getPostCommets = async (postId: string)=> {
     try {
@@ -23,7 +24,7 @@ export const commentOnPost = async (comment: any)=> {
 export const likePost = async (postId: string, userId: string)=> {
     console.log(postId, userId);
     try {
-        const res = await Post.findByIdAndUpdate(postId, {$push: {likes: userId}});
+        const res = await postCustom(`api/posts/likePost`, { userId, postId });
         console.log(res);
         return { success: true };
     } catch (error) {
@@ -31,11 +32,11 @@ export const likePost = async (postId: string, userId: string)=> {
     }
 }
 
-export const getPosts = async ()=> {
+export const getPostsComments = async (postId: string)=> {
     try {
-        const posts = await Post.find();
-        return { data: posts, success: true };
+        const res = await getCustom(`api/posts/comments/post`, { headers:{ "postId": postId }});
+        return { success: true, data: res.data };
     } catch (error) {
-        return { success: false, error };
+        return { error: error, success: false };
     }
 }
