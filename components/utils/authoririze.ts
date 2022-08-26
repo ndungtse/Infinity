@@ -4,7 +4,7 @@ import { getApi } from './../../contexts/apiCallMethods';
 
 const verifyToken = async (token: any) => {
     try {
-        const res = await getApi(`api/user/auth/${token}`);
+        const res: any = await getApi(`api/user/auth/${token}`);
         if(res.authorized) return true
         return false
     } catch (error: any) {
