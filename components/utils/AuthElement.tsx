@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import { HTMLAttributes } from 'react'
 import { BiX } from 'react-icons/bi'
@@ -13,6 +14,7 @@ interface Props extends HTMLAttributes<any> {
 const AuthElement = ({el, content, props, fn}: Props) => {
     const { user } = useApp()
     const [ strict, setStrict ] = React.useState(false)
+    const router  = useRouter()
     
     const handleClick = () => {
         if(!user){ 
@@ -35,7 +37,8 @@ const AuthElement = ({el, content, props, fn}: Props) => {
             <BiX onClick={()=> setStrict(false)}
              className='text-2xl cursor-pointer hover:text-violet-700 absolute top-1 right-1' />
             <h1 className="text-xl text-center">You'll need to be logged in to do this</h1>
-            <a href="user/login" className="text-center mx-auto text-blue-500">Login</a>
+            <p onClick={()=> router.push('user/login')} 
+             className="text-center mx-auto text-blue-500">Login</p>
         </div>
     </div>
     }

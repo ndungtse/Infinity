@@ -6,8 +6,8 @@ import verifyToken from "../../../components/utils/authoririze";
 
 export default async function newPost(req: NextApiRequest, res: NextApiResponse) {
     const { text, creatorId, pictures, videos } = req.body;
-    const verified = await verifyToken(req.headers.authorization);
-    if(!verified) return
+    // const verified = await verifyToken(req.headers.authorization);
+    // if(!verified) return res.status(401).json({ message: "Unauthorized" });
     try {
         await connectDB();
         const res1 = await cloudinary.uploader.upload(pictures[0], {
