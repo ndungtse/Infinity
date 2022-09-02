@@ -119,18 +119,8 @@ const Game: NextPage = () => {
 
   const getExtraImages = async()=>{
     if (gameDetails !== undefined) {
-      let app = 'screenshots'
-    const options = {
-      method: 'GET',
-      url: 'https://bing-image-search1.p.rapidapi.com/images/search',
-      params: {q: gameDetails.name+app},
-      headers: {
-        'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com',
-        'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_RAPID}`
-      }
-    };
-    const res = await axios.request(options)
-    setExtra(res.data.value)
+    const res = await Axios.get(`https://api.rawg.io/api/games/${game}/screenshots?key=${process.env.NEXT_PUBLIC_KEY}`)
+    setExtra(res.data.results)
   }
   }
   
@@ -256,11 +246,11 @@ const Game: NextPage = () => {
                   <div className="flex justify-between">
                     <div className="w-[49%] aspect-video overflow-hidden">
                       <img className='min-w-full min-h-full object-cover'
-                      src={extra[indexImg].contentUrl} alt="sreenshot" />
+                      src={extra[indexImg].image} alt="sreenshot" />
                     </div>
                     <div className="w-[49%] aspect-video overflow-hidden">
                       <img className='min-w-full min-h-full object-cover'
-                      src={extra[indexImg+1].contentUrl} alt="sreenshot" />
+                      src={extra[indexImg+1].image} alt="sreenshot" />
                     </div>
                   </div>
                 <div className={`flex justify-center mt-4 items-center w-full`}>
