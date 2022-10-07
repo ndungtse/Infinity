@@ -1,21 +1,10 @@
-import axios from 'axios'
-import { GetStaticProps, NextPage } from 'next'
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-import LinearIndeterminate from '../../components/Loaders/LinearLoad'
+import React, { useState } from 'react'
 import LinearLoader from '../../components/Loaders/LinearProgress'
 import Navbar from '../../components/Navbar'
 import SideBar from '../../components/SideBar'
 
-const Providers: NextPage = () => {
+const Test = () => {
     const [isLinear, setLinear] = useState<boolean>(false)
-    const [isLoading, SetIsLoading] = useState(true)
-    
-    const router = useRouter()
-    useEffect(()=> {
-      router.push('/store/1')
-    },[router])
-
   return (
     <div className="flex w-full flex-col h-screen bg-stone-800">
       {isLinear&&<LinearLoader />}
@@ -30,5 +19,4 @@ const Providers: NextPage = () => {
   )
 }
 
-
-export default Providers
+export default Test

@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps = async()=>{
   console.log(res);
   return {
     props: {
-      gameData: res.data
+      gameData: res?.data??[]
     },
   };
 };
