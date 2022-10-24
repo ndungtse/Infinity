@@ -40,7 +40,8 @@ export const getServerSideProps: GetServerSideProps = async()=>{
   const res = await Axios.get(`https://api.rawg.io/api/games?key=${process.env.NEXT_PUBLIC_KEY}`)
   return {
     props: {
-      gameData: res.data
+      gameData: res.data,
+      revalidate: 4
     },
   };
 };

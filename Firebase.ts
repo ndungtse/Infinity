@@ -18,3 +18,5 @@ const provider = new GoogleAuthProvider();
 
 export const signInWithGoogle: any = ()=> signInWithRedirect(auth, provider);
 // export const continueWithGoogle: any = () => signI
+
+export const logoutGoogle = () => auth.signOut();

@@ -1,13 +1,15 @@
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillMail } from 'react-icons/ai'
 import { BiLock, BiTag, BiUserCircle } from 'react-icons/bi'
 import { api } from '../../contexts/apiCallMethods'
 import { setCookie } from '../../contexts/utilities'
-import { signInWithGoogle } from '../../Firebase'
+import { auth, signInWithGoogle } from '../../Firebase'
 import LoadingButton from '@mui/lab/LoadingButton';
+import { getRedirectResult, User, UserCredential } from 'firebase/auth'
+import user from '../api/user'
 
 const Signup = () => {
     const [data, setData] = React.useState<any>({
@@ -15,6 +17,7 @@ const Signup = () => {
         const router = useRouter()
     const [status, setStatus] = React.useState('') 
     const [disabled, setDisabled] = React.useState(false)
+    const [user, setUser] = useState<User | null>(null)
         
     const register = async (e: any) => {
         e.preventDefault()
@@ -38,13 +41,12 @@ const Signup = () => {
 
     const continueWithGoogle = async () => {
         setDisabled(true)
-        const user: any = await signInWithGoogle()
         try {
-            const googledata = {name: user.user.displayName, email: user.user.email, picture: user.user.photoURL };
+            const googledata = {name: user?.displayName, email: user?.email, picture: user?.photoURL };
             const res = await api.post('/api/user/newUser/google', googledata)
             console.log(res)
             if (res.statusText === 'Created') {
-                const res1 = await api.post('/api/user/login/google', {email: user.user.email});
+                const res1 = await api.post('/api/user/login/google', {email: user?.email});
                 if (res1.data.message === 'Login success') {
                 setCookie('token', res1.data.token, 999);
                 window.location.href = '/'
@@ -58,7 +60,7 @@ const Signup = () => {
             }
         } catch (error: any) {
             if(error.response.data?.message === "Email already exists") {
-                const res1 = await api.post('/api/user/login/google', {email: user.user.email});
+                const res1 = await api.post('/api/user/login/google', {email: user?.email});
                 console.log(res1);
                 if (res1.data.message === 'Login success') {
                 setCookie('token', res1.data.token, 999);
@@ -68,9 +70,33 @@ const Signup = () => {
                     setDisabled(false)
                 }
             }
+            setStatus('Something went wrong')
         }
         setDisabled(false)
     }
+
+    useEffect(() => {
+      getRedirectResult(auth)
+        .then((result: UserCredential | null) => {
+          if (result) {
+            setUser(result.user)
+          } else {
+            setUser(null)
+          }
+        })
+        .catch((error: any) => {
+          setUser(null)
+          console.log(error)
+        })
+    }, [])
+
+    useEffect(() => {
+      if (user) {
+        continueWithGoogle()
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
+
   return (
     <div className='w-full flex flex-col items-center justify-center h-screen'>
         <div
@@ -108,12 +134,12 @@ const Signup = () => {
 
              <div className="flex flex-col items-center">
                 {disabled?(
-                    <LoadingButton sx={{backgroundColor: '#75067f', width: 150, marginTop: 5}} loading variant="outlined">
+                    <LoadingButton sx={{backgroundColor: '#75067f', width: '100%', marginTop: 5, paddingY: 1}} loading variant="outlined">
                     Submit
                   </LoadingButton>
                 ):(<>
                 <p className='text-xl my-2'>Or</p>
-                <button onClick={continueWithGoogle}
+                <button onClick={signInWithGoogle}
                  className='bg-violet-700 p-1 h-[40px] w-full rounded-lg flex items-center justify-center'> <img className='max-h-full'
                  src="https://freesvg.org/img/1534129544.png" alt="" />
                     <p className='ml-2'>Continue with Google</p></button>

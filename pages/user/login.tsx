@@ -1,26 +1,27 @@
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillMail } from 'react-icons/ai'
 import { BiLock} from 'react-icons/bi'
 import { api } from '../../contexts/apiCallMethods'
 import { setCookie } from '../../contexts/utilities'
-import { signInWithGoogle } from '../../Firebase'
+import { auth, signInWithGoogle } from '../../Firebase'
 import LoadingButton from '@mui/lab/LoadingButton';
+import { getRedirectResult, User, UserCredential } from 'firebase/auth'
 
 const Login = () => {
     const [data, setData] = React.useState<any>({
         email: '', password: '', })
         const router = useRouter()
     const [status, setStatus] = React.useState('') 
-    const [disabled, setDisabled] = React.useState(false)
+    const [disabled, setDisabled] = React.useState(false);
+    const [ user, setUser ] = useState<User | null>(null)
 
     const continueWithGoogle = async () => {
         setDisabled(true)
-        const user: any = await signInWithGoogle();
         try {
-            const res = await api.post('/api/user/login/google', {email: user.user.email});
+            const res = await api.post('/api/user/login/google', {email: user?.email});
             console.log(res)
             if (res.data.message === 'Login success') {
                 setCookie('token', res.data.token, 999);
@@ -32,9 +33,9 @@ const Login = () => {
         } catch (error: any) {
             console.log("go", error.response.data)
             if(error.response.data.message === 'User not found') {
-                const res = await api.post('/api/user/newUser/google', {email: user.user.email, name: user.user.displayName, picture: user.user.photoURL, googleId: user.user.uid});
+                const res = await api.post('/api/user/newUser/google', {email: user?.email, name: user?.displayName, picture: user?.photoURL, googleId: user?.uid});
                 if (res.data.message === 'User created') {
-                    const res1 = await api.post('/api/user/login/google', {email: user.user.email});
+                    const res1 = await api.post('/api/user/login/google', {email: user?.email});
                     if (res1.data.message === 'Login success') {
                         setCookie('token', res1.data.token, 999);
                         window.location.href = '/'
@@ -73,6 +74,26 @@ const Login = () => {
         
     }
 
+    useEffect(()=> {
+        getRedirectResult(auth).then((result: UserCredential | null)=>{
+            if(result){
+                setUser(result.user);
+            } else{
+                setUser(null)
+            }
+        }).catch((error: any)=>{
+            setUser(null)
+            console.log(error);
+        })
+    },[])
+
+    useEffect(()=> {
+        if(user){
+            continueWithGoogle()
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[user])
+
   return (
     <div className='w-full flex flex-col items-center justify-center h-screen'>
         <div className='w-1/3 text-white min-w-[280px] five:min-w-[400px]  max-w-[400px] flex flex-col rounded-lg bg-stone-900 p-5'>
@@ -95,12 +116,12 @@ const Login = () => {
             </form>
              <div className="flex flex-col items-center">
                 {disabled?(
-                    <LoadingButton sx={{backgroundColor: '#75067f', width: 150, marginTop: 5}} loading variant="outlined">
+                    <LoadingButton sx={{backgroundColor: '#75067f', width: '100%', marginTop: 5, paddingY: 1}} loading variant="outlined">
                     Submit
                   </LoadingButton>
                 ):(<>
                 <p className='text-xl my-2'>Or</p>
-                <button onClick={continueWithGoogle} disabled={disabled}
+                <button onClick={signInWithGoogle} disabled={disabled}
                  className='bg-violet-700 p-1 h-[40px] w-full rounded-lg flex items-center justify-center'> <img className='max-h-full'
                  src="https://freesvg.org/img/1534129544.png" alt="" />
                     <p className='ml-2'>Continue with Google</p></button>
