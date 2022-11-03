@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import AppProvider from '../contexts/AppContext'
 import PostProvider from '../contexts/PostContext'
+import { UserProvider } from '../contexts/UserContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, SetIsLoading] = useState(true)
@@ -29,11 +30,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <AppProvider>
         <PostProvider>
-          <Component
-            {...pageProps}
-            isLoading={isLoading}
-            setIsLoading={SetIsLoading}
-          />
+          <UserProvider>
+            <Component
+              {...pageProps}
+              isLoading={isLoading}
+              setIsLoading={SetIsLoading}
+            />
+          </UserProvider>
         </PostProvider>
       </AppProvider>
     </>

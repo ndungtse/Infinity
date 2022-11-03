@@ -10,7 +10,7 @@ export default async function userHandler(req: NextApiRequest, res: NextApiRespo
     switch (method) {
         case "GET":
             const users = await User.find();
-            res.status(200).json({ message: "Success", data: users });
+            res.status(200).json({ message: "Success", data: users, success: true });
             break;
         case "PUT":
             // const { name, email, password } = req.body;

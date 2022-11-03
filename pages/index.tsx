@@ -22,10 +22,6 @@ const Home: NextPage<Props> = ({gameData,isLoading, setIsLoading}: any) => {
 
   return (
     <>
-      <Head>
-        <title>Infinity</title>
-        <link rel="icon" href="/logo2.png" />
-      </Head>
     {isLoading?<HomeLoader />:( 
     <div className="flex w-full flex-col h-screen bg-stone-800">
       {isLinear &&<LinearLoader />}
