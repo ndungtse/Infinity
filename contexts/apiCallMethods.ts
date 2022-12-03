@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api = axios.create({ baseURL: 'https://infinity3.herokuapp.com/' })
+export const api = axios.create({ baseURL: 'https://infinity-e4uz.onrender.com' })
 //https://infinity3.herokuapp.com/
 export const dbApi = axios.create({
     baseURL: 'http://localhost:5173/api'
