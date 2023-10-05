@@ -46,6 +46,7 @@ function Store({store}: any){
 
     useEffect(()=>{
         getStoreLogo()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     return(
