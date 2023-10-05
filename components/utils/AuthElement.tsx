@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<any> {
     el: any,
     props?: HTMLAttributes<any>,
     fn?: ()=>void,
-    content?: string | React.ReactNode | number | HTMLElement | null,
+    content?: any,
 }
 
 const AuthElement = ({el, content, props, fn}: Props) => {
